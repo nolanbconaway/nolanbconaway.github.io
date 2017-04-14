@@ -1,1 +1,21 @@
-theme: jekyll-theme-cayman
+name: Nolan Conaway
+permalink: /blog/:year/:title
+markdown: kramdown
+highlighter: rouge
+
+gems:
+  - jekyll-sitemap
+  - jekyll-github-metadata
+  - jekyll-last-modified-at
+
+# default info
+title: Nolan Conaway
+description: Nolan Conaway's personal website.
+keywords: cognitive, data, science
+
+exclude:
+    - node_modules
+    - old
+
+
+

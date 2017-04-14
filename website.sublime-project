@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace",
+			],
+			"folder_exclude_patterns":
+			[
+				".ipynb_checkpoints",
+			],
+			"path": "."
+		}
+	]
+	}

@@ -1,0 +1,53 @@
+---
+layout: default
+---
+
+
+<style type="text/css">
+	#ptitle {
+		margin-bottom: 10px;
+	}
+
+	#pmeta {
+		padding-right: 5px;
+	}
+
+	#pmeta td {
+		vertical-align: top;
+		color: #BDBDBD;
+	}
+	
+	#pmeta table {
+		width: 100%;
+	}
+
+	#keywordspan {
+		padding-right: 5px;
+		padding-left: 10px;
+	}
+
+</style>
+
+<div class="post">
+
+	<h1 id='ptitle'>{{page.title}}</h1>
+
+	<div id="pmeta">
+
+	<table>
+		<tr>
+		<td>
+			<div id="pdate">{{ page.date | date_to_string }}</div>
+		</td>
+		
+		<td align="right">
+			<div id="pkeywords">
+				<span id='keywordspan'>Keywords: </span>
+				<code>{{ page.keywords}}</code>
+			</div>
+		</td>
+	</table>		
+	</div>
+	
+	{{ content }}
+</div>

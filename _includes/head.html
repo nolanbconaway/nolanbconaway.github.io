@@ -1,0 +1,39 @@
+
+<!-- Variables -->
+<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}{{ site.keywords }}{% endif %}">
+
+<!-- metas -->
+<meta name="author" content="Nolan Conaway">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="C7bXzgZzJ2Meif-HU6_7Pl7OPXsJtBoKcvKoEXpIiAE" />
+<meta charset="utf-8">
+
+<!-- favicon -->
+<link rel="icon" type="image/x-icon" href="/img/favicon/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="/img/favicon/source-code-icon-152-213242.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/img/favicon/source-code-icon-152-213242.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/favicon/source-code-icon-144-213242.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/img/favicon/source-code-icon-120-213242.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/favicon/source-code-icon-114-213242.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/favicon/source-code-icon-72-213242.png">
+<link rel="apple-touch-icon-precomposed" href="/img/favicon/source-code-icon-57-213242.png">
+<link rel="icon" href="/img/favicon/source-code-icon-32-213242.png" sizes="32x32">
+
+<!-- fonts -->
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+<!-- Styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/syntax.css">
+
+<!-- math if desired -->
+{% if page.mathy %}
+  {% include mathjax_support.html %}
+{% endif %}
+
+<!-- analytics -->
+{% include analytics.html %}

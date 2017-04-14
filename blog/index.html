@@ -1,0 +1,27 @@
+---
+layout: default
+title: Nolan Conaway | Blog
+description: General news and links to blog posts.
+keywords: blog
+---
+
+
+<style type="text/css">
+	
+	#content table{
+		width: 100%;
+	}
+</style>
+<table>
+	<tr>
+	<td><h1>{{ page.description }}</h1></td>
+	<td align="right"><a href="/blog/atom.xml"><img src="/img/feedicons/feed-icon-28x28.png"/></a></a></td>
+	</tr>
+</table>
+
+
+<ul class="posts">
+  {% for post in site.posts %}
+    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>

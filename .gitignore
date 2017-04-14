@@ -1,0 +1,7 @@
+# Misc
+.DS_Store
+*.sublime-workspace
+old/
+
+# Jekyll
+_site/
