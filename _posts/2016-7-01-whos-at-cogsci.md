@@ -5,5 +5,5 @@ keywords: R, Shiny, CogSci
 season: Summer 2016
 type: app
 external_url: https://nolan.shinyapps.io/whos-at-cogsci/
-layout: post
+layout: external
 ---

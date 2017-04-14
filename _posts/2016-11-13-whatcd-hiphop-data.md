@@ -5,5 +5,5 @@ keywords: gazelle, music, analysis
 season: Autumn 2016
 type: data
 external_url: https://github.com/nolanbconaway/hip.hop.data
-layout: post
+layout: external
 ---
