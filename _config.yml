@@ -5,8 +5,6 @@ highlighter: rouge
 
 gems:
   - jekyll-sitemap
-  - jekyll-github-metadata
-  - jekyll-last-modified-at
 
 # default info
 title: Nolan Conaway
