@@ -22,7 +22,9 @@ keywords: blog
 	.descriptioncell {
 		padding-left: 5px;
 	}
-
+	.internalurl {
+		font-size: 0.5em;
+	}
 	.code {
 		background-color: #F9FBE7;
 	}
@@ -82,6 +84,10 @@ keywords: blog
 	<!-- description -->
 	<td class="descriptioncell">
 		{{item.description}}
+
+		{% if item.type != 'blog' %}
+		<span class="internalurl"><a href="{{item.url}}">[internal]</a></span>
+		{% endif %}
     </td>
 
     </tr>
