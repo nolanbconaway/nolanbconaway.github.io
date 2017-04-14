@@ -33,27 +33,53 @@ h1, h2, h3, h4, h5, h6, .fancy {
   font-family: 'Josefin Slab', serif;
 }
 
-code {
+code, pre {
   font-family: 'Source Code Pro', monospace;
-  font-size:  smaller;
+  font-size: 0.79em;
+  margin: 2px;
 }
+
+
+blockquote {
+  background-color: #ECEFF1;
+  margin: 20px;
+}
+
+blockquote p {
+  padding: 10px;
+}
+
 
 /* Nav Bar */
 #navbar{
   font-size: 1.5em;
+  font-family: 'Josefin Slab', serif;
+  text-align: center;
+  height: 2.2em;
+  line-height: 2.2em;
+  margin: 0 auto;  
+
 }
 
 #navbar ul {
     list-style-type: none;
+    overflow: hidden;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #2E7D32;
+    display: inline-block;
+    width: 100%;
 }
 
 #navbar li {
+  width: 20%;
+  max-width: 90px;
+  min-width: 40px;
   float: left;
-  border-right: 1px solid #bbb;
+  border-right: 1px solid #C8E6C9;
+  display: block;
+  text-align : center;
+  box-sizing: border-box;
 
 }
 
@@ -62,11 +88,9 @@ code {
 }
 
 #navbar li a {
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
   color: #E8F5E9;
+  display: block;
 }
 
 #navbar li a:hover {
@@ -74,7 +98,32 @@ code {
     color: #1B5E20;
 }
 
-#navbar .navbar_img {
-  padding: 7px 8px;
+#navbar img {
+      vertical-align: middle;
+      padding-bottom: 0.1em;
 }
 
+/* code blocks */
+
+/* blog images */
+  .highlight .lineno { 
+    color: #CFD8DC; 
+    display:inline-block; 
+    padding-left: 5px;
+    margin: 0;
+    padding-right: 10px;
+    border-right:1px solid #607D8B; 
+  }
+  .highlight pre code { 
+    display: block; 
+    white-space: pre; 
+    overflow-x: auto; 
+    word-wrap: normal; 
+  }
+  .highlight pre {
+    margin-left: 8px;
+  }
+
+  div .highlight {
+    background-color: white;
+  }

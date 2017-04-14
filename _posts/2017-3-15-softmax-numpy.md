@@ -1,7 +1,10 @@
 ---
 title: A softmax function for numpy.
-description: A softmax function for numpy.
+description: A numpy function to apply the softmax along arbitrary axes.
 keywords: python, numpy, softmax
+season: Spring 2017
+assets: none
+type: blog
 layout: post
 mathy: true
 ---

@@ -7,11 +7,46 @@ keywords: blog
 
 <style type="text/css">
 	
-	#content table{
+	#content #headtable{
 		width: 100%;
 	}
+
+	.typecell {
+		text-align: center;
+		text-transform: uppercase;
+		border: 1px solid;
+		border-radius: 5px;
+		padding: 3px 5px;
+	}
+	
+	.descriptioncell {
+		padding-left: 5px;
+	}
+
+	.code {
+		background-color: #F9FBE7;
+	}
+
+	.blog {
+		background-color: #C8E6C9;
+	}
+
+	.app {
+		background-color: #F9FBE7;
+	}
+
+	.data {
+		background-color: #F9FBE7;
+	}
+
+	.pdf {
+		background-color: #E0F2F1;
+	}
+
 </style>
-<table>
+
+
+<table id="headtable">
 	<tr>
 	<td><h1>{{ page.description }}</h1></td>
 	<td align="right"><a href="/blog/atom.xml"><img src="/img/feedicons/feed-icon-28x28.png"/></a></a></td>
@@ -20,7 +55,40 @@ keywords: blog
 
 
 <ul class="posts">
-  {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-  {% endfor %}
+	{% assign season_groups = site.posts | group_by: 'season' %}
+
+
+    {% for season in season_groups %}
+	<h2>{{season.name}}</h2>
+	<table class="seasontable">
+	
+	{% for item in season.items %}
+	<tr>
+
+	<!-- indicator -->
+	<td class='typecell {{item.type}}'>
+
+
+			{% if item.type=='blog' %}
+				<a href="{{item.url}}">
+			{% else %}
+				<a href="{{item.external_url}}">
+			{% endif %}
+
+				{{item.type}}
+			</a>
+	</td>
+
+	<td class="descriptioncell">
+		{{item.description}}
+    </td>
+
+    </tr>
+    <!-- item loop -->
+    {% endfor %} 
+    </table>
+
+    <!-- season loop -->
+    {% endfor %}
+
 </ul>

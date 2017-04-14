@@ -4,6 +4,8 @@ layout: default
 
 
 <style type="text/css">
+
+	/* metas */
 	#ptitle {
 		margin-bottom: 10px;
 	}
@@ -25,29 +27,67 @@ layout: default
 		padding-right: 5px;
 		padding-left: 10px;
 	}
+	
+
+	/* images */
+	#blogpost img {
+		max-width: 100%;
+		max-height: 250px;
+		object-fit: scale-down;
+		display: block;
+		margin: auto;
+	  }
+
+	/* style tables */
+	#blogpost .datatable  { 
+	  border-collapse: collapse;
+	  border: 1px solid #546E7A;  
+	  border-radius: 15px;
+	  margin: 10px auto;
+	  padding: 0 20px;
+	}
+
+
+	#blogpost .datatable tr:nth-of-type(odd) { 
+	  background: #ECEFF1; 
+	}
+
+	#blogpost .datatable th { 
+	  background: #263238;
+	  border: 1px solid #546E7A; 
+	  color: #ECEFF1; 
+	  font-weight: bold; 
+	}
+
+	#blogpost .datatable td, th{ 
+		padding: 0.2em 1em;
+		border: 1px solid #546E7A;
+		text-align: left; 
+	}
 
 </style>
 
-<div class="post">
 
-	<h1 id='ptitle'>{{page.title}}</h1>
 
-	<div id="pmeta">
+<h1 id='ptitle'>{{page.title}}</h1>
 
-	<table>
-		<tr>
-		<td>
-			<div id="pdate">{{ page.date | date_to_string }}</div>
-		</td>
-		
-		<td align="right">
-			<div id="pkeywords">
-				<span id='keywordspan'>Keywords: </span>
-				<code>{{ page.keywords}}</code>
-			</div>
-		</td>
-	</table>		
-	</div>
+<div id="pmeta">
+
+<table>
+	<tr>
+	<td>
+		<div id="pdate">{{ page.date | date:"%B %d %Y" }}</div>
+	</td>
 	
+	<td align="right">
+		<div id="pkeywords">
+			<span id='keywordspan'>Keywords: </span>
+			<code>{{ page.keywords}}</code>
+		</div>
+	</td>
+</table>		
+</div>
+	
+<div id="blogpost">
 	{{ content }}
 </div>
