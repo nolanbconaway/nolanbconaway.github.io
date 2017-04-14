@@ -54,7 +54,7 @@ keywords: blog
 </table>
 
 
-<ul class="posts">
+<div class="posts">
 	{% assign season_groups = site.posts | group_by: 'season' %}
 
 
@@ -79,16 +79,19 @@ keywords: blog
 			</a>
 	</td>
 
+	<!-- description -->
 	<td class="descriptioncell">
 		{{item.description}}
     </td>
 
     </tr>
+
     <!-- item loop -->
     {% endfor %} 
     </table>
 
+
     <!-- season loop -->
     {% endfor %}
 
-</ul>
+</div>
