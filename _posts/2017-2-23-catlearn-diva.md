@@ -1,7 +1,7 @@
 ---
 title: Catlearn DIVA Package
-description: Garrett Honke and I (mostly Garrett) wrote a DIVA model for the Catlearn R library.
-keywords: R, DIVA
+excerpt: Garrett Honke and I (mostly Garrett) wrote a DIVA model for the Catlearn R library.
+tags: R, DIVA
 season: Winter 2017
 assets: none
 type: code

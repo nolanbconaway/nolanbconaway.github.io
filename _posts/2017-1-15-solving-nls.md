@@ -1,7 +1,7 @@
 ---
 title: Solving nonlinearly separable classifications in a single layer neural network.
-description: How to solve nonlinearly separable classifications in a single layer neural network.
-keywords: neural networks, linear separability
+excerpt: How to solve nonlinearly separable classifications in a single layer neural network.
+tags: neural networks, linear separability
 season: Winter 2017
 assets: /blog/assets/solving-nls
 type: blog

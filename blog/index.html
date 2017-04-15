@@ -50,7 +50,7 @@ keywords: blog
 <table id="headtable">
 	<tr>
 	<td><h1>{{ page.description }}</h1></td>
-	<td align="right"><a href="/blog/atom.xml"><img src="/img/feedicons/feed-icon-28x28.png"/></a></a></td>
+	<td align="right"><a href="/feed.xml"><img src="/img/feedicons/feed-icon-28x28.png"/></a></a></td>
 	</tr>
 </table>
 
@@ -84,7 +84,7 @@ keywords: blog
 	<!-- description -->
 	<td class="descriptioncell">
 
-		{{item.description}}
+		{{item.excerpt}}
 		
 		{% if item.type != 'blog' %}
 		<td class="internalurl">

@@ -1,12 +1,13 @@
 ---
 title: What.CD Hip Hop Roundup.
-description: What.CD Data Roundup! What I've found through analyses of 75,000 torrents tagged 'hip.hop'.
-keywords: gazelle, music, data
+excerpt: What.CD Data Roundup! What I've found through analyses of 75,000 torrents tagged 'hip.hop'.
+tags: gazelle, music, data
 season: Spring 2017
 assets: /blog/assets/whatcd-roundup
 type: blog
 layout: post
 mathy: true
+image: /blog/assets/whatcd-roundup/coast-timelines.png
 ---
 
 > _On October 22 2016, I posted a dataset containing metadata for 75,719 music releases that were tagged as "hip.hop" by the What.CD torrent community. My timing could not have been much better: on November 17 2016, What.CD was [shut down](http://www.theverge.com/2016/11/17/13669832/what-cd-music-torrent-website-shut-down) by the French authorities. In the following weeks I [posted](http://nbviewer.jupyter.org/github/nolanbconaway/hip.hop.data/blob/master/hiphop-per-person.ipynb) [several](http://nbviewer.jupyter.org/github/nolanbconaway/hip.hop.data/blob/master/coastal-timeline.ipynb) [Jupyter](http://nbviewer.jupyter.org/github/nolanbconaway/hip.hop.data/blob/master/mixtape-versus-album.ipynb) [Notebooks](https://github.com/nolanbconaway/hip.hop.data/blob/master/most-prolific-artists.ipynb) of my analyses. In this post, I'll describe what I found in a less code-driven fashion. If you'd prefer a more technical read, check out the dataset on [GitHub](https://github.com/nolanbconaway/hip.hop.data)!_
