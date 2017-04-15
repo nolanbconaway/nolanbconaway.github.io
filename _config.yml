@@ -1,4 +1,5 @@
 name: Nolan Conaway
+author: Nolan Conaway
 permalink: /blog/:year/:title
 github: [metadata]
  
@@ -19,11 +20,14 @@ kramdown:
 
 gems:
   - jekyll-sitemap
+  - jekyll-feed
+
 
 # default info
 title: Nolan Conaway
-description: Nolan Conaway's personal website.
+description: Nolan Conaway's personal website and blog.
 keywords: cognitive, data, science
+author: Nolan Conaway
 
 
 

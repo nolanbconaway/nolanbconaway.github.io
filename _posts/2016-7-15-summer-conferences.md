@@ -1,7 +1,7 @@
 ---
 title: I'll be at MathPsych and CogSci 2016!
-description: Here's what I'll be presenting MathPsych and CogSci 2016.
-keywords: CogSci, MathPsych
+excerpt: Here's what I'll be presenting MathPsych and CogSci 2016.
+tags: CogSci, MathPsych
 season: Summer 2016
 assets: /pdfs/
 type: blog
