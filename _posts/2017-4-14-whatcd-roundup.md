@@ -7,7 +7,6 @@ assets: /blog/assets/whatcd-roundup
 type: blog
 layout: post
 mathy: true
-image: /blog/assets/whatcd-roundup/coast-timelines.png
 ---
 
 > _On October 22 2016, I posted a dataset containing metadata for 75,719 music releases that were tagged as "hip.hop" by the What.CD torrent community. My timing could not have been much better: on November 17 2016, What.CD was [shut down](http://www.theverge.com/2016/11/17/13669832/what-cd-music-torrent-website-shut-down) by the French authorities. In the following weeks I [posted](http://nbviewer.jupyter.org/github/nolanbconaway/hip.hop.data/blob/master/hiphop-per-person.ipynb) [several](http://nbviewer.jupyter.org/github/nolanbconaway/hip.hop.data/blob/master/coastal-timeline.ipynb) [Jupyter](http://nbviewer.jupyter.org/github/nolanbconaway/hip.hop.data/blob/master/mixtape-versus-album.ipynb) [Notebooks](https://github.com/nolanbconaway/hip.hop.data/blob/master/most-prolific-artists.ipynb) of my analyses. In this post, I'll describe what I found in a less code-driven fashion. If you'd prefer a more technical read, check out the dataset on [GitHub](https://github.com/nolanbconaway/hip.hop.data)!_
@@ -67,7 +66,7 @@ So who is the most prolific artist in hip hop? Obviously, the answer is **Dj Scr
 
 ## Where is hip hop coming from?
 
-The whole reason why I went to the trouble of acquiring and analyzing this data was to satisfy a hunch. During the fall of 2016, I dug really deep into the [Hypnotize Minds](https://en.wikipedia.org/wiki/Hypnotize_Minds) catalog, and I felt that artists from of Memphis tended to be exceptionally prolific. In general, I has the sense that *a lot* of hip hop was coming out of Memphis, especially when you consider the city's small size (compared to places like New York, Los Angeles, etc).
+The whole reason why I went to the trouble of acquiring and analyzing this data was to satisfy a hunch. During the fall of 2016, I dug really deep into the [Hypnotize Minds](https://en.wikipedia.org/wiki/Hypnotize_Minds) catalog, and I felt that artists from of Memphis tended to be exceptionally prolific. In general, I had the sense that *a lot* of hip hop was coming out of Memphis, especially when you consider the city's small size (compared to places like New York, Los Angeles, etc).
 
 So I integrated [2010 census data](https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population) from the 300-ish biggest cities in the United States, and massaged the data a little to conform to What.CD tagging practices (e.g., San Francisco is more commonly tagged under "bay.area"). The goal was to see which city makes the most hip-hop, relative to its population
 
