@@ -4,10 +4,11 @@
 body {
   color: #616161;
   font-family: 'Josefin Sans', sans-serif;
+  -webkit-text-size-adjust: 100%;
 }
 
 #container {
-  margin: auto;
+  margin: 4em auto;
   width: 100%;
   max-width: 800px;
   padding-bottom: 10px;
@@ -49,6 +50,15 @@ blockquote p {
   padding: 10px;
 }
 
+/* fix top part */
+#topper {
+  position: fixed;
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  z-index: 500;
+}
 
 /* Nav Bar */
 #navbar{

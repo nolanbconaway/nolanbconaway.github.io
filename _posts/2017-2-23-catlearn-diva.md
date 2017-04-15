@@ -6,7 +6,7 @@ season: Winter 2017
 assets: none
 type: code
 external_url: https://cran.r-project.org/web/packages/catlearn/index.html
-layout: post
+layout: external
 ---
 
-[Garrett Honke](http://bingweb.binghamton.edu/~ghonke1/)
+Also, check out [Garrett](http://bingweb.binghamton.edu/~ghonke1/)'s website!
