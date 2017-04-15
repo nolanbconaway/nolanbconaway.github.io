@@ -5,7 +5,7 @@ tags: R, DIVA
 season: Winter 2017
 assets: none
 type: code
-external_url: https://cran.r-project.org/web/packages/catlearn/index.html
+external_url: http://catlearn.r-forge.r-project.org/
 layout: external
 ---
 
