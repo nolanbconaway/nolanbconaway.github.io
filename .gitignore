@@ -5,3 +5,5 @@ old/
 
 # Jekyll
 _site/
+
+data.db

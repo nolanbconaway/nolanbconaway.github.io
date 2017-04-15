@@ -1,6 +1,6 @@
 ---
 title: What.CD Hip Hop Roundup.
-description: What I've found through analyses of 75,000 torrents tagged 'hip.hop' on What.CD.
+description: What.CD Data Roundup! What I've found through analyses of 75,000 torrents tagged 'hip.hop'.
 keywords: gazelle, music, data
 season: Spring 2017
 assets: /blog/assets/whatcd-roundup
@@ -56,7 +56,7 @@ If you look at the overall number of releases (left), the list is dominated by w
 
  I think the "true" metric of hard work is in the number of releases per year. The cumulative total numbers favor artists with longer careers (hence, more time to make music) and penalize artists who have produced a lot of music in a shorter span of time. The dataset only offers a rough measurement of releases per year: each artist's total output, divided by the range of years the albums/mixtapes were released between. 
 
- These data (on the right) yield an entirely different picture. Dj Screw is still in the top spot, but his lead is not _crushingly_ huge. None of the other artists on the list are in the cumulative top 10. Likewise, excepting Dj Screw, nearly all of their music was released within the last couple of years. [Bruce Lee](https://brucelee315.bandcamp.com/), for example, released 20 mixtapes in 2016 (many of which were separate discs of the '_Dragon_' series). If you exclude artists with less than 3 years of activity, the listing looks a lot more like the cumulative total. Regardless, this pattern suggests that there's something of a new breed of proflific producers on the scene.
+ These data (on the right) yield an entirely different picture. Dj Screw is still in the top spot, but his lead is not _crushingly_ huge. None of the other artists on the list are in the cumulative top 10. Likewise, excepting Dj Screw, nearly all of their music was released within the last couple of years. [Bruce Lee](https://brucelee315.bandcamp.com/), for example, released 20 mixtapes in 2016 (many of which were separate discs of the '_Dragon_' series). If you exclude artists with less than 3 years of activity, the listing looks a lot more like the cumulative total. Regardless, this pattern suggests that there's something of a new breed of prolific producers on the scene.
 
 So who is the most prolific artist in hip hop? Obviously, the answer is **Dj Screw**.
 
@@ -65,7 +65,24 @@ So who is the most prolific artist in hip hop? Obviously, the answer is **Dj Scr
 </div>
 
 ## Where is hip hop coming from?
-<!-- citypop vs hip hop -->
+
+The whole reason why I went to the trouble of acquiring and analyzing this data was to satisfy a hunch. During the fall of 2016, I dug really deep into the [Hypnotize Minds](https://en.wikipedia.org/wiki/Hypnotize_Minds) catalog, and I felt that artists from of Memphis tended to be exceptionally prolific. In general, I has the sense that *a lot* of hip hop was coming out of Memphis, especially when you consider the city's small size (compared to places like New York, Los Angeles, etc).
+
+So I integrated [2010 census data](https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population) from the 300-ish biggest cities in the United States, and massaged the data a little to conform to What.CD tagging practices (e.g., San Francisco is more commonly tagged under "bay.area"). The goal was to see which city makes the most hip-hop, relative to its population
+
+<p><img src="{{page.assets}}/tags-per-person.png"></p>
+
+I was close! Per person, New Orleans is the biggest producer of hip hop. Then Atlanta, then Memphis. Somewhat surprisingly, there's a big division between the cities that made the most hip hop total (the 'flagship' cities of hip hop music) and those that make the most per-person (big-but-not-*huge* cities, predominantly in the south). 
+
+Overall, these results say more about Southern hip hop than Memphis specifically: New York, Los Angeles, Chicago, and the Bay Area aren't even in the top 10, per-person. My fondness for Dirty South hip hop knows no bounds, so I followed this with a more systematic comparison between hip hop produced in the East Coast, West Coast, and Dirty South (Third Coast). So i combed through the data to pull out the main tags associated with hip hop from each region, and counted the releases over time.
+
+<p><img src="{{page.assets}}/coast-timelines.png"></p>
+
+The bump in the releases between 1994 and 1999 is concrete evidence of hip hop's 'golden age': in all three regions the amount of hip hop increases drastically, and the frequency from that period has not been matched since. The rise of the Dirty South is particularly notable: the region goes from essentially zero releases in the early 90's to producing more than the East and West coasts in the mid-90's.
+
+## Conclusions
+
+I'm still bummed about what's happened to What.CD, but I'm glad about having obtained this dataset before it was shut down. I don't think I've wrought out nearly everything that's in the data. If you want, [send me an email](mailto:nolanbconaway@gmail.com) with something you're curious about, or [check out the data](https://github.com/nolanbconaway/hip.hop.data) yourself!
 <!-- east vs west vs third coast -->
 
 
