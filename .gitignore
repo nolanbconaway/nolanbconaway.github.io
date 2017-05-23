@@ -6,4 +6,6 @@ old/
 # Jekyll
 _site/
 
-data.db
+# ignore sqlite data
+/blog/assets/**/*.db
+/blog/assets/**/*.sqlite
