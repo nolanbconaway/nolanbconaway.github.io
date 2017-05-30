@@ -1,33 +1,47 @@
 rm(list=ls())
+this.dir <- dirname(parent.frame(2)$ofile)
+setwd(this.dir)
 
-library(sqldf)
-library(ggplot2)
+library(tidyverse)
+library(tidyquant)
 
-# grab the data
-con = dbConnect(SQLite(), dbname="pitchfork.db")
-borderline = dbGetQuery( con,
+p4k_db <- src_sqlite(path = 'pitchfork.db')
+borderline <- tbl(p4k_db, sql(
 	paste('SELECT reviewid, pub_date, score, best_new_music, author FROM reviews', 
 		'WHERE (score BETWEEN 8.1 AND 8.5)',
 		'AND (pub_weekday < 6)',
-		'AND substr(pub_date,1,4)|| substr(pub_date,6,2)|| substr(pub_date,9,2) > "20030114"')
+		'AND substr(pub_date,1,4) || substr(pub_date,6,2) || substr(pub_date,9,2) > "20030114"')
+	)
 )
-all_reviews = dbGetQuery( con,
+
+all_reviews <- tbl(p4k_db, sql(
 	'SELECT reviewid, pub_date, best_new_music, score, author FROM reviews'
+	)
 )
-author_info = dbGetQuery( con,
+
+author_info <- tbl(p4k_db, sql(
 	paste('SELECT author, AVG(best_new_music), COUNT(*) FROM reviews', 
 		'WHERE (pub_weekday < 6)',
-		'AND substr(pub_date,1,4)|| substr(pub_date,6,2)|| substr(pub_date,9,2) > "20030114"',
+		'AND substr(pub_date,1,4) || substr(pub_date,6,2)|| substr(pub_date,9,2) > "20030114"',
 		'GROUP BY author')
+	), check.names=TRUE
 )
-colnames(author_info) = c('author','proportion', 'count')
-dbDisconnect(con)
-
+author_info = rename(author_info,
+			proportion = `AVG(best_new_music)`,
+			count = `COUNT(*)`
+		)
 
 # convert dates to integers
+select(borderline, pub_date)
+as_xts(borderline, date_col = pub_date)
+
+as.numeric(as.POSIXct(select(borderline, pub_date),  format="%Y-%m-%d"))
+lll
 borderline$unixtime = as.numeric(as.POSIXct(borderline$pub_date , format="%Y-%m-%d"))
 all_reviews$unixtime = as.numeric(as.POSIXct(all_reviews$pub_date , format="%Y-%m-%d"))
 
+
+lll
 n = dim(borderline)[1]
 
 # construct a table for regressing
