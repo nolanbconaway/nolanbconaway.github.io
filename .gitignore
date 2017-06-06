@@ -6,6 +6,10 @@ old/
 # Jekyll
 _site/
 
+# R
+*.RData
+*.Rhistory
+
 # ignore sqlite data
 /blog/assets/**/*.db
 /blog/assets/**/*.sqlite
