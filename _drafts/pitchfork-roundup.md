@@ -1,8 +1,8 @@
 ---
 title: Pitchfork Roundup! What I found in 18,000 Pitchfork Reviews.
-excerpt: Pitchfork roundup! On the biases in review scores.
+excerpt: Pitchfork roundup! On bias in album reviews.
 tags: pitchfork, music, data
-season: Spring 2017
+season: Summer 2017
 assets: /blog/assets/pitchfork-roundup
 type: blog
 layout: post
@@ -23,7 +23,7 @@ So, while subjective, music reviews are at least _interpreted_ as an authoritati
 
 ## The Reviews
 
-It's worth briefly describing what a Pitchfork review entails, and establishing some basic descriptives. Since 1998, Pitchfork has published five new reviews every weekday. In 2016, Pitchfork added an additional five reviews on Saturdays, as well as a "Sunday Reviews" section containing single, long-form article on a classic album (one review per week, published on Sundays). They've also occasionally published more targeted series of reviews on individual artists or groups (such as following the deaths of [David Bowie](http://pitchfork.com/artists/438-david-bowie/) and [Prince](http://pitchfork.com/artists/3397-prince/))
+It's worth briefly describing what a Pitchfork review entails, and establishing some basic descriptives. Since 1998, Pitchfork has published five new reviews every weekday. In 2016, Pitchfork added an additional five reviews on Saturdays, as well as a "Sunday Reviews" section containing long-form articles on a classic albums (one review per week, published on Sundays). They've also occasionally published more targeted series of reviews on individual artists or groups (such as following the deaths of [David Bowie](http://pitchfork.com/artists/438-david-bowie/) and [Prince](http://pitchfork.com/artists/3397-prince/))
 
 The typical review addresses a single release by a specific artist, and is attributed to a single author. However, sometimes reviews are published for multiple albums, or by multiple artists, or are authored by multiple individuals. All reviews are given a numerical score (0.0-10.0), are labeled by one or more genre tags, report the record label (if any), and contain several paragraphs of text (the review itself). Since 2003, authors have awarded some releases the title "_Best New Music_", which means what you'd think. Best New Music albums are displayed prominently on Pitchfork, and even have their own [page](http://pitchfork.com/reviews/best/albums/).
 
@@ -37,7 +37,9 @@ A little more than 5% of reviews are awarded Best New Music. Most scores lie bet
 
 ## Authorship Biases
 
-The first source of bias I considered was the authors of the reviews themselves. We know from research in cognitive psychology that decisions made by people are [all sorts of biased](https://en.wikipedia.org/wiki/List_of_cognitive_biases#Decision-making.2C_belief.2C_and_behavioral_biases), and I imagine that deciding ob an album's score and the Best New Music status is subject to those biases just like anything else.
+The main source of bias I considered was the authors of the reviews themselves. We know from research in cognitive psychology that people are [all sorts of biased](https://en.wikipedia.org/wiki/List_of_cognitive_biases#Decision-making.2C_belief.2C_and_behavioral_biases), and I imagine that deciding on an album's score and the Best New Music status is subject to those biases just like anything else. 
+
+In a later post, I might explore some of Pitchfork's institutional biases. But to keep this post at a manageable size, for now I'll stick to biases stemming from the authors themselves.
 
 ### Statistical Heaping
 
@@ -47,46 +49,24 @@ Partly inspired by a [really cool blog post](https://gutterstats.wordpress.com/2
 
 Those diamond markers show what you'd expect if Pitchfork reviewers were totally unbiased. The _Uniform Sampling_ model is what you'd get if you picked scores at random; the _Normal Sampling_ model shows what you'd get if you picked scores around a normal distribution  based on the observed scores (\\(\mu=7.006, \sigma = 1.294\\)). *.0 gets a slight bump in the uniform model because 10.0 is a possibility, but 10.1-10.9 are not. 
 
-Obviously, the tidy, round *.0 value is much more frequently chosen than you'd expect given either sampling technique. _Its very nearly twice as frequent as *.1_. There's also a slight bump at the *0.5 and *.8  marks, but those values are a bit weaker. The point is, Pitchfork reviewers absolutely show the heaping behavior: at least in this sense, the review scores are biased. 
+Obviously, the tidy, round *.0 value is much more frequently chosen than you'd expect given either sampling technique: _It's very nearly twice as frequent as *.1_. There's also a slight bump at the *0.5 and *.8  marks, but those values are a bit weaker. The point is, Pitchfork reviewers absolutely show the heaping behavior: at least in this sense, the review scores are biased. 
 
 ### Borderline Best New Music Decisions
 
-Still, its important to consider that the impact of the heaping bias is not _huge_. We're taking about a reviewer picking between, for example, a score of 6.9 or 7.0, which is not a big difference overall. A more impactful difference lies in the choice to award a release the title of Best New Music. As I noted above, while most releases scoring better than 8.5 are given the award, releases scoring between 8.1 and 8.5 may be Best New Music but it is not in any sense guaranteed. I wonder about how are these decisions made, and if there are any sources of bias guiding the decision-making of reviewers.
+Still, its important to consider that the impact of the heaping bias is not _huge_. We're taking about a reviewer picking between, for example, a score of 7.0 or 7.1, which is not a big difference overall. A more impactful difference lies in the choice to award a release the title of _Best New Music_. As I noted above, while most releases scoring better than 8.5 are given the award, releases scoring between 8.1 and 8.5 may be Best New Music but it is not in any sense guaranteed. I wonder about how are these decisions made, and if there are any sources of bias guiding the decision-making of reviewers.
 
-I reduced the dataset to only the reviews posted after the advent of Best New Music, excepting those posted on Sundays (which are often high scoring but not Best New Music), within the critical 8.1-8.5 range. There are 1565 such cases, only 408 of which (26.1%) are Best New Music. My guess is that granting Best New Music status is somewhat reserved at Pitchfork; Best New Music is only meaningful if it is relatively scarce. So maybe authors would be less likely to award Best New Music to a new release if they had recently awarded it in another review? 
+I reduced the dataset to these borderline cases (reviews scoring 8.1-8.5, published after the advent of Best New Music, and are not reviews of re-releases): there are 1430 in all, 373 (26.1%) of which are Best New Music. My guess is that writers seek to award Best New Music to albums that are of an unusually high quality. But, if you look at the data [grouped by author]({{page.assets}}/author_avgs.png), it's evident that some authors are "tougher" reviewers compared to others. So maybe tougher reviewers, for whom scores of 8.1-8.5 are more unusual, are more likely to award Best New Music in a borderline case.
 
-Answering this question is tricky, since authors vary in how frequently they award Best New Music. For each borderline Best New Music, I tracked down the author's previous review to see if _that_ was Best New Music. The result is a contingency table, but the numbers are a deceptive. In the interest of full disclosure, I'll report the results here:
+To estimate how "normal" scores of 8.1-8.5 are to each author, I assumed that each author's reviews can be represented by a normal distribution with parameters: \\((\mu_{a}, \sigma_{a})\\). Using these distributions, I computed the Z-Score of each borderline case within its author's distribution (\\(Z=(x - \mu_{a})/\sigma_{a}\\)). The prediction is that more unusual releases (having greater Z-Scores) should be more likely to be awarded Best New Music, so I binned the Z-scores and calculated the proportion of releases in each bin that were Best New Music:
 
-{:.datatable}
-|                 |   Prior Regular Review   |  Prior Best New Music   |  
-|  ---            |   :---:                  |  :---:                  |  
-|  Regular Review |     1061 (*76%*)         |  72 (*56%*)             | 
-|  Best New Music |     345  (*24%*)         |  57 (*44%*)             | 
+{% include svg.html content="borderline-bnm-zscore.svg" %}
 
-> Note: Although there are 1565 borderline Best New Music candidates, 30 of these are from the first review posted by an author, and so there is no prior review to reference. These candidates are excluded from the above data.
+Obviously, there is a strong and positive relation between the Z-Score of an review within it's author's distribution and the probability it will be awarded Best New Music. In the extreme case, very unusually high scores (\\(Z \ge 2.25\\)) nearly have a 100% chance of being awarded Best New Music -- even though their actual score is no better than any of the other borderline cases. There's only a handful of reviews with Z-Scores that extreme, so I wouldn't commit too strongly the 100% value, but you get the point: "Tougher" authors are more likely to award Best New Music in borderline cases. The (presumably semi-random) draw of an album's reviewer can make a huge difference in it's reception.
 
+## Wrapping Up
 
-When the author's previous article was _not_ best New Music, there's a 24% chance that a borderline album will be awarded Best New Music. but when the author's previous article _was_ Best New Music, that chance shoots up to 44%. That is in no sense a _small_ difference, and its obviously inconsistent with my intuition (that a recent Best New Music will decrease the probability of an award to a borderline album). But I wonder if this is really indicating something about individual author behavior
+The reason why I'm personally interested in revealing these sources of biases is that reviews published on Pitchfork Media (as well as through other outlets) carry with them a sense of authority: that the favorability of a review is in some sense objective. But, obviously, authors are people, and people are [biased](https://en.wikipedia.org/wiki/List_of_cognitive_biases#Decision-making.2C_belief.2C_and_behavioral_biases), so it's no surprise that, once you get digging into the data, you can find evidence of all sorts of biases. 
 
+To their credit, in this post I did _not_ report any of the analyses I conducted which uncovered no evidence of bias (like [this one](http://nbviewer.jupyter.org/github/nolanbconaway/pitchfork-data/blob/master/notebooks/reviewer-development.ipynb), or [this one](http://nbviewer.jupyter.org/github/nolanbconaway/pitchfork-data/blob/master/notebooks/best-new-music-iid.ipynb)). Of course, that's not exactly evidence that there is _no_ bias, but Pitchfork reviewers are professionals, and my guess is that many of them have considered these sorts of biases before, and may even attempt to combat their influence.
 
 
-
-
-
-
-
-
-- How are borderline BNM decided on?
-
-### Autocorrelations
-
-- Influence of a recent negative or positive score on the following review. 
-
-
-
-## Institutional Biases
-
-How does the Pitchfork institution influence reviews?
-
-- Distribution of scores / best new music per day / week.
-- What gets reviewed? What doesn't? 
