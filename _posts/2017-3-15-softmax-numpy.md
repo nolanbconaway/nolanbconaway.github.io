@@ -108,7 +108,7 @@ def softmax(X, theta = 1.0, axis = None):
 
 The only aspect of this function that does not directly correspond to something in the softmax equation is the subtraction of the maximum from each of the elements of `X`. This is done for stability reasons: when you exponentiate even large-ish numbers, the result can be quite large. `numpy` will return `inf` when you exponentiate values over 710 or so. So if values of `X` aren't limited to some fixed range (e.g., \\([0...1]\\)), or even if you let `theta` take on any value, you run the distinct possibility of hitting the `inf` ceiling.
 
-But! If you subtract the maximum value from each element, the largest pre-exponential value will be zero, thus avoiding the numerical instability problem.
+But! If you subtract the maximum value from each element, the largest pre-exponential value will be zero, thus avoiding numerical instability.
 
 So that solves the numerical stability problem, but is it _mathematically_ correct? To clear this up, let's write out the softmax equation with the subtraction terms in there. To keep it simple, I've also removed the \\(\theta\\) parameter:
 
