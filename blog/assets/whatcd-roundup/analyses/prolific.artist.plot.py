@@ -59,6 +59,7 @@ ax[1].set_title('Releases Per Year', fontsize = 14)
 
 plt.tight_layout()
 plt.savefig('../prolific-artists.png', bbox_inches = 'tight')
+plt.savefig('../prolific-artists.svg', bbox_inches = 'tight')
 
 
 

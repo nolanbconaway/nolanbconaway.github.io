@@ -50,7 +50,7 @@ Speaking of staff picks, I think it says something about Kanye's popularity that
 
 The second thing I wanted to know was who the hardest working artists are: "hardest working" being defined as the number of albums and mixtapes released. I didn't count singles, EPs, compilations, and so on because the amount of new music published on these release types is not as significant. So I just counted the number of albums and mixtapes released by each artist, here are the top-10s:
 
-<p><img src="{{page.assets}}/prolific-artists.png"></p>
+{% include svg.html content="prolific-artists.svg" %}
 
 If you look at the overall number of releases (left), the list is dominated by well-known artists who have had reasonably long careers, but there's also a few lesser-known artists who have been grinding away at new content for some time. It's also worth noting that [Dj Screw](https://en.wikipedia.org/wiki/DJ_Screw) produced more releases than the next six artists combined, which is remarkable when you consider that his career was cut short when he was only 29 years old.
 
@@ -70,20 +70,20 @@ The whole reason why I went to the trouble of acquiring and analyzing this data 
 
 So I integrated [2010 census data](https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population) from the 300-ish biggest cities in the United States, and massaged the data a little to conform to What.CD tagging practices (e.g., San Francisco is more commonly tagged under "bay.area"). The goal was to see which city makes the most hip-hop, relative to its population
 
-<p><img src="{{page.assets}}/tags-per-person.png"></p>
+{% include svg.html content="tags-per-person.svg" %}
+
 
 I was close! Per person, New Orleans is the biggest producer of hip hop. Then Atlanta, then Memphis. Somewhat surprisingly, there's a big division between the cities that made the most hip hop total (the 'flagship' cities of hip hop music) and those that make the most per-person (big-but-not-*huge* cities, predominantly in the south). 
 
 Overall, these results say more about Southern hip hop than Memphis specifically: New York, Los Angeles, Chicago, and the Bay Area aren't even in the top 10, per-person. My fondness for Dirty South hip hop knows no bounds, so I followed this with a more systematic comparison between hip hop produced in the East Coast, West Coast, and Dirty South (Third Coast). So i combed through the data to pull out the main tags associated with hip hop from each region, and counted the releases over time.
 
-<p><img src="{{page.assets}}/coast-timelines.png"></p>
+{% include svg.html content="coast-timelines.svg" %}
 
 The bump in the releases between 1994 and 1999 is concrete evidence of hip hop's 'golden age': in all three regions the amount of hip hop increases drastically, and the frequency from that period has not been matched since. The rise of the Dirty South is particularly notable: the region goes from essentially zero releases in the early 90's to producing more than the East and West coasts in the mid-90's.
 
 ## Conclusions
 
 I'm still bummed about what's happened to What.CD, but I'm glad about having obtained this dataset before it was shut down. I don't think I've wrought out nearly everything that's in the data. If you want, [send me an email](mailto:nolanbconaway@gmail.com) with something you're curious about, or [check out the data](https://github.com/nolanbconaway/hip.hop.data) yourself!
-<!-- east vs west vs third coast -->
 
 
 

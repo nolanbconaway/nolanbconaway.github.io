@@ -51,6 +51,5 @@ h.set_title('Hip Hop Releases Per 100k People')
 
 plt.tight_layout()
 
-
-
 fh.savefig('../tags-per-person.png', bbox_inches = 'tight')
+fh.savefig('../tags-per-person.svg', bbox_inches = 'tight')

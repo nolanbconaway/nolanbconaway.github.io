@@ -54,6 +54,7 @@ leg = plt.legend(loc='upper left', frameon = True)
 
 plt.tight_layout()
 fh.savefig('../coast-timelines.png', bbox_inches = 'tight')
+fh.savefig('../coast-timelines.svg', bbox_inches = 'tight')
 
 
 
