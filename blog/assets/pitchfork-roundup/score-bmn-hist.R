@@ -12,13 +12,6 @@ dbDisconnect(con)
 
 print(summary(reviews))
 
-
-# print quantiles of each point
-ecdf_fun <- function(x,perc) ecdf(x)(perc)
-for (i in seq(0.0,10.0,0.1)) {
-	print(c(i, ecdf_fun(reviews$score,i)))
-}
-
 # print percentage of scores that are bnm
 attach(reviews)
 print(aggregate(reviews, by=list(score), FUN=mean))
@@ -31,9 +24,10 @@ plot = ggplot(counts, aes(x=score, y = Freq, fill = best_new_music,  colour=best
 	geom_bar(stat = 'identity', width = 1) + 
 	xlab("Score") +
 	ylab("Number of Reviews") +
+	ggtitle("Distribution of Review Scores") +
 	scale_x_discrete(breaks = seq(from=0,to=10,by=1)) +
 	scale_y_continuous(breaks = seq(from=0,to=1000,by=100)) +
-	theme_bw(base_size = 10) +
+	theme_bw(base_size = 12) +
 	theme(
 	  	legend.title = element_blank(),
 	  	legend.position = c(0.2, 0.8),

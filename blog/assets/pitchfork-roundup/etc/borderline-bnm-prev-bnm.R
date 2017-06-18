@@ -7,7 +7,7 @@ rm(list=ls())
 
 suppressMessages(library(tidyverse))
 
-p4k_db = DBI::dbConnect(RSQLite::SQLite(),"pitchfork.db")
+p4k_db = DBI::dbConnect(RSQLite::SQLite(),"../pitchfork.db")
 reviews = tbl(p4k_db, "reviews")
 years = tbl(p4k_db, "years")
 

@@ -83,7 +83,6 @@ Present. **Postdoctoral Research Associate**. University of Wisconsin–Madison.
 - Designed Python classes to scrape 16 years of reviews from Pitchfork Media. 
 - Stored data in SQL format, analyses focused on uncovering evidence of reviewer bias.
 - Published results in Jupyter Notebooks and a blog post.
-- _Sample result_. "Tough" reviewers are _more_ likely to award Best New Music in borderline cases.
 - _Sample result_. Reviewers statistically heap scores to "round" values (e.g., *.0).
 
 
@@ -92,7 +91,6 @@ Present. **Postdoctoral Research Associate**. University of Wisconsin–Madison.
 - Used an online API to scrape metadata from a major BitTorrent website. 
 - Integrated 2010 US census data, conducted analyses describing geographic patterns.
 - Published results in Jupyter Notebooks and a blog post.
-- _Sample result_. Hip Hop has become less regional: Eastern vs. Western vs. Southern sub-genre distinctions have declined since the mid 90's.
 - _Sample result_. Southern cities (e.g., New Orleans, Atlanta, Memphis) produce the most hip hop, per person.
 
 **CogSci 2016 Shiny App**. _Summer 2016_.

@@ -47,9 +47,10 @@ plot = ggplot(NULL, aes(x = decimal, y = count)) +
 	geom_point(data = normal, aes(x = 1:10, colour = 'Normal Sampling   '), 
 		stroke = 1.25, size = 6, shape = 23) + 
 	ylab("Number of Reviews") +
+	ggtitle("Statistical Heaping to 'Round' Values") +
 	scale_y_continuous(breaks = seq(from=0,to=3000,by=500)) +
 	scale_x_discrete(breaks=observed$decimal, labels=xticklabs) +
-	theme_bw(base_size = 10) +
+	theme_bw(base_size = 12) +
 	theme(
 		axis.title.x=element_blank(),
 		panel.grid.major.x = element_blank(),
@@ -57,7 +58,7 @@ plot = ggplot(NULL, aes(x = decimal, y = count)) +
 		legend.title = element_blank(),
 	  	legend.position = c(0.5, 0.9),
 	  	panel.grid.minor.y = element_blank(),
-	  	axis.text.x  = element_text(size=10),
+	  	axis.text.x  = element_text(size=12),
 	  ) + 
 	scale_colour_manual(values=c("#009688", "#FFB300"))
 
