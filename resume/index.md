@@ -17,7 +17,7 @@ tags: resume
 
 -  `(443)204-3707` 
 -  `nolanbconaway@gmail.com`. 
--  [`Website`](https://nolanbconaway.github.io/), [`Github`](github.com/nolanbconaway), [`Linkedin`](https://www.linkedin.com/in/nolanbconaway/), [`Stack Overflow`](https://stackoverflow.com/users/3521179/nolan-conaway)
+-  [`Website`](https://nolanbconaway.github.io/), [`Github`](https://github.com/nolanbconaway), [`Linkedin`](https://www.linkedin.com/in/nolanbconaway/), [`Stack Overflow`](https://stackoverflow.com/users/3521179/nolan-conaway)
 
 ## Experience
 
