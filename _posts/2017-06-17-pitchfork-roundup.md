@@ -45,7 +45,7 @@ Obviously, the tidy, round *.0 value is much more frequently chosen than you'd e
 
 ## Borderline Best New Music Decisions
 
-Still, its important to consider that the impact of the heaping is not _huge_. We're taking about a reviewer picking between, for example, a score of 7.0 or 7.1. A more impactful difference lies in the choice to award _Best New Music_. As I noted above, while most releases scoring 8.5 or better are given the award, releases scoring between 8.1 and 8.4 have a shot but it is not guaranteed. I've long wondered about how are these decisions made, so I looked into it.
+Still, its important to consider that the impact of the heaping is not _huge_. We're taking about a reviewer picking between, for example, a score of 7.0 or 7.1. A more impactful difference lies in the choice to award _Best New Music_. As I noted above, while most releases scoring 8.5 or better are given the award, releases scoring between 8.1 and 8.4 have a shot but it is not guaranteed. I've long wondered about how these decisions are made, so I looked into it.
 
 I reduced the dataset to the borderline Best New Music candidates: there are 1223 in all, 269 (22%) of which are Best New Music. I checked out a bunch of possible explanations for why some get Best New Music and some do not; for full disclosure I'll list them here:
 
