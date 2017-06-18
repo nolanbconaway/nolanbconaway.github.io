@@ -71,7 +71,7 @@ Unfortunately, I do not have a clear idea as to why record labels are treated di
 
 ## Wrapping Up
 
-The reason why I was interested in revealing these sources of biases is that music reviews carry with them a sense of authority: that the favorability of a review is in some sense objective. But, obviously, authors are people, and [people are biased](https://en.wikipedia.org/wiki/List_of_cognitive_biases#Decision-making.2C_belief.2C_and_behavioral_biases). So it's no surprise that, once you get digging into the data, you can find evidence of all sorts of biases. 
+The reason why I was interested in revealing these sources of bias is that music reviews carry with them a sense of authority: that the favorability of a review is in some sense objective. But, obviously, authors are people, and [people are biased](https://en.wikipedia.org/wiki/List_of_cognitive_biases#Decision-making.2C_belief.2C_and_behavioral_biases). So it's no surprise that, once you get digging into the data, you can find evidence of all sorts of biases. 
 
 To their credit, in this post I did _not_ report many of the analyses I conducted which uncovered no evidence of bias (like [this one](https://twitter.com/nolanbconaway/status/873754026080436224), or [this one](http://nbviewer.jupyter.org/github/nolanbconaway/pitchfork-data/blob/master/notebooks/reviewer-development.ipynb), or [this one](http://nbviewer.jupyter.org/github/nolanbconaway/pitchfork-data/blob/master/notebooks/best-new-music-iid.ipynb)). Of course, that's not exactly evidence that there is _no_ bias. But, Pitchfork reviewers are professionals, and my guess is that many of them have considered these sorts of biases before, and may even attempt to combat their influence.
 
