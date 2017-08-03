@@ -1,6 +1,6 @@
 ---
 title: I'll be at MathPsych and CogSci 2016!
-excerpt: Here's what I'll be presenting MathPsych and CogSci 2016.
+excerpt: Here's what I'll be presenting at MathPsych and CogSci 2016.
 tags: CogSci, MathPsych
 season: Summer 2016
 assets: /pdfs/
