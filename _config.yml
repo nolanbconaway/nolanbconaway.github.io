@@ -2,7 +2,7 @@ name: Nolan Conaway
 author: Nolan Conaway
 permalink: /blog/:year/:title
 github: [metadata]
- 
+
 
 # Configure Markdown
 markdown: kramdown
@@ -18,7 +18,7 @@ kramdown:
       line_numbers: true
       start_line: 1
 
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-feed
 

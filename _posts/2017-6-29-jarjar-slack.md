@@ -1,7 +1,7 @@
 ---
 title: Jarjar Slack Modules.
 excerpt: Jeff Zemla and I developed Python and Bash code for sending notifications to Slack.
-tags: gazelle, data, shiny, app
+tags: python, slack
 season: Summer 2017
 type: code
 layout: external
