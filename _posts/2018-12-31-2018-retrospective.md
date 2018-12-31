@@ -1,13 +1,13 @@
 ---
-title: 2018 Retrospective.
-excerpt: Some reflections on the last year.
-tags: retrospective
+title: 2018 retrospective (or, how devops changed how I do data science).
+excerpt: 2018 retrospective (or, how devops changed how I do data science).
+tags: retrospective, devops
 season: Winter 2019
 type: blog
 layout: post
 ---
 
-2018 was my first full year as a professional. I finished my postdoc work in [Joe's awesome lab](http://alab.psych.wisc.edu/) in late 2017 and started at Shutterstock soon after.
+2018 was my first full year as a professional data scientist. I finished my postdoc work in [Joe's awesome lab](http://alab.psych.wisc.edu/) in late 2017 and started at Shutterstock soon after.
 
 I found that full time data science is a lot like academic work, but you also need to learn a lot of devops to get your work out there for others to use. I had some time before my family's New Year's Eve celebration so I am writing up some thoughts on how learning a little devops has changed the way I work.
 
@@ -41,7 +41,7 @@ In the coming month's I'd like to learn how to apply this ethos to testing flask
 
 ## 3. CI/CD pipelines
 
-For the first handful of months at Shutterstock, data science work was primary made available to internal consumers through manual requests. Imagine emails like, "Hey can I get X data? In an excel spreadsheet?". That is not at all my style: I don't like CSV formats ([I'm not the only one](https://twitter.com/kanyewest/status/989184954310410240)) and I _really_ don't like manual processes.
+For my first handful of months at Shutterstock, data science work was primary made available to internal consumers through manual requests. Imagine emails like, "Hey can I get X data? In an excel spreadsheet?". That is not at all my style: I don't like CSV formats ([I'm not the only one](https://twitter.com/kanyewest/status/989184954310410240)) and I _really_ don't like manual processes.
 
 So we buckled down, learned some devops, and started opening up our models to consumers through REST APIs and webapps using our in-house Kubernetes pipeline. Most of those reports were really just views of a database anyway, so why not let the user download the report whenever they need it?
 
