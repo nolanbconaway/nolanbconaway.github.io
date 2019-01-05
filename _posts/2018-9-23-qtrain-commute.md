@@ -1,6 +1,6 @@
 ---
 title: How was my Q Train commute?
-excerpt: I built a slack app to ask me how the Q ride was every day.
+excerpt: I built a slack app to ask me how my Q ride was every day.
 tags: heroku, flask, commute, slack
 season: Autumn 2018
 type: app
