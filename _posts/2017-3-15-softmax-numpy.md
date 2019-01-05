@@ -9,12 +9,18 @@ layout: post
 mathy: true
 ---
 
+<hr>
+
+### Update (Jan 2019): SciPy (1.2.0) now includes the softmax as a special function. It's really slick. Use it. [Here are some notes](/blog/2019/softmax-numpy-update).
+
+<hr>
+
 I use the [softmax](https://en.wikipedia.org/wiki/Softmax_function) function _constantly_. It's handy anytime I need to model choice among a set of mutually exclusive options. In the canonical example, you have some metric of evidence, \\(X = \\{ X_1, X_2, ... X_n\\} \\), that an item belongs to each of \\(N\\) classes: \\( C = \\{C_1, C_2, ... C_n\\} \\). \\(X\\) can only belong to one class, and larger values indicate more evidence for class membership. So you need to convert the relative amounts of evidence into probabilities of membership within each of the classes.
 
 That's what the softmax function is for. Below I have written the mathematics, but idea is simple: you divide each element of \\(X\\) by the sum of all the elements:
 
 $$
-p(C_n) = 
+p(C_n) =
 \frac{ \exp\{\theta \cdot X_n\} }
 { \sum_{i=1}^{N}{\exp \{\theta \cdot X_i\} } }
 $$
@@ -32,7 +38,7 @@ ps = np.exp(X * theta)
 ps /= np.sum(ps)
 ```
 
-Of course, usually `X` and `theta` come from somewhere else. This works well if you are only simulating one decision: the softmax requires literally two lines of code and its easily readable. But things get thornier if you want to simulate many choices. For example, what if `X` is a matrix where rows correspond to the different choices, and the columns correspond to the options? 
+Of course, usually `X` and `theta` come from somewhere else. This works well if you are only simulating one decision: the softmax requires literally two lines of code and its easily readable. But things get thornier if you want to simulate many choices. For example, what if `X` is a matrix where rows correspond to the different choices, and the columns correspond to the options?
 
 In the 2D case, you can either run a loop through the rows of `X` or use `numpy` matrix [broadcasting](https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html). Here's the loop solution:
 
@@ -50,7 +56,7 @@ for i in range(X.shape[0]):
     ps[i,:] /= np.sum(ps[i,:])
 ```
 
-That's not _terrible_, but you can imagine that it's annoying to write one of those _every time_ you need to softmax. Likewise, you'd have to change up the code if you wanted to softmax over columns rather than rows. Or for that matter, what if `X` was a 3D-array, and you wanted to compute softmax over the third dimension? 
+That's not _terrible_, but you can imagine that it's annoying to write one of those _every time_ you need to softmax. Likewise, you'd have to change up the code if you wanted to softmax over columns rather than rows. Or for that matter, what if `X` was a 3D-array, and you wanted to compute softmax over the third dimension?
 
 At this point it feels more useful to write a generalized softmax function.
 
@@ -65,10 +71,10 @@ def softmax(X, theta = 1.0, axis = None):
 
     Parameters
     ----------
-    X: ND-Array. Probably should be floats. 
+    X: ND-Array. Probably should be floats.
     theta (optional): float parameter, used as a multiplier
         prior to exponentiation. Default = 1.0
-    axis (optional): axis to compute values along. Default is the 
+    axis (optional): axis to compute values along. Default is the
         first non-singleton axis.
 
     Returns an array the same size as X. The result will sum to 1
@@ -82,12 +88,12 @@ def softmax(X, theta = 1.0, axis = None):
     if axis is None:
         axis = next(j[0] for j in enumerate(y.shape) if j[1] > 1)
 
-    # multiply y against the theta parameter, 
+    # multiply y against the theta parameter,
     y = y * float(theta)
 
     # subtract the max for numerical stability
     y = y - np.expand_dims(np.max(y, axis = axis), axis)
-    
+
     # exponentiate y
     y = np.exp(y)
 
@@ -113,7 +119,7 @@ But! If you subtract the maximum value from each element, the largest pre-expone
 So that solves the numerical stability problem, but is it _mathematically_ correct? To clear this up, let's write out the softmax equation with the subtraction terms in there. To keep it simple, I've also removed the \\(\theta\\) parameter:
 
 $$
-p(C_n) = 
+p(C_n) =
 \frac{ \exp\{ X_n - \max(X) \} }
 { \sum_{i=1}^{N}{\exp \{ X_i - \max(X) \} } }
 $$
@@ -131,7 +137,7 @@ Then you just cancel out the maximum terms, and you're left with the original eq
 
 $$
 \frac{ \exp \{ X_n  \} \div \exp \{ \max(X) \} }
-{ \sum_{i=1}^{N}{\exp \{ X_i \} \div \exp \{ \max(X) \} } } = 
+{ \sum_{i=1}^{N}{\exp \{ X_i \} \div \exp \{ \max(X) \} } } =
 \frac{ \exp\{ X_n \} }
 { \sum_{i=1}^{N}{\exp \{ X_i \} } }
 $$
@@ -147,7 +153,7 @@ X = np.array([
     [1.1, 5.0, 2.2, 7.3],
     [6.5, 3.2, 8.8, 5.3],
     [2.7, 5.1, 9.6, 7.4],
-    ]) 
+    ])
 
 # softmax over rows
 softmax(X, theta = 0.5, axis = 0)

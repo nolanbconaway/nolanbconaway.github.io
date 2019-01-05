@@ -8,7 +8,7 @@ type: blog
 layout: post
 ---
 
-As of early 2019, my post on a [softmax function for numpy](https://nolanbconaway.github.io/blog/2017/softmax-numpy) accounts for 83% of traffic to my website (~16k views in 2018). I recently found that, as of version 1.2.0, scipy has included an implementation of the softmax in its special functions.
+As of early 2019, my post on a [softmax function for numpy](/blog/2017/softmax-numpy) accounts for 83% of traffic to my website (~16k views in 2018). I recently found that, as of version 1.2.0, scipy has included an implementation of the softmax in its special functions.
 
 Some info on the change:
 
