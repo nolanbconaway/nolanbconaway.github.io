@@ -154,5 +154,5 @@ Anyway, I still prefer scipy softmax to reduce the dependency on a handwritten f
 
 Some notes:
 
-- I get similar results obtained every time I ran the script.
+- I get similar results every time I ran the script.
 - I use a cruddy pip install on python 3.7.1. I don't know what would happen if those speedy conda optimizations were in play.
