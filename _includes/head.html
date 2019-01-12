@@ -1,3 +1,5 @@
+<!-- analytics -->
+{% include analytics.html %}
 
 <!-- Variables -->
 <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
@@ -35,9 +37,6 @@
 {% if page.mathy %}
   {% include mathjax_support.html %}
 {% endif %}
-
-<!-- analytics -->
-{% include analytics.html %}
 
 <!-- feed -->
 {% feed_meta %}
