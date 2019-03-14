@@ -113,6 +113,15 @@ blockquote p {
       padding-bottom: 0.1em;
 }
 
+.notice {
+  background-color: #FEE7B7;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 2px dashed #607D8B
+}
+
 /* code blocks */
 
 /* blog images */

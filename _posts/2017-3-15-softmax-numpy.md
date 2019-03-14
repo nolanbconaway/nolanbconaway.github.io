@@ -9,11 +9,10 @@ layout: post
 mathy: true
 ---
 
-<hr>
-
+{::options parse_block_html="true" /}
+<div class='notice'>
 ### Update (Jan 2019): SciPy (1.2.0) now includes the softmax as a special function. It's really slick. Use it. [Here are some notes](/blog/2019/softmax-numpy-update).
-
-<hr>
+</div>
 
 I use the [softmax](https://en.wikipedia.org/wiki/Softmax_function) function _constantly_. It's handy anytime I need to model choice among a set of mutually exclusive options. In the canonical example, you have some metric of evidence, \\(X = \\{ X_1, X_2, ... X_n\\} \\), that an item belongs to each of \\(N\\) classes: \\( C = \\{C_1, C_2, ... C_n\\} \\). \\(X\\) can only belong to one class, and larger values indicate more evidence for class membership. So you need to convert the relative amounts of evidence into probabilities of membership within each of the classes.
 
