@@ -22,7 +22,7 @@ Those data might look something like:
 
 The question is: How likely are we to obtain those data under the assumption that there was no change in overall CPC?
 
-That question specifies the null hypothesis: the two periods of data were generated form the same distribution. Under the alternative hypothesis the test period data might have a greater or lesser CPC.
+That question specifies the null hypothesis: the two periods of data were generated from the same distribution. Under the alternative hypothesis the test period data might have a greater or lesser CPC.
 
 The [Poisson Exact Test](http://www.ucs.louisiana.edu/~kxk4695/JSPI-04.pdf) (E-Test) is a hypothesis test for answering this kind of question. In R, you can use [`poisson.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/poisson.test.html), which implements the similar but inexact Poisson C-Test. But in Python, no such implementation exists.
 
