@@ -53,6 +53,7 @@ b 2
 Freeze your dict and you can use it as a set item, dictionary key, etc.
 But you can't mutate it.
 
+{% raw %}
 ```python
 >>> d = FreezableDict(a=1, b=2).freeze()
 >>> set([d])
@@ -64,10 +65,13 @@ But you can't mutate it.
 ...
 Frozen dicts cannot be changed. thaw to proceed.
 ```
+{% endraw %}
+
 
 Thaw out a frozen dict and you can mutate it as usual, but TypeError is
 thrown when you try to use the frozen stuff.
 
+{% raw %}
 ```python
 >>> d = FreezableDict(a=1, b=2).freeze()
 >>> d.thaw()
@@ -80,3 +84,4 @@ thrown when you try to use the frozen stuff.
 ...
 Thawed dicts do not hash. freeze me to proceed.
 ```
+{% endraw %}
