@@ -2,7 +2,7 @@
 title: A single sample poisson test.
 excerpt: Computing sample probabilities from a Poisson distribution.
 tags: python, poisson
-season: Summer 2019
+season: Spring 2019
 type: blog
 layout: post
 mathy: true
