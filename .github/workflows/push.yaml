@@ -21,7 +21,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build Production Site
-        run: make publish
+        run: |
+          make publish
+          cp readme.md output/readme.md
 
       - name: Deploy to GH Pages Branch
         uses: JamesIves/github-pages-deploy-action@releases/v3
