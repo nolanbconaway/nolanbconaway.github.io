@@ -3,7 +3,7 @@ name: Main Workflow
 on:
   push:
     branches:
-      - master
+      - dev
 
 jobs:
   build-and-deploy:
@@ -27,5 +27,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
+          BRANCH: master
           FOLDER: output
