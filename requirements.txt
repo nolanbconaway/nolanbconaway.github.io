@@ -1,0 +1,2 @@
+pelican[Markdown]
+git+https://github.com/bytefish/MarkdownEmojiExtension

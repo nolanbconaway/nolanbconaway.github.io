@@ -1,0 +1,51 @@
+body {
+    margin-bottom: 5em;
+    width: 100%;
+}
+
+h2, h3, h4 {
+    margin-top: 1em;
+}
+
+/* image centering */
+
+.content>img, .content>p>img {
+    margin: auto;
+    display: block;
+    padding: 1em;
+    max-width: 100%;
+    height: auto;
+}
+
+.content>object, .content>p>object {
+    max-width: 90%;
+    margin: auto;
+    display: block;
+    padding: 1em;
+}
+
+/* box in code snips */
+
+pre {
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre;
+    box-shadow: 0.2em 0.4em 2em -0.5em gray;
+}
+
+/*  padding to code and math */
+
+div.highlight>pre {
+    padding: 1em;
+}
+
+div.MathJax_Display {
+    padding: 1em;
+}
+
+/* resize block quotes */
+
+.blockquote {
+    font-size: 1em;
+    margin: 2em;
+}
