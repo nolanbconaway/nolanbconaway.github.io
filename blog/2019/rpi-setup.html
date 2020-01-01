@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Nolan Conaway</title>
+  <meta charset="utf-8" />
+
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/theme/images/favicon.ico">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80719882-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-80719882-1');
+  </script>
+
+  <!-- mathjax -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+  <!-- bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- custom -->
+  <link rel="stylesheet" href="/theme/css/pygment.css">
+  <link rel="stylesheet" href="/theme/css/custom.css">
+</head>
+
+<body id="index" class="home">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pdfs">PDFs</a></li>
+        </ul>
+        <a class="navbar-brand" href="https://github.com/nolanbconaway">
+          <img src="/theme/images/GitHub-Mark-Light-64px.png" width="30" height="30" alt="Github">
+        </a>
+      </div>
+    </nav>
+
+    <hr>
+
+    <div class="content">
+
+<h1>Configuring a headless raspberry pi on your home network.</h1>
+<div class="text-right">March 2019</div>
+
+<hr>
+<p>I do a lot of projects that involve raspberry pis. At this point, there are three tucked away in different corners of my apartment (one runs an online <a href="/blog/2018/apartment-temp">temperature sensor</a>). They all run headless and I SSH into them occasionally to see if anything has broken.</p>
+<p>I recently set up a fresh Raspberry Pi 3 B+. The project was to hook up a <a href="https://www.adafruit.com/product/2097">PiTFT display</a> and use it to show upcoming Manhattan-bound Q trains.</p>
+<p>The initial setup for a headless raspberry pi can be tricky. Since I've done this more than a handful of times, I thought I'd record the steps I take to configure my new machine.</p>
+<h2 id="install-raspbian">Install Raspbian</h2>
+<p>I have never been able to remember the syntax to <code>dd</code>, so I just head over to raspberrypi.org and follow <a href="https://www.raspberrypi.org/documentation/installation/installing-images/README.md">their instructions</a>.</p>
+<p>As for the Raspbian distribution, I choose the latest "lite" version (right now it is "Raspbian Stretch Lite") because I don't use the desktop environment. But you do you.</p>
+<h3 id="before-you-proceed">Before you proceed ...</h3>
+<p>Consider the catch-22 situation you're in. In order to connect to a headless pi, you need to have set up ssh. But you also need to connect to it <em>in order to set up ssh</em>. Luckily, there's a little trick to set up ssh before the first boot.</p>
+<p>Simply add a blank file, <code>ssh</code>, to the root of the SD card. I never can remember where my SD card mount lives in the mac filesystem, so I navigate my finder to the mounted SD card and use <a href="https://zipzapmac.com/Go2Shell">Go2Shell</a> to put my terminal there. Then a simple <code>touch ssh</code> command will do the trick.</p>
+<p>If you want to connect to your pi via wifi, you've arrived at yet another catch-22 situation. As far as I know, you need to be able to connect to your pi in order to configure the wifi connection. What a nightmare.</p>
+<p>I don't know any tricks here; for the time being, you'll need to connect to the pi via ethernet. I'll run through how to set up wifi later in this post.</p>
+<h2 id="boot-it-up">Boot it up</h2>
+<p>With SSH enabled, you should be able to connect to the pi remotely via ethernet the very first time you boot it up. You won't know the machine's IP address ahead of time, but you can get that info a bunch of different ways (I use <a href="https://inetapp.de/en/inetx.html">iNet Network Scanner</a>).</p>
+<p>Once you discover the IP address, ssh in. The default username and password are, of course, <code>pi</code> and <code>raspberry</code>.</p>
+<div class="highlight"><pre><span></span>ssh pi@&lt;IP Address&gt;
+</pre></div>
+
+
+<h2 id="step-1-update-upgrade">Step 1: update / upgrade</h2>
+<p>Get this out of the way. Should take a few mins, depending on the speed of your network.</p>
+<div class="highlight"><pre><span></span>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade -y
+</pre></div>
+
+
+<h2 id="step-2-raspi-config">Step 2: raspi-config</h2>
+<p>By default the locale for raspberry pis are set to <code>en_GB.UTF8</code>. I, like many other people, live in NYC. So I need to change the locale (keyboard layout, character set, timezone, etc) for myself. Do this with the built-in GUI tool <code>raspi-config</code>. Run it under sudo:</p>
+<div class="highlight"><pre><span></span>sudo raspi-config
+</pre></div>
+
+
+<p>You'll get a display that looks like:</p>
+<p><img alt="" src="/blog/2019/rpi-setup/main.png"></p>
+<p>I end up doing a lot of tinkering in here.</p>
+<ol>
+<li><strong>Network Options -&gt; Hostname</strong>. So that my machine has an informative name on my network.</li>
+<li><strong>Advanced Options -&gt; Expand Filesystem</strong>. Gimme <em>all</em> that sweet, sweet SD memory.</li>
+</ol>
+<p>Whatever you do, you want to make sure to hit <strong>Localisation Options</strong>.</p>
+<p><img alt="" src="/blog/2019/rpi-setup/localisation.png"></p>
+<p>When you hit the "Change Locale" menu, you'll get a very long list of possible locales. Scroll with your arrow keys (it sucks and takes forever) and press spacebar on the to select / deselect.</p>
+<p>Personally, I deselect <code>en_GB.UTF-8 UTF-8</code> and then select <code>en_US.UTF-8 UTF-8</code>.</p>
+<p>When you're done, hit OK (skip there by pressing TAB). The next screen lets you choose your default locale. Just highlight the one you want and TAB to OK. You should be good to go.</p>
+<p>Next, change your timezone. This works a lot like setting your locale; highlight your region and TAB to OK.</p>
+<h2 id="step-3-set-up-wifi-connection">Step 3: Set up wifi connection</h2>
+<p>If you want to connect to your raspberry pi on your wifi network, you'll want configure the connection earlier rather than later. I cannot tell you how many times I have lost all ability to connect to my machine (ethernet or otherwise) after messing up the network configuration in an attempt to set up the darn wifi.</p>
+<p>If you might break it all, you'll want to do it <em>before</em> you invest a lot of time into configuration.</p>
+<p>There are <a href="https://www.google.com/search?q=raspberry+pi+wireless+connection">like a million posts on how to configure a wifi connection</a>. The <a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md">authoritative guide on the subject</a> can be found on raspberrypi.org, and you might just want to do that.</p>
+<p>As for me, I don't know how <em>not</em> to break this stuff. So I just copy over config from another, working, raspberry pi. My config looks like:</p>
+<h3 id="etcnetworkinterfaces">/etc/network/interfaces</h3>
+<div class="highlight"><pre><span></span>source-directory /etc/network/interfaces.d
+
+auto lo
+iface lo inet loopback
+
+iface eth0 inet dhcp
+
+allow-hotplug wap0
+auto wap0
+iface wap0 inet dhcp
+        wpa-ssid &quot;&lt;NETWORK&gt;&quot;
+        wpa-psk &quot;&lt;PASSWORD&gt;&quot;
+</pre></div>
+
+
+<p>Astute readers may have noticed that I called my wireless device <code>wap0</code> instead of the typical <code>wlan0</code>. This is because one time I had a machine that was randomly switching between two wireless devices (<code>wlan0</code> and <code>wlan1</code>). I didn't even have two wifi adapters connected so I don't know. This is the mess I create for myself.</p>
+<p>Again, you might want to follow the raspberrypi.org instructions instead. Just sayin'.</p>
+<p>Anyway, I decided to pick out my <em>intended</em> wifi device via its MAC address and get <em>that</em> to connect.</p>
+<p>This <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=29&amp;t=55527#p1061146">forum post</a> solved the problem for me. The idea is to get your machine to associate a specific adapter (via MAC address) with some other name (in this case, <code>wap0</code>), and then refer to that in <code>/etc/network/interfaces</code>.</p>
+<p>Finding the MAC address of your adapter is as simple as plugging it in and digging through the results of call to <code>ip address</code>. It'll look like <code>aa:bb:cc:dd:ee:ff</code>.</p>
+<p>With the MAC address in hand, you can throw it in <code>/etc/udev/rules.d/70-my_network_interfaces.rules</code>:</p>
+<h4 id="etcudevrulesd70-my_network_interfacesrules">/etc/udev/rules.d/70-my_network_interfaces.rules</h4>
+<div class="highlight"><pre><span></span># Built-in wifi interface used in hostapd - identify device by MAC address
+SUBSYSTEM==&quot;net&quot;, ACTION==&quot;add&quot;, ATTR{address}==&quot;&lt;MAC ADDRESS&gt;&quot;, NAME=&quot;wap0&quot;
+</pre></div>
+
+
+<h3 id="reboot">Reboot</h3>
+<p>This is the moment of truth. Did you break everything? There's no shame in it. If so, hopefully you can still connect via ethernet, in which case you can tinker around until you get a wifi connection.</p>
+<h2 id="step-4-set-up-a-static-ip">Step 4: Set up a static IP.</h2>
+<p>If you didn't ruin everything in step 3, you should be able to ssh in your pi again.</p>
+<p>At this point, your raspberry pi will be assigned an IP address each time it connects to your network. The address could change across reboots and I don't like having to check the address each time.</p>
+<p>The solution is to configure a static IP address. If you like pain, there is a way to configure the static address on your raspberry pi. But, to me, that has always felt <em>way</em> too complicated, <a href="https://raspberrypi.stackexchange.com/questions/37920/how-do-i-set-up-networking-wifi-static-ip-address">see this Stack Exchange post</a>.</p>
+<p>I find it much easier to do this via my router's admin panel. Most routers will have a section in which you can specify a DHCP reservation for a specific MAC address. This is just a fancy way of making sure your router assigns a specific IP address to your raspberry pi, and that it never assigns any other device to that address.</p>
+<p>I use an Apple Airport Express, here's what that configuration screen looks like:</p>
+<p><img alt="" src="https://discussions.apple.com/content/attachment/466201040"></p>
+<h2 id="step-5-enable-passwordless-ssh">Step 5: Enable passwordless ssh.</h2>
+<p>I hate typing my passwords so I make sure to set up passwordless ssh.</p>
+<p>The idea here is that you create a <code>key</code> on the machine you are using to ssh into the pi <em>from</em> (that is, the computer you are in front of). Then you paste that key in a special place on the pi. When you try to log in, ssh will compare the keys and let you in without a password if they match.</p>
+<p>First thing, you'll need to make your key. Keys are unique to the machine you are ssh-ing <em>from</em>, so if you've done this before you don't need to do it again. <a href="https://docs.joyent.com/public-cloud/getting-started/ssh-keys/generating-an-ssh-key-manually/manually-generating-your-ssh-key-in-mac-os-x">Here's a tutorial on how you'd make an ssh key on a mac</a>.</p>
+<p>Your key will probably live in <code>~/.ssh/id_rsa.pub</code> and will look something like:</p>
+<div class="highlight"><pre><span></span>ssh-rsa &lt;lots of letters and numbers&gt;<span class="o">==</span> user@host
+</pre></div>
+
+
+<p>One you have that key copy-pasteable, you can run this command on your raspberry pi:</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> nano .ssh/authorized_keys
+</pre></div>
+
+
+<p>Paste the key from your computer in that bad boy, save the file (<code>ctrl-O</code>), then log out and log back in. When you log back in, you shouldn't be asked for your password.</p>
+<h2 id="step-6-change-the-username-and-password">Step 6: Change the username and password.</h2>
+<p>Everybody knows the default login for a raspberry pi (or at least, lots of people). So for security you'll want to change them. Changing the username can be a bit of a hassle since you need to move around the user home, etc, so I only change the username if I plan on opening my firewall to allow outside connections (gotta have that <em>extra</em> security).</p>
+<p>In either case, <em>definitely</em> change the password. You can do that with:</p>
+<div class="highlight"><pre><span></span>passwd
+</pre></div>
+
+
+<p>So easy.</p>
+<h2 id="step-7-installations">Step 7: Installations</h2>
+<p>At this point:</p>
+<ol>
+<li>Your raspberry pi has updated packages and the right locale.</li>
+<li>The network connectivity is in place.</li>
+<li>The same IP address is assigned to your machine each time you reboot.</li>
+<li>It is at least kind of secure with a nondefault password.</li>
+</ol>
+<p>Now you get to install the stuff you want to use for your projects. Each project requires different tooling, so below I'll list some of the common items I install each time:</p>
+<h3 id="mailutils">mailutils</h3>
+<p>I run a lot of stuff in cron and I want to make sure I get notified if a job fails. If you install mailtutils, cron errors will automatically go to mail and you'll get an indicator if there was a failure when you log in.</p>
+<div class="highlight"><pre><span></span>sudo apt-get install mailutils
+</pre></div>
+
+
+<h3 id="zsh-oh-my-zsh">zsh, oh-my-zsh</h3>
+<p>I love zsh. <em>Love it</em>. It's even better when you use <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> as a configuration manager.</p>
+<div class="highlight"><pre><span></span>sudo apt-get install zsh<span class="p">;</span>
+sh -c <span class="s2">&quot;</span><span class="k">$(</span>wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+
+
+<p>That's all. Have fun spending the next hour <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes">picking your theme</a>.</p>
+<h3 id="python">python</h3>
+<blockquote>
+<p><strong>Dec 2019</strong>: these days I am all about pyenv and I would probably opt for that instead.</p>
+</blockquote>
+<p>I use python for basically everything. I prefer to keep the raspberry pi pre-installed python clean, so I opt to install my own python.</p>
+<p>There are a bunch if tutorials on how to build a python distribution on a raspberry pi. <a href="https://gist.github.com/SeppPenner/6a5a30ebc8f79936fa136c524417761d">Here is one</a>. Even if you know what you're doing, it takes freaking forever to <code>configure &amp;&amp; make &amp;&amp; make install</code> the thing. If you do not know what you are doing (I do not know what <em>I</em> am doing), it'll take you that amount of freaking forever to learn something is wrong and that you have to do a different <code>configure &amp;&amp; make &amp;&amp; make install</code>.</p>
+<p>Learn from my mistakes. Use <a href="https://github.com/jjhelmus/berryconda">Berryconda</a>. Berryconda is pre-built conda distribution for raspberry pi. It only takes a few minutes to set up and it "just works". Follow the instructions on the github page to install. It should be something like:</p>
+<div class="highlight"><pre><span></span>wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh <span class="o">&amp;&amp;</span> <span class="se">\</span>
+chmod +x Berryconda3-2.0.0-Linux-armv7l.sh <span class="o">&amp;&amp;</span> <span class="se">\</span>
+./Berryconda3-2.0.0-Linux-armv7l.sh
+</pre></div>
+
+
+<p>That'll walk you through the installation.</p>
+<p>If you installed zsh, you'll want to make sure to put the berryconda binary directory on your path (so that zsh knows what to do when you refer to <code>python</code>). Add a line like this to your <code>~/.zshrc</code>:</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">:</span><span class="nv">$HOME</span><span class="s2">/berryconda3/bin&quot;</span>
+</pre></div>
+
+
+<p>Where <code>$HOME/berryconda3/bin</code> is wherever you decided to install berryconda. Then, you should confirm that your python3 command refers to the berryconda install:</p>
+<div class="highlight"><pre><span></span>which python3
+</pre></div>
+
+
+<p>Should output something like <code>/home/pi/berryconda3/bin/python3</code> not <code>/usr/bin/python3</code>.</p>
+
+    </div>
+
+  </div>
+</body>
+
+<!-- apply bootstrap classes where i can't do it in markdown -->
+<script>
+  $('table').not('.highlighttable').addClass('table table-hover')
+  $('blockquote').addClass('blockquote')
+</script>
+
+</html>

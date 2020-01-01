@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Nolan Conaway</title>
+  <meta charset="utf-8" />
+
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/theme/images/favicon.ico">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80719882-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-80719882-1');
+  </script>
+
+  <!-- mathjax -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+  <!-- bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- custom -->
+  <link rel="stylesheet" href="/theme/css/pygment.css">
+  <link rel="stylesheet" href="/theme/css/custom.css">
+</head>
+
+<body id="index" class="home">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pdfs">PDFs</a></li>
+        </ul>
+        <a class="navbar-brand" href="https://github.com/nolanbconaway">
+          <img src="/theme/images/GitHub-Mark-Light-64px.png" width="30" height="30" alt="Github">
+        </a>
+      </div>
+    </nav>
+
+    <hr>
+
+    <div class="content">
+
+<h1>An update on the softmax function for numpy.</h1>
+<div class="text-right">January 2019</div>
+
+<hr>
+<p>As of early 2019, my post on a <a href="/blog/2017/softmax-numpy">softmax function for numpy</a> accounts for 83% of traffic to my website (~16k views in 2018). I recently found that, as of version 1.2.0, scipy has included an implementation of the softmax in its special functions.</p>
+<p>Some info on the change:</p>
+<ul>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.softmax.html#scipy.special.softmax">SciPy docs</a>.</li>
+<li><a href="https://github.com/scipy/scipy/pull/8872">Merged pull request</a>.</li>
+<li><a href="https://github.com/scipy/scipy/pull/8556/commits/02d0ac2dea6bd2ad11ddf6c6022b3bae881c961a#diff-86dbed1918e224062ad4239fe5d14041R188">Feeding my ego</a>.</li>
+</ul>
+<p>Originally, the proposed function looked very much like the one I had posted, but then <a href="https://github.com/pv">a very smart person</a> realized that you could use existing tooling around <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html#scipy.special.logsumexp">scipy.special.logsumexp</a> to make things much cleaner.</p>
+<p>So now the function is <a href="https://github.com/scipy/scipy/blob/master/scipy/special/_logsumexp.py#L215">a freaking one-liner</a>.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">logsumexp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+
+
+<p>I 100% prefer importing a function from scipy over pasting a hand-written one. Especially given the beauty of that puppy. But the two functions are not totally swappable, there are a couple important changes in behavior:</p>
+<ol>
+<li><strong>SciPy computes the softmax over <em>all</em> array elements by default</strong>. It will keep the shape but the <em>entire</em> result will sum to 1. My old function computed the softmax over the first non-singleton dimension like in MATLAB.</li>
+<li><strong>There is no <code>theta</code> multiplier</strong>. In my function, a <code>theta</code> parameter was accepted to control determinism, but that was not implemented in the scipy function. No biggie, you'll just need to do <code>softmax(X*theta)</code> instead of <code>softmax(X, theta=theta)</code>.</li>
+</ol>
+<h2 id="a-quick-performance-comparison">A quick performance comparison</h2>
+<p>I figured scipy had some magic stuff going on with <code>logsumexp</code>, and their function would be both more beautiful <em>and</em> performant than mine.</p>
+<p>But I ran a quick handful of tests just for kicks. First I wrote up a decorator to print function exec time to the console and wrapped my softmax and scipy softmax in it.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.special</span>
+
+
+<span class="k">def</span> <span class="nf">timeit</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decorator to print function exec time.&quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">te</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{f.__name__}</span><span class="s1"> took: {te-ts:2.4f}s&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrap</span>
+
+
+<span class="nd">@timeit</span>
+<span class="k">def</span> <span class="nf">softmax_nolan</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;My func without those pesky comments and docs.&quot;&quot;&quot;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">),</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">ax_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">),</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">ax_sum</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">p</span>
+
+
+<span class="nd">@timeit</span>
+<span class="k">def</span> <span class="nf">softmax_scipy</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scipy softmax with the axis inference and theta included.&quot;&quot;&quot;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+
+<p>I ran each function on 2D arrays of varying sizes and checked for differences in the results.</p>
+<div class="highlight"><pre><span></span><span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">10000</span><span class="p">,),</span>
+    <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10000</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100000</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10000000</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">:</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Running: </span><span class="si">{size}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">result_nolan</span> <span class="o">=</span> <span class="n">softmax_nolan</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="n">result_scipy</span> <span class="o">=</span> <span class="n">softmax_scipy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="c1"># check for differences</span>
+    <span class="n">max_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">result_scipy</span> <span class="o">-</span> <span class="n">result_nolan</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">max_diff</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">max_diff</span>
+</pre></div>
+
+
+<p><a href="/blog/2019/numpy-softmax-update/test.py">Here is the full script</a>, in case you want to toy around with it.</p>
+<h3 id="results">Results</h3>
+<p>My function was ... faster?</p>
+<div class="highlight"><pre><span></span><span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,)</span>
+<span class="n">softmax_nolan</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0004</span><span class="n">s</span>
+<span class="n">softmax_scipy</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0162</span><span class="n">s</span>
+
+<span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">softmax_nolan</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0210</span><span class="n">s</span>
+<span class="n">softmax_scipy</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0259</span><span class="n">s</span>
+
+<span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">softmax_nolan</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0132</span><span class="n">s</span>
+<span class="n">softmax_scipy</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0233</span><span class="n">s</span>
+
+<span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">softmax_nolan</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0141</span><span class="n">s</span>
+<span class="n">softmax_scipy</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0198</span><span class="n">s</span>
+
+<span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">softmax_nolan</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">2186</span><span class="n">s</span>
+<span class="n">softmax_scipy</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">2869</span><span class="n">s</span>
+
+<span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+<span class="n">softmax_nolan</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1633</span><span class="n">s</span>
+<span class="n">softmax_scipy</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">2740</span><span class="n">s</span>
+
+<span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span>
+<span class="n">softmax_nolan</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1962</span><span class="n">s</span>
+<span class="n">softmax_scipy</span> <span class="n">took</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">2792</span><span class="n">s</span>
+
+<span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10000000</span><span class="p">)</span>
+<span class="n">softmax_nolan</span> <span class="n">took</span><span class="p">:</span> <span class="mi">3</span><span class="p">.</span><span class="mi">3774</span><span class="n">s</span>
+<span class="n">softmax_scipy</span> <span class="n">took</span><span class="p">:</span> <span class="mi">4</span><span class="p">.</span><span class="mi">4439</span><span class="n">s</span>
+</pre></div>
+
+
+<p>My function runs an exponential one time, whereas scipy runs the array through <code>logsumexp</code> and then exponentializes again. So maybe that's why we get these results? I don't really know what <code>logsumexp</code> does under the hood.</p>
+<p>Anyway, I still prefer scipy softmax to reduce the dependency on a handwritten function.</p>
+<p>Some notes:</p>
+<ul>
+<li>I get similar results every time I ran the script.</li>
+<li>I use a cruddy pip install on python 3.7.1. I don't know what would happen if those speedy conda optimizations were in play.</li>
+</ul>
+
+    </div>
+
+  </div>
+</body>
+
+<!-- apply bootstrap classes where i can't do it in markdown -->
+<script>
+  $('table').not('.highlighttable').addClass('table table-hover')
+  $('blockquote').addClass('blockquote')
+</script>
+
+</html>
