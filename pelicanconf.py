@@ -4,7 +4,7 @@ from emojiextension import EmojiExtension
 
 
 AUTHOR = "Nolan Conaway"
-SITENAME = "Nolan Conaway"
+SITENAME = "Nolan Conaway's Blog"
 SITEURL = ""
 PATH = "content"
 TIMEZONE = "America/New_York"
