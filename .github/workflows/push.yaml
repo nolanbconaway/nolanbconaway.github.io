@@ -25,9 +25,10 @@ jobs:
           make publish
           cp readme.md output/readme.md
 
-      - name: Deploy to GH Pages Branch
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
+      - name: Deploy To Master Branch
+        uses: s0/git-publish-subdir-action@master
+        env:
+          REPO: self
+          BRANCH: master
           FOLDER: output
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
