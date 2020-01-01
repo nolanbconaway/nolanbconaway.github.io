@@ -24,6 +24,7 @@ jobs:
         run: |
           make publish
           cp readme.md output/readme.md
+          touch output/.nojekyll
 
       - name: Deploy To Master Branch
         uses: s0/git-publish-subdir-action@master
