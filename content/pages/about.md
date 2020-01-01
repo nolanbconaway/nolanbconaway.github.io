@@ -1,5 +1,5 @@
 Title: About
-Date: 2019-12-30
+Date: 2020-01-01
 
 I live in New York City and work as a data scientist. Previously, I was a postdoc at the University of Wisconsin-Madison. Before that, I was a Ph.D. student at Binghamton University.
 
