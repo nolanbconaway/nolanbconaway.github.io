@@ -6,3 +6,6 @@ I live in New York City and work as a data scientist. Previously, I was a postdo
 Here's a picture of me, on my honeymoon in Athens in 2017.
 
 <img src="/theme/images/blue-steel.jpg" width="95%" style="max-width: 460px">
+
+
+This website was built using pelican and deployed via Github pages. [Here](https://github.com/nolanbconaway/nolanbconaway.github.io) is the source repo.
