@@ -6,6 +6,10 @@
   <title>Nolan Conaway's Blog</title>
   <meta charset="utf-8" />
 
+  <!-- describe the site -->
+  <meta name="description" content="Nolan Conaway's Blog">
+  <meta name="author" content="Nolan Conaway">
+
   <!-- viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -46,7 +50,7 @@
 <body id="index" class="home">
   <div class="container">
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
-      <a class="navbar-brand" href="/">Nolan Conaway's Blog</a>
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -66,10 +70,8 @@
     <hr>
 
     <div class="content">
-
 <h1>Solving nonlinearly separable classifications in a single layer neural network.</h1>
 <div class="text-right">January 2017</div>
-
 <hr>
 <blockquote>
 <p><em>Recently, <a href="https://www.binghamton.edu/psychology/people/kkurtz.html">Ken Kurtz</a> (my graduate advisor) and I figured out a unique solution to the famous limitation that single-layer neural networks cannot solve nonlinearly separable classifications. We published our findings in <a href="http://www.mitpressjournals.org/doi/abs/10.1162/NECO_a_00931">Neural Computation</a>. This post is intended to provide a more introductory-level description of our solution. Read the paper for a more formal report!</em></p>
@@ -303,7 +305,6 @@ $$</p>
         <span class="nb">print</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">model</span> <span class="o">+</span> <span class="s1">&#39; weights:&#39;</span><span class="p">)</span>
         <span class="n">printattr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">wts</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
-
     </div>
 
   </div>

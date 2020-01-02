@@ -6,6 +6,10 @@
   <title>Nolan Conaway's Blog</title>
   <meta charset="utf-8" />
 
+  <!-- describe the site -->
+  <meta name="description" content="Nolan Conaway's Blog">
+  <meta name="author" content="Nolan Conaway">
+
   <!-- viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -46,7 +50,7 @@
 <body id="index" class="home">
   <div class="container">
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
-      <a class="navbar-brand" href="/">Nolan Conaway's Blog</a>
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -66,10 +70,8 @@
     <hr>
 
     <div class="content">
-
 <h1>A python implementation of the Poisson exact test (e-test).</h1>
 <div class="text-right">March 2019</div>
-
 <hr>
 <p>At work we are doing tests on different paid search optimization tools. We wanted to see if a new tool offered improvements over what we had been using. In reality we are comparing the two on all sorts of metrics, but as an example we can focus on comparisons with respect to the cost paid per click, <em>CPC</em>, measured in USD.</p>
 <p>Cost per click is an example of a Poisson distributed variable. We started measuring the CPC during some control period using the current tools, then switched to the new tool in a test period.</p>
@@ -140,7 +142,6 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="c1"># 0.0034409891789582165</span>
 </pre></div>
-
     </div>
 
   </div>
