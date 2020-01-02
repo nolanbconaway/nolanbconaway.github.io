@@ -2,6 +2,7 @@
 title: Deploying my Pelican website to Github Pages.
 date: 2020-01-01
 category: blog
+keywords: pelican, github actions
 ---
 
 ::party_popper:: If you're reading this, you're looking at my new website! ::party_popper::
