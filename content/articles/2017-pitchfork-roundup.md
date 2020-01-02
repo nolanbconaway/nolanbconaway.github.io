@@ -3,6 +3,7 @@ title: What I found in 18,000 Pitchfork album reviews.
 date: 2017-06-17
 category: blog
 slug: pitchfork-roundup
+keywords: pitchfork, music criticism, analysis
 ---
 
 

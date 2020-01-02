@@ -3,6 +3,7 @@ title: I'll be at MathPsych and CogSci 2016
 date: 2016-07-15
 category: blog
 slug: summer-conferences
+keywords: 2016, mathpsych, cogsci, conferences
 ---
 
 >Here's what I'll be up to! Also check out my [Shiny App](https://nolan.shinyapps.io/whos-at-cogsci/) to see who else is presenting at CogSci.

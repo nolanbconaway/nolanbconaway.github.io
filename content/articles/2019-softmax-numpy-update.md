@@ -3,6 +3,7 @@ title: An update on the softmax function for numpy.
 date: 2019-01-05
 category: blog
 slug: softmax-numpy-update
+keywords: numpy, softmax, python, scipy
 ---
 
 As of early 2019, my post on a [softmax function for numpy](/blog/2017/softmax-numpy) accounts for 83% of traffic to my website (~16k views in 2018). I recently found that, as of version 1.2.0, scipy has included an implementation of the softmax in its special functions.

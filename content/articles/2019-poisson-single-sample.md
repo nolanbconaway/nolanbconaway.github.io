@@ -2,6 +2,7 @@
 title: A single sample poisson test.
 date: 2019-05-15
 category: blog
+keywords: statistics, poisson, testing, python
 ---
 
 I am working with a lot of Poisson data recently. The more I encounter these data, the more I realize that data scientists often incorrectly treat Poisson data as normally or linearly distributed variables.

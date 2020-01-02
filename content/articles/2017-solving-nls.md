@@ -3,6 +3,7 @@ title: Solving nonlinearly separable classifications in a single layer neural ne
 date: 2017-01-15
 category: blog
 slug: solving-nls
+keywords: linear separability, neural networks, python
 ---
 
 > _Recently, [Ken Kurtz](https://www.binghamton.edu/psychology/people/kkurtz.html) (my graduate advisor) and I figured out a unique solution to the famous limitation that single-layer neural networks cannot solve nonlinearly separable classifications. We published our findings in [Neural Computation](http://www.mitpressjournals.org/doi/abs/10.1162/NECO_a_00931). This post is intended to provide a more introductory-level description of our solution. Read the paper for a more formal report!_

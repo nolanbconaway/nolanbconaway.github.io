@@ -3,6 +3,7 @@ title: A softmax function for numpy.
 date: 2017-03-15
 category: blog
 slug: softmax-numpy
+keywords: numpy, softmax, python
 ---
 
 > #### Update (Jan 2019): SciPy (1.2.0) now includes the softmax as a special function. It's really slick. Use it. [Here are some notes](/blog/2019/softmax-numpy-update).

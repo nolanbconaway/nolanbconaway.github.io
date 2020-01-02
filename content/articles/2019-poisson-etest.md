@@ -2,6 +2,7 @@
 title: A python implementation of the Poisson exact test (e-test).
 date: 2019-03-24
 category: blog
+keywords: statistics, poisson, testing, python
 ---
 
 At work we are doing tests on different paid search optimization tools. We wanted to see if a new tool offered improvements over what we had been using. In reality we are comparing the two on all sorts of metrics, but as an example we can focus on comparisons with respect to the cost paid per click, _CPC_, measured in USD.
