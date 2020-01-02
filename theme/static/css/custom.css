@@ -30,7 +30,7 @@ pre {
     overflow: auto;
     word-wrap: normal;
     white-space: pre;
-    box-shadow: 0.2em 0.4em 2em -0.5em gray;
+    box-shadow: 0.1em 0.2em 1em -0.2em gray;
 }
 
 /*  padding to code and math */
@@ -38,7 +38,7 @@ pre {
 div.highlight>pre {
     padding: 1em;
     margin-bottom: 2em;
-    margin-top: 0.5em;
+    margin-top: 1em;
 }
 
 div.MathJax_Display {
