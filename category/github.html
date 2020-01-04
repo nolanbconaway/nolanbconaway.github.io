@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <title>Nolan Conaway's Blog - data category</title>
+  <title>Nolan Conaway's Blog - github category</title>
   <meta charset="utf-8" />
 
   <!-- describe the site -->
@@ -71,26 +71,75 @@
 
     <div class="content">
 
+<h2>2019</h2>
+
+<table id='blogroll'>
+    <tr>
+        <td class=badge_cell>
+            <a class='badge badge-pill badge-light' href="https://github.com/nolanbconaway/underground">
+                github
+            </a>
+
+        </td>
+        <td>Underground, A python library for processing realtime NYC subway data.</td>
+    </tr>
+    <tr>
+        <td class=badge_cell>
+            <a class='badge badge-pill badge-light' href="https://github.com/nolanbconaway/shlack">
+                github
+            </a>
+
+        </td>
+        <td>Shlack, yet another command line interface for slack.</td>
+    </tr>
+    <tr>
+        <td class=badge_cell>
+            <a class='badge badge-pill badge-light' href="https://github.com/nolanbconaway/freezable_dict">
+                github
+            </a>
+
+        </td>
+        <td>A freezable dictionary for python.</td>
+    </tr>
+</table>
 <h2>2018</h2>
 
-<table>
+<table id='blogroll'>
     <tr>
         <td class=badge_cell>
             <a class='badge badge-pill badge-light' href="https://github.com/nolanbconaway/strongbad_email">
-                data
+                github
             </a>
 
         </td>
         <td>I scraped the text of every Strongbad Email.</td>
     </tr>
+    <tr>
+        <td class=badge_cell>
+            <a class='badge badge-pill badge-light' href="https://github.com/AusterweilLab/jarjar">
+                github
+            </a>
+
+        </td>
+        <td>Jarjar 3.0 Released.</td>
+    </tr>
 </table>
 <h2>2017</h2>
 
-<table>
+<table id='blogroll'>
+    <tr>
+        <td class=badge_cell>
+            <a class='badge badge-pill badge-light' href="https://github.com/AusterweilLab/jarjar">
+                github
+            </a>
+
+        </td>
+        <td>Jeff Zemla and I developed Python and Bash code for sending notifications to Slack.</td>
+    </tr>
     <tr>
         <td class=badge_cell>
             <a class='badge badge-pill badge-light' href="https://github.com/nolanbconaway/RollerCoaster-Tycoon-Data">
-                data
+                github
             </a>
 
         </td>
@@ -115,7 +164,8 @@
 
 <!-- apply bootstrap classes where i can't do it in markdown -->
 <script>
-  $('table').not('.highlighttable').addClass('table table-hover')
+  $('table').not('.highlighttable').addClass('table table-sm table-hover')
+  $('table.table>thead>tr>th').attr('scope', 'col')
   $('blockquote').addClass('blockquote')
 </script>
 

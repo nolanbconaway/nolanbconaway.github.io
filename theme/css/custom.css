@@ -24,21 +24,22 @@ h2, h3, h4 {
     padding: 1em;
 }
 
-/* box in code snips */
+/* styling for code and math */
+
+div.highlight {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    margin-top: 1.5em;
+    margin-bottom: 2em;
+}
 
 pre {
     overflow: auto;
     word-wrap: normal;
     white-space: pre;
     box-shadow: 0.1em 0.2em 1em -0.2em gray;
-}
-
-/*  padding to code and math */
-
-div.highlight>pre {
     padding: 1em;
-    margin-bottom: 2em;
-    margin-top: 1em;
 }
 
 div.MathJax_Display {
@@ -50,4 +51,15 @@ div.MathJax_Display {
 .blockquote {
     font-size: 1em;
     margin: 2em;
+}
+
+/* table styling */
+
+table.table:not(#blogroll) {
+    margin: 2em auto;
+    width: 90%
+}
+
+td.badge_cell {
+    text-align: center;
 }

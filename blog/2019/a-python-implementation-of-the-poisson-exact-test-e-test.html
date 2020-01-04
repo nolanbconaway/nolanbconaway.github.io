@@ -150,7 +150,8 @@
 
 <!-- apply bootstrap classes where i can't do it in markdown -->
 <script>
-  $('table').not('.highlighttable').addClass('table table-hover')
+  $('table').not('.highlighttable').addClass('table table-sm table-hover')
+  $('table.table>thead>tr>th').attr('scope', 'col')
   $('blockquote').addClass('blockquote')
 </script>
 

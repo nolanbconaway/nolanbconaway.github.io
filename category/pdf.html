@@ -73,7 +73,7 @@
 
 <h2>2019</h2>
 
-<table>
+<table id='blogroll'>
     <tr>
         <td class=badge_cell>
             <a class='badge badge-pill badge-light' href="/pdfs/manuscripts/levering-conaway-kurtz-memcog-2019.pdf">
@@ -102,7 +102,8 @@
 
 <!-- apply bootstrap classes where i can't do it in markdown -->
 <script>
-  $('table').not('.highlighttable').addClass('table table-hover')
+  $('table').not('.highlighttable').addClass('table table-sm table-hover')
+  $('table.table>thead>tr>th').attr('scope', 'col')
   $('blockquote').addClass('blockquote')
 </script>
 
