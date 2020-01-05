@@ -48,18 +48,37 @@ div.MathJax_Display {
 
 /* resize block quotes */
 
-.blockquote {
-    font-size: 1em;
-    margin: 2em;
+blockquote.blockquote {
+    font-size: 0.9em;
+    margin: 0 auto;
+    padding: 0 1em;
+    width: 95%;
+    border-left: medium solid gray;
 }
 
 /* table styling */
 
-table.table:not(#blogroll) {
-    margin: 2em auto;
-    width: 90%
+table.table:not(.blogroll) {
+    width: 90%;
+    margin: 0 auto;
 }
 
 td.badge_cell {
     text-align: center;
+}
+
+div.table_wrap {
+    margin: 2em auto;
+    overflow: auto;
+    word-wrap: normal;
+}
+
+/* anchor styling */
+
+a.anchor {
+    display: none;
+}
+
+h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor {
+    display: initial;
 }
