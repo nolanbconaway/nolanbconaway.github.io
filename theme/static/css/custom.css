@@ -48,9 +48,12 @@ div.MathJax_Display {
 
 /* resize block quotes */
 
-.blockquote {
-    font-size: 1em;
-    margin: 2em;
+blockquote.blockquote {
+    font-size: 0.9em;
+    margin: 0 auto;
+    padding: 0 1em;
+    width: 95%;
+    border-left: medium solid gray;
 }
 
 /* table styling */
