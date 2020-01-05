@@ -4,7 +4,7 @@
 {% for  year, year_group in articles | groupby('date.year') | sort(reverse = True) %}
 <h2>{{year}}</h2>
 
-<table id='blogroll'>
+<table class='blogroll'>
     {% for article in year_group | sort(attribute='date', reverse = True)%}
     <tr>
         <td class=badge_cell>

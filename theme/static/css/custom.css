@@ -55,11 +55,18 @@ div.MathJax_Display {
 
 /* table styling */
 
-table.table:not(#blogroll) {
-    margin: 2em auto;
-    width: 90%
+table.table:not(.blogroll) {
+    width: 90%;
+    margin: 0 auto;
 }
 
 td.badge_cell {
     text-align: center;
+}
+
+div.table_wrap {
+    margin: 2em auto;
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre;
 }
