@@ -29,19 +29,19 @@ I looked into these summary stats for days which stand out, days like:
 
 ## ::fire:: the warmest day
 
-<object type="image/svg+xml" data="{attach}last-year-in-temperatures/warmest.svg"></object>
+<object type="image/svg+xml" data="{attach}warmest.svg"></object>
 
 The day with the highest average temperature was [July 5](https://temp-in-nolans-apartment.herokuapp.com/date/2019-07-05). We were in Baltimore to celebrate July 4 with my family, so we closed up the windows and shut off the AC and the apartment absolutely _roasted_.
 
 ## ::snow_flake:: the coldest day
 
-<object type="image/svg+xml" data="{attach}last-year-in-temperatures/coldest.svg"></object>
+<object type="image/svg+xml" data="{attach}coldest.svg"></object>
 
 Per NYC regulation, landlords are required to maintain a temperature of 68&#8457; during the day in the winter, but on [Feb 1](https://temp-in-nolans-apartment.herokuapp.com/date/2019-02-01) the temperature hung below 66&#8457; all day long. 
 
 ## The most variable day
 
-<object type="image/svg+xml" data="{attach}last-year-in-temperatures/most_stddev.svg"></object>
+<object type="image/svg+xml" data="{attach}most_stddev.svg"></object>
 
 On December 16 we were burgled (**everyone was ok!**). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the time the burglar entered the apartment. The detective that caught our case thought this was _awesome_!
 
@@ -103,11 +103,11 @@ Then I picked out the days with the lowest densities! Here are those dates:
 
 The first anomaly is an obvious one: the most variable day of the year which I wrote about above. See below for plots of the other four:
 
-<object type="image/svg+xml" data="{attach}last-year-in-temperatures/anomaly-2019-09-12.svg"></object>
-<object type="image/svg+xml" data="{attach}last-year-in-temperatures/anomaly-2019-09-19.svg"></object>
-<object type="image/svg+xml" data="{attach}last-year-in-temperatures/anomaly-2019-09-11.svg"></object>
-<object type="image/svg+xml" data="{attach}last-year-in-temperatures/anomaly-2019-10-01.svg"></object>
+<object type="image/svg+xml" data="{attach}anomaly-2019-09-12.svg"></object>
+<object type="image/svg+xml" data="{attach}anomaly-2019-09-19.svg"></object>
+<object type="image/svg+xml" data="{attach}anomaly-2019-09-11.svg"></object>
+<object type="image/svg+xml" data="{attach}anomaly-2019-10-01.svg"></object>
 
 And for good measure, [here](https://temp-in-nolans-apartment.herokuapp.com/date/2019-03-22) is the least anomalous date according to my very naive model.
 
-<object type="image/svg+xml" data="{attach}last-year-in-temperatures/nonanomaly.svg"></object>
+<object type="image/svg+xml" data="{attach}nonanomaly.svg"></object>

@@ -6,7 +6,9 @@
 
 {% block content %}
 
-{{page.content}}
+<div class='markdown_insert'>
+    {{page.content}}
+</div>
 <hr>
 Last updated: {{page.date.strftime(page.date_format)}}
 

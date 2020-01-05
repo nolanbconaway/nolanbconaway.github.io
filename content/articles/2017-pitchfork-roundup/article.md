@@ -24,7 +24,7 @@ The typical review addresses a single release by a specific artist, and is attri
 
 Album scores and Best New Music awards will be the focus of my analysis, so it's worth taking a look at those distributions.
 
-<object type="image/svg+xml" data="{attach}pitchfork-roundup/score-bmn-hist.svg"></object>
+<object type="image/svg+xml" data="{attach}score-bmn-hist.svg"></object>
 
 > Note: Most high scoring albums that are _not_ Best New Music are from reviews prior to the advent of Best New Music, or are reviews of classic releases.
 
@@ -34,7 +34,7 @@ A little more than 5% of reviews are awarded Best New Music. Most scores lie bet
 
 Inspired by [this really cool blog post](https://gutterstats.wordpress.com/2015/11/03/are-nfl-officials-biased-with-their-ball-placement/), I thought about what a reviewer might do if they have a _general_ sense of an album's score, but they need to pick a _specific_ value. Is this a 7.8? 7.9? 7.7? The above mentioned post found that NFL officials tend to place the line of scrimmage at tidy yard numbers (i.e., 10s and 5s). The technical term for this is [statistical heaping](http://ww2.amstat.org/sections/SRMS/Proceedings/y1958/Patterns%20Of%20Heaping%20In%20The%20Reporting%20Of%20Numerical%20Data.pdf), and its observed commonly in survey data. So maybe Pitchfork reviewers behave similarly? I counted the number of scores at each decimal place (e.g., \\( *.0, *.1... *.9 \\)), here's the result:
 
-<object type="image/svg+xml" data="{attach}pitchfork-roundup/score-anchor-points.svg"></object>
+<object type="image/svg+xml" data="{attach}score-anchor-points.svg"></object>
 
 Those diamond markers show what you'd expect if Pitchfork reviewers were totally unbiased. The _Uniform Sampling_ model is what you'd get if you picked scores at random; the _Normal Sampling_ model shows what you'd get if you picked scores around a normal distribution  based on the observed scores (\\(\mu=7.006, \sigma = 1.294\\)). *.0 gets a slight bump in the uniform model because 10.0 is a possibility, but 10.1-10.9 are not. 
 
@@ -55,7 +55,7 @@ To Pitchfork's credit: all of these would be reasonable biases to observe and I 
 
 But when I looked into whether some record labels where favored over others, the results were striking. I computed the proportion of borderline cases from each label that were Best new Music; most only had one or two borderlines cases, but here are the labels with at least ten:
 
-<object type="image/svg+xml" data="{attach}pitchfork-roundup/borderline-by-label.svg"></object>
+<object type="image/svg+xml" data="{attach}borderline-by-label.svg"></object>
 
 The first thing to note is that the labels are all major labels or at least big-name indie labels (with the exception of "self-released"). The second thing to note is the huge degree of differences between labels: [4AD](https://en.wikipedia.org/wiki/4AD) got Best New Music on 8/14 borderline cases, and [Thrill Jockey](https://en.wikipedia.org/wiki/Thrill_Jockey), [Relapse](https://en.wikipedia.org/wiki/Relapse_Records), [Nonesuch](https://en.wikipedia.org/wiki/Nonesuch_Records), and [Anti-](https://en.wikipedia.org/wiki/Anti-_(record_label)) collectively went 0 out of 44. 
 

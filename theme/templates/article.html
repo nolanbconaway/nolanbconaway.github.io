@@ -10,5 +10,7 @@
 <h1>{{article.title}}</h1>
 <div class="text-right">{{article.date.strftime('%B %Y')}}</div>
 <hr>
-{{article.content}}
+<div class='markdown_insert'>
+    {{article.content}}
+</div>
 {% endblock content %}

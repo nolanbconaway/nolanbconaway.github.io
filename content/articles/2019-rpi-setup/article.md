@@ -57,7 +57,7 @@ sudo raspi-config
 
 You'll get a display that looks like:
 
-![]({attach}rpi-setup/main.png)
+![Raspi Config]({attach}main.png)
 
 I end up doing a lot of tinkering in here.
 
@@ -66,7 +66,7 @@ I end up doing a lot of tinkering in here.
 
 Whatever you do, you want to make sure to hit __Localisation Options__.
 
-![]({attach}rpi-setup/localisation.png)
+![Localisation]({attach}localisation.png)
 
 When you hit the "Change Locale" menu, you'll get a very long list of possible locales. Scroll with your arrow keys (it sucks and takes forever) and press spacebar on the to select / deselect.
 
@@ -139,7 +139,7 @@ I find it much easier to do this via my router's admin panel. Most routers will 
 
 I use an Apple Airport Express, here's what that configuration screen looks like:
 
-![](https://discussions.apple.com/content/attachment/466201040)
+![airport express network options](https://discussions.apple.com/content/attachment/466201040)
 
 ## Step 5: Enable passwordless ssh.
 

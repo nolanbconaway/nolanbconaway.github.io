@@ -106,7 +106,7 @@ for size in sizes:
     assert max_diff < 1e-10, max_diff
 ```
 
-[Here is the full script]({attach}numpy-softmax-update/test.py), in case you want to toy around with it.
+[Here is the full script]({attach}test.py), in case you want to toy around with it.
 
 ### Results
 
