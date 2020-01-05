@@ -74,7 +74,8 @@
 <h1>Deploying my Pelican website to Github Pages.</h1>
 <div class="text-right">January 2020</div>
 <hr>
-<p>🎉 If you're reading this, you're looking at my new website! 🎉</p>
+<div class='markdown_insert'>
+    <p>🎉 If you're reading this, you're looking at my new website! 🎉</p>
 <p>I ditched Jekyll because I didn't want to have to maintain a ruby installation on my machine. My new site runs on Pelican and I hacked together a deployment flow to Github pages. Here's that hack:</p>
 <div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Main Workflow</span>
 
@@ -117,6 +118,7 @@
 <p>On push to the <code>dev</code> branch, Github will set up a python 3.7 environment with my requirements.txt. It'll build the static site into an <code>output</code> directory using <code>make publish</code>. I added a <code>.nojekyll</code> file so that Github knows it's not working with a Jekyll page.</p>
 <p>I found an <a href="https://github.com/marketplace/actions/push-git-subdirectory-as-branch">action</a> that will push a subdirectory to another branch of the repo. I set that up to send the static site directory to the <code>master</code> branch. Github will then automatically deploy the site since i am using my <code>username.github.io</code> repo! 🎊</p>
 <p>So the flow is that I make all updates to <code>dev</code> which propagate automatically to <code>master</code> and then deployment on push. Beautiful!</p>
+</div>
     </div>
 
   </div>

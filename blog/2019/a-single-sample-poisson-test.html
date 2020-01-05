@@ -74,7 +74,8 @@
 <h1>A single sample poisson test.</h1>
 <div class="text-right">May 2019</div>
 <hr>
-<p>I am working with a lot of Poisson data recently. The more I encounter these data, the more I realize that data scientists often incorrectly treat Poisson data as normally or linearly distributed variables.</p>
+<div class='markdown_insert'>
+    <p>I am working with a lot of Poisson data recently. The more I encounter these data, the more I realize that data scientists often incorrectly treat Poisson data as normally or linearly distributed variables.</p>
 <p>I recently added a new tool to my Poisson kit, which I think of as a "Single Sample Poisson test". The question being asked is:</p>
 <blockquote>
 <p>What is the probability of drawing \(N\) samples with mean \(\bar{x}=\sum_i{N_i} \div N\) from a Poisson distribution with mean \(\mu\)?</p>
@@ -148,6 +149,7 @@ $$</p>
 
 
 <p>When \(N=50\), 96.7% of samples from the distribution would have a lower average value (conversely, only 3.3% of samples would have a greater value). We're much less likely to obtain \(\bar{x}=102.6\) by chance, and I might suggest looking into how CPCs are being targeted.</p>
+</div>
     </div>
 
   </div>

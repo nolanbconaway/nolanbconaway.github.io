@@ -79,13 +79,13 @@
 &lt;p&gt;Most of those columns have sensible names. &lt;code&gt;avg_minute_delta&lt;/code&gt; describes the average difference in temperature per minute across adjacent readings. &lt;code&gt;day_delta&lt;/code&gt; is the difference between the first and last reading in the day.&lt;/p&gt;
 &lt;p&gt;I looked into these summary stats for days which stand out, days like:&lt;/p&gt;
 &lt;h2 id="the-warmest-day"&gt;🔥 the warmest day&lt;/h2&gt;
-&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/warmest.svg"&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/warmest.svg"&gt;&lt;/object&gt;&lt;/p&gt;
 &lt;p&gt;The day with the highest average temperature was &lt;a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-07-05"&gt;July 5&lt;/a&gt;. We were in Baltimore to celebrate July 4 with my family, so we closed up the windows and shut off the AC and the apartment absolutely &lt;em&gt;roasted&lt;/em&gt;.&lt;/p&gt;
 &lt;h2 id="the-coldest-day"&gt;❄ the coldest day&lt;/h2&gt;
-&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/coldest.svg"&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/coldest.svg"&gt;&lt;/object&gt;&lt;/p&gt;
 &lt;p&gt;Per NYC regulation, landlords are required to maintain a temperature of 68&amp;#8457; during the day in the winter, but on &lt;a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-02-01"&gt;Feb 1&lt;/a&gt; the temperature hung below 66&amp;#8457; all day long. &lt;/p&gt;
 &lt;h2 id="the-most-variable-day"&gt;The most variable day&lt;/h2&gt;
-&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/most_stddev.svg"&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/most_stddev.svg"&gt;&lt;/object&gt;&lt;/p&gt;
 &lt;p&gt;On December 16 we were burgled (&lt;strong&gt;everyone was ok!&lt;/strong&gt;). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the time the burglar entered the apartment. The detective that caught our case thought this was &lt;em&gt;awesome&lt;/em&gt;!&lt;/p&gt;
 &lt;h2 id="anomaly-detection"&gt;Anomaly Detection&lt;/h2&gt;
 &lt;p&gt;We can also use statistics to identify days with unusual properties. I queried my database with Python like:&lt;/p&gt;
@@ -202,12 +202,12 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;The first anomaly is an obvious one: the most variable day of the year which I wrote about above. See below for plots of the other four:&lt;/p&gt;
-&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/anomaly-2019-09-12.svg"&gt;&lt;/object&gt;
-&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/anomaly-2019-09-19.svg"&gt;&lt;/object&gt;
-&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/anomaly-2019-09-11.svg"&gt;&lt;/object&gt;
-&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/anomaly-2019-10-01.svg"&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/anomaly-2019-09-12.svg"&gt;&lt;/object&gt;
+&lt;object type="image/svg+xml" data="/blog/2020/anomaly-2019-09-19.svg"&gt;&lt;/object&gt;
+&lt;object type="image/svg+xml" data="/blog/2020/anomaly-2019-09-11.svg"&gt;&lt;/object&gt;
+&lt;object type="image/svg+xml" data="/blog/2020/anomaly-2019-10-01.svg"&gt;&lt;/object&gt;&lt;/p&gt;
 &lt;p&gt;And for good measure, &lt;a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-03-22"&gt;here&lt;/a&gt; is the least anomalous date according to my very naive model.&lt;/p&gt;
-&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/nonanomaly.svg"&gt;&lt;/object&gt;&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Deploying my Pelican website to Github Pages.</title><link href="/blog/2020/deploying-my-pelican-website-to-github-pages.html" rel="alternate"></link><published>2020-01-01T00:00:00-05:00</published><updated>2020-01-01T00:00:00-05:00</updated><author><name>Nolan Conaway</name></author><id>tag:None,2020-01-01:/blog/2020/deploying-my-pelican-website-to-github-pages.html</id><summary type="html">&lt;p&gt;🎉 If you're reading this, you're looking at my new website! 🎉&lt;/p&gt;
+&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/nonanomaly.svg"&gt;&lt;/object&gt;&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Deploying my Pelican website to Github Pages.</title><link href="/blog/2020/deploying-my-pelican-website-to-github-pages.html" rel="alternate"></link><published>2020-01-01T00:00:00-05:00</published><updated>2020-01-01T00:00:00-05:00</updated><author><name>Nolan Conaway</name></author><id>tag:None,2020-01-01:/blog/2020/deploying-my-pelican-website-to-github-pages.html</id><summary type="html">&lt;p&gt;🎉 If you're reading this, you're looking at my new website! 🎉&lt;/p&gt;
 &lt;p&gt;I ditched Jekyll because I didn't want to have to maintain a ruby installation on my machine. My new site runs on Pelican and I hacked together a deployment flow to Github pages. Here's that hack:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Main Workflow&lt;/span&gt;
 
@@ -429,14 +429,14 @@ $$&lt;/p&gt;
 
 
 &lt;p&gt;You'll get a display that looks like:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="/blog/2019/rpi-setup/main.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Raspi Config" src="/blog/2019/main.png"&gt;&lt;/p&gt;
 &lt;p&gt;I end up doing a lot of tinkering in here.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;Network Options -&amp;gt; Hostname&lt;/strong&gt;. So that my machine has an informative name on my network.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Advanced Options -&amp;gt; Expand Filesystem&lt;/strong&gt;. Gimme &lt;em&gt;all&lt;/em&gt; that sweet, sweet SD memory.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Whatever you do, you want to make sure to hit &lt;strong&gt;Localisation Options&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="/blog/2019/rpi-setup/localisation.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Localisation" src="/blog/2019/localisation.png"&gt;&lt;/p&gt;
 &lt;p&gt;When you hit the "Change Locale" menu, you'll get a very long list of possible locales. Scroll with your arrow keys (it sucks and takes forever) and press spacebar on the to select / deselect.&lt;/p&gt;
 &lt;p&gt;Personally, I deselect &lt;code&gt;en_GB.UTF-8 UTF-8&lt;/code&gt; and then select &lt;code&gt;en_US.UTF-8 UTF-8&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;When you're done, hit OK (skip there by pressing TAB). The next screen lets you choose your default locale. Just highlight the one you want and TAB to OK. You should be good to go.&lt;/p&gt;
@@ -482,7 +482,7 @@ SUBSYSTEM==&amp;quot;net&amp;quot;, ACTION==&amp;quot;add&amp;quot;, ATTR{addres
 &lt;p&gt;The solution is to configure a static IP address. If you like pain, there is a way to configure the static address on your raspberry pi. But, to me, that has always felt &lt;em&gt;way&lt;/em&gt; too complicated, &lt;a href="https://raspberrypi.stackexchange.com/questions/37920/how-do-i-set-up-networking-wifi-static-ip-address"&gt;see this Stack Exchange post&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I find it much easier to do this via my router's admin panel. Most routers will have a section in which you can specify a DHCP reservation for a specific MAC address. This is just a fancy way of making sure your router assigns a specific IP address to your raspberry pi, and that it never assigns any other device to that address.&lt;/p&gt;
 &lt;p&gt;I use an Apple Airport Express, here's what that configuration screen looks like:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://discussions.apple.com/content/attachment/466201040"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="airport express network options" src="https://discussions.apple.com/content/attachment/466201040"&gt;&lt;/p&gt;
 &lt;h2 id="step-5-enable-passwordless-ssh"&gt;Step 5: Enable passwordless ssh.&lt;/h2&gt;
 &lt;p&gt;I hate typing my passwords so I make sure to set up passwordless ssh.&lt;/p&gt;
 &lt;p&gt;The idea here is that you create a &lt;code&gt;key&lt;/code&gt; on the machine you are using to ssh into the pi &lt;em&gt;from&lt;/em&gt; (that is, the computer you are in front of). Then you paste that key in a special place on the pi. When you try to log in, ssh will compare the keys and let you in without a password if they match.&lt;/p&gt;
@@ -646,7 +646,7 @@ chmod +x Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;a
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;a href="/blog/2019/numpy-softmax-update/test.py"&gt;Here is the full script&lt;/a&gt;, in case you want to toy around with it.&lt;/p&gt;
+&lt;p&gt;&lt;a href="/blog/2019/test.py"&gt;Here is the full script&lt;/a&gt;, in case you want to toy around with it.&lt;/p&gt;
 &lt;h3 id="results"&gt;Results&lt;/h3&gt;
 &lt;p&gt;My function was ... faster?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Running&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;
@@ -703,14 +703,14 @@ chmod +x Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;a
 &lt;p&gt;Since 1998, Pitchfork has published five new reviews every weekday. In 2016, Pitchfork added an additional five reviews on Saturdays, as well as a "Sunday Reviews" section containing long-form articles on a classic albums (one review per week, published on Sundays). They've also occasionally published more targeted series of reviews (such as following the deaths of &lt;a href="http://pitchfork.com/artists/438-david-bowie/"&gt;David Bowie&lt;/a&gt; and &lt;a href="http://pitchfork.com/artists/3397-prince/"&gt;Prince&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;The typical review addresses a single release by a specific artist, and is attributed to a single author. All reviews are given a numerical score (0.0-10.0), are labeled by genre, report the record label (if any), and contain several paragraphs of text (the review itself). Since 2003, authors have awarded some releases the title "&lt;em&gt;Best New Music&lt;/em&gt;", which means what you'd think. Best New Music albums are displayed prominently on Pitchfork, and even have their own &lt;a href="http://pitchfork.com/reviews/best/albums/"&gt;page&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Album scores and Best New Music awards will be the focus of my analysis, so it's worth taking a look at those distributions.&lt;/p&gt;
-&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2017/pitchfork-roundup/score-bmn-hist.svg"&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2017/score-bmn-hist.svg"&gt;&lt;/object&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: Most high scoring albums that are &lt;em&gt;not&lt;/em&gt; Best New Music are from reviews prior to the advent of Best New Music, or are reviews of classic releases.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;A little more than 5% of reviews are awarded Best New Music. Most scores lie between 6.4 and 7.8, with the average review getting a score of 7.0. Best New Music is typically awarded to albums scoring greater than 8.4. Scores between 8.1 and 8.4 have a decent shot at Best New Music, but many albums in that range are not given the title. &lt;/p&gt;
 &lt;h2 id="statistical-heaping"&gt;Statistical Heaping&lt;/h2&gt;
 &lt;p&gt;Inspired by &lt;a href="https://gutterstats.wordpress.com/2015/11/03/are-nfl-officials-biased-with-their-ball-placement/"&gt;this really cool blog post&lt;/a&gt;, I thought about what a reviewer might do if they have a &lt;em&gt;general&lt;/em&gt; sense of an album's score, but they need to pick a &lt;em&gt;specific&lt;/em&gt; value. Is this a 7.8? 7.9? 7.7? The above mentioned post found that NFL officials tend to place the line of scrimmage at tidy yard numbers (i.e., 10s and 5s). The technical term for this is &lt;a href="http://ww2.amstat.org/sections/SRMS/Proceedings/y1958/Patterns%20Of%20Heaping%20In%20The%20Reporting%20Of%20Numerical%20Data.pdf"&gt;statistical heaping&lt;/a&gt;, and its observed commonly in survey data. So maybe Pitchfork reviewers behave similarly? I counted the number of scores at each decimal place (e.g., \( &lt;em&gt;.0, &lt;/em&gt;.1... *.9 \)), here's the result:&lt;/p&gt;
-&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2017/pitchfork-roundup/score-anchor-points.svg"&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2017/score-anchor-points.svg"&gt;&lt;/object&gt;&lt;/p&gt;
 &lt;p&gt;Those diamond markers show what you'd expect if Pitchfork reviewers were totally unbiased. The &lt;em&gt;Uniform Sampling&lt;/em&gt; model is what you'd get if you picked scores at random; the &lt;em&gt;Normal Sampling&lt;/em&gt; model shows what you'd get if you picked scores around a normal distribution  based on the observed scores (\(\mu=7.006, \sigma = 1.294\)). *.0 gets a slight bump in the uniform model because 10.0 is a possibility, but 10.1-10.9 are not. &lt;/p&gt;
 &lt;p&gt;Obviously, the tidy, round &lt;em&gt;.0 value is much more frequently chosen than you'd expect given either sampling technique: _It's nearly twice as frequent as &lt;/em&gt;.1_. There's also a slight bump at the &lt;em&gt;0.5 and &lt;/em&gt;.8  marks, but those values are a bit weaker. The point is, Pitchfork reviewers absolutely show the heaping behavior: at least in this sense, the review scores are biased. &lt;/p&gt;
 &lt;h2 id="borderline-best-new-music-decisions"&gt;Borderline Best New Music Decisions&lt;/h2&gt;
@@ -724,7 +724,7 @@ chmod +x Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;a
 &lt;/ul&gt;
 &lt;p&gt;To Pitchfork's credit: all of these would be reasonable biases to observe and I found little evidence of each. I &lt;em&gt;did&lt;/em&gt; find that &lt;a href="https://twitter.com/nolanbconaway/status/875568013050658818"&gt;some genres are more likely to be considered Best New Music&lt;/a&gt;, but I'm not sure if that constitutes bias or just Pitchfork's focus.&lt;/p&gt;
 &lt;p&gt;But when I looked into whether some record labels where favored over others, the results were striking. I computed the proportion of borderline cases from each label that were Best new Music; most only had one or two borderlines cases, but here are the labels with at least ten:&lt;/p&gt;
-&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2017/pitchfork-roundup/borderline-by-label.svg"&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2017/borderline-by-label.svg"&gt;&lt;/object&gt;&lt;/p&gt;
 &lt;p&gt;The first thing to note is that the labels are all major labels or at least big-name indie labels (with the exception of "self-released"). The second thing to note is the huge degree of differences between labels: &lt;a href="https://en.wikipedia.org/wiki/4AD"&gt;4AD&lt;/a&gt; got Best New Music on 8/14 borderline cases, and &lt;a href="https://en.wikipedia.org/wiki/Thrill_Jockey"&gt;Thrill Jockey&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Relapse_Records"&gt;Relapse&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Nonesuch_Records"&gt;Nonesuch&lt;/a&gt;, and &lt;a href="https://en.wikipedia.org/wiki/Anti-_(record_label)"&gt;Anti-&lt;/a&gt; collectively went 0 out of 44. &lt;/p&gt;
 &lt;p&gt;That &lt;em&gt;feels&lt;/em&gt; unlikely, but are those differences routine? I sent each label's data through an unbiased model, where the probability of \(k\) Best New Musics out of \(n\) borderline cases follows a Binomial distribution, with \( p=0.22 \) (the overall proportion of Best New Music among borderline cases). This model (depicted in the figure) shows how likely each label's data is &lt;em&gt;individually&lt;/em&gt;, but it does not really address the question: How probable is the data &lt;em&gt;collectively&lt;/em&gt;?  How likely are we to observe four labels with zero Best New Music? How likely are we to observe four labels with more than 40% Best new Music? How likely are we to observe both scenarios simultaneously?&lt;/p&gt;
 &lt;p&gt;So I did some Monte Carlo sampling. I simulated each label's Best New Music record 1 million times using the above Binomial distributions. Out of the 1,000,000 samples, 4523 (0.4523%) contained four or more labels with zero Best New Music, 22469 (2.2469%) contained four or more labels with more than 30% Best New Music, and only &lt;em&gt;42&lt;/em&gt; (&lt;em&gt;0.0042%&lt;/em&gt;) had both. Obviously, the data we have is &lt;em&gt;very unlikely&lt;/em&gt; to occur, assuming each label were awarded Best New Music with equal probability.&lt;/p&gt;
@@ -914,11 +914,11 @@ $$&lt;/p&gt;
 &lt;h2 id="what-is-a-nonlinearly-separable-classification"&gt;What is a nonlinearly separable classification?&lt;/h2&gt;
 &lt;p&gt;Nonlinearly separable classifications are most straightforwardly understood through contrast with linearly separable ones: if a classification is linearly separable, you can draw a line to separate the classes. &lt;/p&gt;
 &lt;p&gt;Below is an example of each. Imagine you are trying to discriminate between two classes, A and B, on the basis of two input dimensions (\(D_1\) and \(D_2\)):&lt;/p&gt;
-&lt;p&gt;&lt;img src="/blog/2017/solving-nls/ls-nls.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/blog/2017/ls-nls.png"&gt;&lt;/p&gt;
 &lt;p&gt;The NLS problem above is the ubiquitous &lt;a href="https://en.wikipedia.org/wiki/Exclusive_or"&gt;Exclusive-Or&lt;/a&gt; (XOR) problem. Whereas you can easily separate the LS classes with a line, this task is not possible for the NLS problem. &lt;/p&gt;
 &lt;h2 id="why-cant-a-single-layer-network-solve-nls-classifications"&gt;Why &lt;em&gt;can't&lt;/em&gt; a single layer network solve NLS classifications?&lt;/h2&gt;
 &lt;p&gt;Drawing a line between the classes is like solving the classification with regression: the aim is to find the boundary the best separates the members of the two classes. And as it turns out, the traditional single-layer classifier is identical to a regression model:&lt;/p&gt;
-&lt;p&gt;&lt;img src="/blog/2017/solving-nls/traditional-perceptron.png" height="150"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/blog/2017/traditional-perceptron.png" height="150"&gt;&lt;/p&gt;
 &lt;p&gt;The network has two input units, \(D_1\) and \(D_2\), a bias unit, and a single output unit coding the response (say, 0 codes for A, and 1 codes for B). The inputs are connected to the outputs with weights, \(W_1\) and \(W_2\). So the model's output is given by:&lt;/p&gt;
 &lt;p&gt;$$
 \begin{align}
@@ -927,7 +927,7 @@ output &amp;amp; = D_1W_1 + D_2W_2 + bias
 $$&lt;/p&gt;
 &lt;p&gt;Of course, that's also the canonical formula for regression. \(W_1\) and \(W_2\) are the slopes, and the bias is the intercept. The learning objective is to find the values of \(W_1\), \(W_2\), and bias that produce values of 0 for items in category A, and 1 for items in category B.&lt;/p&gt;
 &lt;p&gt;The above architecture is just a specific case of the more general multi-class network:&lt;/p&gt;
-&lt;p&gt;&lt;img src="/blog/2017/solving-nls/traditional-multiclass-perceptron.png" height="150"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/blog/2017/traditional-multiclass-perceptron.png" height="150"&gt;&lt;/p&gt;
 &lt;p&gt;Where each class (again, A and B) gets its own output node. I've color-coded the weights so you can see how this is just two versions of the earlier network, put next to each other. So now output for each unit \(c\) is the sum of the product of each dimension \(D_k\) multiplied against the dimension's weight to the unit, \(W_{ck}\):&lt;/p&gt;
 &lt;p&gt;$$
 \begin{align}
@@ -969,13 +969,13 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Anyway&lt;/em&gt;, the goal, of course, is to find values for \(W\) that correctly predict the category. But since this is akin to separating the categories with a line (which is what regression does), you'll never find useful values for an NLS problem: by definition, you cannot separate the classes with a line.&lt;/p&gt;
 &lt;h2 id="how-to-solve-the-nls-classification"&gt;How to solve the NLS classification&lt;/h2&gt;
 &lt;p&gt;You definitely can't solve the NLS problem with any of the architectures above. So, the solution we came up with involves a re-envisioning of the problem, which is realized in a change to the architecture. Instead of the traditional perceptron architecture with dimensions-as-inputs and categories-as-outputs, we designed an autoassociator-based classifier:&lt;/p&gt;
-&lt;p&gt;&lt;img src="/blog/2017/solving-nls/divergent-autoassoc.png" height="200"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/blog/2017/divergent-autoassoc.png" height="200"&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: That architecture is actually a single-layer version of Ken's &lt;a href="https://link.springer.com/article/10.3758/BF03196806"&gt;Divergent Autoencoder&lt;/a&gt; model, which is also very cool!&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;I've color-coded the weights so that it doesn't look like a tangled mess. Instead of having one output unit per category, the network has one output unit per category, per dimension. The output units are split into two, category-specific, channels, which is why we call it a "&lt;em&gt;Divergent Autoassociator&lt;/em&gt;".&lt;/p&gt;
 &lt;p&gt;You could also imagine that network as two separate, regular autoassociators, which is formally the same (it just doesn't &lt;em&gt;look&lt;/em&gt; divergent):&lt;/p&gt;
-&lt;p&gt;&lt;img src="/blog/2017/solving-nls/divergent-autoassoc-split.png" height="200"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/blog/2017/divergent-autoassoc-split.png" height="200"&gt;&lt;/p&gt;
 &lt;p&gt;The network's goal is to "reconstruct" everything it sees in the correct category. So if \(D_1=0\) and \(D_2=1\) (i.e., &lt;code&gt;input = [0,1]&lt;/code&gt;), and the network is told that belongs to category A, then the goal is for \(A_1=0\) and \(A_2=1\). The units on the opposite-category channel (\(B_1\) and \(B_2\)) are left alone.&lt;/p&gt;
 &lt;p&gt;Based on that learning objective, the network needs to learn weights that accurately reconstruct each category's items on the correct channel. This produces a network which learns how dimensions are correlated within each category, rather than a network which learns how dimensions predict categories.&lt;/p&gt;
 &lt;h3 id="classification-with-the-divergent-autoassociator"&gt;Classification with the Divergent Autoassociator&lt;/h3&gt;
@@ -1009,7 +1009,7 @@ $$&lt;/p&gt;
 
 &lt;h3 id="the-single-layer-nls-solution"&gt;The Single-Layer NLS Solution&lt;/h3&gt;
 &lt;p&gt;So "solving" a classification in the Divergent Autoassociator involves finding a set of weights that allow each class to reconstruct its own members, but poorly reconstruct members of the other class. Here's how it's done:&lt;/p&gt;
-&lt;p&gt;&lt;img src="/blog/2017/solving-nls/divergent-autoassoc-split-solution.png" height="275"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/blog/2017/divergent-autoassoc-split-solution.png" height="275"&gt;&lt;/p&gt;
 &lt;p&gt;To prevent things from looking like a tangled mess, I've used the two-separate-autoassociators figure. But remember, this is just a single network! I've put the optimal weight values next to each weight.&lt;/p&gt;
 &lt;p&gt;Those weights result in the following outputs:&lt;/p&gt;
 &lt;table&gt;
@@ -1097,7 +1097,7 @@ $$&lt;/p&gt;
 &lt;p&gt;It doesn't do anything &lt;em&gt;that&lt;/em&gt; differently from the traditional architecture: we didn't add a new computational step, we didn't add preprocessing, we didn't add a hidden layer. But by looking at the computational problem from a different angle, a new solution arises.&lt;/p&gt;
 &lt;h1 id="explore-it-yourself"&gt;Explore it yourself!&lt;/h1&gt;
 &lt;p&gt;Along with this post, I've written a couple simple python classes to explore learning in the traditional perceptron and divergent autoassociator models. They're probably not what you want to use for any rigorous study (they don't even &lt;em&gt;classify&lt;/em&gt; things), but they're enough to explore what kinds of weight solutions are learned.&lt;/p&gt;
-&lt;p&gt;The classes can be found &lt;a href="/blog/2017/solving-nls/single_layer_nets.zip"&gt;here&lt;/a&gt;. You can download them and import as a module like so:&lt;/p&gt;
+&lt;p&gt;The classes can be found &lt;a href="/blog/2017/single_layer_nets.zip"&gt;here&lt;/a&gt;. You can download them and import as a module like so:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_printoptions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;precision&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 

@@ -74,7 +74,8 @@
 <h1>An update on the softmax function for numpy.</h1>
 <div class="text-right">January 2019</div>
 <hr>
-<p>As of early 2019, my post on a <a href="/blog/2017/softmax-numpy">softmax function for numpy</a> accounts for 83% of traffic to my website (~16k views in 2018). I recently found that, as of version 1.2.0, scipy has included an implementation of the softmax in its special functions.</p>
+<div class='markdown_insert'>
+    <p>As of early 2019, my post on a <a href="/blog/2017/softmax-numpy">softmax function for numpy</a> accounts for 83% of traffic to my website (~16k views in 2018). I recently found that, as of version 1.2.0, scipy has included an implementation of the softmax in its special functions.</p>
 <p>Some info on the change:</p>
 <ul>
 <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.softmax.html#scipy.special.softmax">SciPy docs</a>.</li>
@@ -166,7 +167,7 @@
 </pre></div>
 
 
-<p><a href="/blog/2019/numpy-softmax-update/test.py">Here is the full script</a>, in case you want to toy around with it.</p>
+<p><a href="/blog/2019/test.py">Here is the full script</a>, in case you want to toy around with it.</p>
 <h3 id="results">Results</h3>
 <p>My function was ... faster?</p>
 <div class="highlight"><pre><span></span><span class="n">Running</span><span class="p">:</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,)</span>
@@ -210,6 +211,7 @@
 <li>I get similar results every time I ran the script.</li>
 <li>I use a cruddy pip install on python 3.7.1. I don't know what would happen if those speedy conda optimizations were in play.</li>
 </ul>
+</div>
     </div>
 
   </div>

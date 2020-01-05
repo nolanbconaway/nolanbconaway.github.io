@@ -74,7 +74,8 @@
 <h1>2019: The high and low temperatures</h1>
 <div class="text-right">January 2020</div>
 <hr>
-<p>Last winter I hooked up a <a href="https://www.adafruit.com/product/374">DS18B20</a> thermometer to a Raspberry Pi. I set up a <a href="https://github.com/nolanbconaway/thermometer">python library</a> to read the temperature, and a cron job to save the temperature in my postgres database every minute. Then I built a <a href="https://temp-in-nolans-apartment.herokuapp.com/">webapp</a> to display the last 24 hours of data. The first stable readings were stored on Jan 5 2019, so we have arrived at one full year of readings from my thermometer project 🎉!</p>
+<div class='markdown_insert'>
+    <p>Last winter I hooked up a <a href="https://www.adafruit.com/product/374">DS18B20</a> thermometer to a Raspberry Pi. I set up a <a href="https://github.com/nolanbconaway/thermometer">python library</a> to read the temperature, and a cron job to save the temperature in my postgres database every minute. Then I built a <a href="https://temp-in-nolans-apartment.herokuapp.com/">webapp</a> to display the last 24 hours of data. The first stable readings were stored on Jan 5 2019, so we have arrived at one full year of readings from my thermometer project 🎉!</p>
 <p>The data are probably uninteresting to anyone who does not live in my apartment. Actually, they're not even interesting to all the people who <em>do</em> live here 🤔.</p>
 <p>But I think the data can tell a story. At least some of it. This post tells the stories of unusual days in my apartment, from the perspective of temperature measurements.</p>
 <h2 id="describing-a-days-temperatures">Describing a day's temperatures</h2>
@@ -154,13 +155,13 @@
 <p>Most of those columns have sensible names. <code>avg_minute_delta</code> describes the average difference in temperature per minute across adjacent readings. <code>day_delta</code> is the difference between the first and last reading in the day.</p>
 <p>I looked into these summary stats for days which stand out, days like:</p>
 <h2 id="the-warmest-day">🔥 the warmest day</h2>
-<p><object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/warmest.svg"></object></p>
+<p><object type="image/svg+xml" data="/blog/2020/warmest.svg"></object></p>
 <p>The day with the highest average temperature was <a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-07-05">July 5</a>. We were in Baltimore to celebrate July 4 with my family, so we closed up the windows and shut off the AC and the apartment absolutely <em>roasted</em>.</p>
 <h2 id="the-coldest-day">❄ the coldest day</h2>
-<p><object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/coldest.svg"></object></p>
+<p><object type="image/svg+xml" data="/blog/2020/coldest.svg"></object></p>
 <p>Per NYC regulation, landlords are required to maintain a temperature of 68&#8457; during the day in the winter, but on <a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-02-01">Feb 1</a> the temperature hung below 66&#8457; all day long. </p>
 <h2 id="the-most-variable-day">The most variable day</h2>
-<p><object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/most_stddev.svg"></object></p>
+<p><object type="image/svg+xml" data="/blog/2020/most_stddev.svg"></object></p>
 <p>On December 16 we were burgled (<strong>everyone was ok!</strong>). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the time the burglar entered the apartment. The detective that caught our case thought this was <em>awesome</em>!</p>
 <h2 id="anomaly-detection">Anomaly Detection</h2>
 <p>We can also use statistics to identify days with unusual properties. I queried my database with Python like:</p>
@@ -277,12 +278,13 @@
 </tbody>
 </table>
 <p>The first anomaly is an obvious one: the most variable day of the year which I wrote about above. See below for plots of the other four:</p>
-<p><object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/anomaly-2019-09-12.svg"></object>
-<object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/anomaly-2019-09-19.svg"></object>
-<object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/anomaly-2019-09-11.svg"></object>
-<object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/anomaly-2019-10-01.svg"></object></p>
+<p><object type="image/svg+xml" data="/blog/2020/anomaly-2019-09-12.svg"></object>
+<object type="image/svg+xml" data="/blog/2020/anomaly-2019-09-19.svg"></object>
+<object type="image/svg+xml" data="/blog/2020/anomaly-2019-09-11.svg"></object>
+<object type="image/svg+xml" data="/blog/2020/anomaly-2019-10-01.svg"></object></p>
 <p>And for good measure, <a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-03-22">here</a> is the least anomalous date according to my very naive model.</p>
-<p><object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/nonanomaly.svg"></object></p>
+<p><object type="image/svg+xml" data="/blog/2020/nonanomaly.svg"></object></p>
+</div>
     </div>
 
   </div>
