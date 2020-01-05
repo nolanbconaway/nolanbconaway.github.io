@@ -43,7 +43,7 @@ Per NYC regulation, landlords are required to maintain a temperature of 68&#8457
 
 <object type="image/svg+xml" data="{attach}last-year-in-temperatures/most_stddev.svg"></object>
 
-On December 16 we were burgled (**everyone was ok!**). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the burglar entered the apartment. The detective that caught our case thought this was _awesome_!
+On December 16 we were burgled (**everyone was ok!**). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the time the burglar entered the apartment. The detective that caught our case thought this was _awesome_!
 
 ## Anomaly Detection
 
