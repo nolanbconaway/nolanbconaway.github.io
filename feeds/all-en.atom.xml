@@ -86,7 +86,7 @@
 &lt;p&gt;Per NYC regulation, landlords are required to maintain a temperature of 68&amp;#8457; during the day in the winter, but on &lt;a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-02-01"&gt;Feb 1&lt;/a&gt; the temperature hung below 66&amp;#8457; all day long. &lt;/p&gt;
 &lt;h2 id="the-most-variable-day"&gt;The most variable day&lt;/h2&gt;
 &lt;p&gt;&lt;object type="image/svg+xml" data="/blog/2020/last-year-in-temperatures/most_stddev.svg"&gt;&lt;/object&gt;&lt;/p&gt;
-&lt;p&gt;On December 16 we were burgled (&lt;strong&gt;everyone was ok!&lt;/strong&gt;). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the burglar entered the apartment. The detective that caught our case thought this was &lt;em&gt;awesome&lt;/em&gt;!&lt;/p&gt;
+&lt;p&gt;On December 16 we were burgled (&lt;strong&gt;everyone was ok!&lt;/strong&gt;). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the time the burglar entered the apartment. The detective that caught our case thought this was &lt;em&gt;awesome&lt;/em&gt;!&lt;/p&gt;
 &lt;h2 id="anomaly-detection"&gt;Anomaly Detection&lt;/h2&gt;
 &lt;p&gt;We can also use statistics to identify days with unusual properties. I queried my database with Python like:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
