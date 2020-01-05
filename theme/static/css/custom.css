@@ -9,7 +9,7 @@ h2, h3, h4 {
 
 /* image centering */
 
-.content>img, .content>p>img {
+.content img {
     margin: auto;
     display: block;
     padding: 1em;
@@ -17,7 +17,7 @@ h2, h3, h4 {
     height: auto;
 }
 
-.content>object, .content>p>object {
+.content object {
     max-width: 90%;
     margin: auto;
     display: block;
