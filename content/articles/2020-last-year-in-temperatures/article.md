@@ -2,7 +2,7 @@
 title: 2019: The high and low temperatures
 date: 2020-01-05
 category: blog
-keywords: retrospective, thermometer
+keywords: thermometer, anomaly detection
 ---
 
 Last winter I hooked up a [DS18B20](https://www.adafruit.com/product/374) thermometer to a Raspberry Pi. I set up a [python library](https://github.com/nolanbconaway/thermometer) to read the temperature, and a cron job to save the temperature in my postgres database every minute. Then I built a [webapp](https://temp-in-nolans-apartment.herokuapp.com/) to display the last 24 hours of data. The first stable readings were stored on Jan 5 2019, so we have arrived at one full year of readings from my thermometer project ::tada::!
