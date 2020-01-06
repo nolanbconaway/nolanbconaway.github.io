@@ -86,40 +86,27 @@ If you might break it all, you'll want to do it _before_ you invest a lot of tim
 
 As for me, I don't know how _not_ to break this stuff. So I just copy over config from another, working, raspberry pi. My config looks like:
 
-### /etc/network/interfaces
+### `/etc/network/interfaces`
 
 ```text
 source-directory /etc/network/interfaces.d
 
-auto lo
-iface lo inet loopback
-
-iface eth0 inet dhcp
-
-allow-hotplug wap0
-auto wap0
-iface wap0 inet dhcp
-        wpa-ssid "<NETWORK>"
-        wpa-psk "<PASSWORD>"
+auto wlan0
+iface wlan0 inet manual
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 ```
 
-Astute readers may have noticed that I called my wireless device `wap0` instead of the typical `wlan0`. This is because one time I had a machine that was randomly switching between two wireless devices (`wlan0` and `wlan1`). I didn't even have two wifi adapters connected so I don't know. This is the mess I create for myself.
-
-Again, you might want to follow the raspberrypi.org instructions instead. Just sayin'.
-
-Anyway, I decided to pick out my _intended_ wifi device via its MAC address and get _that_ to connect.
-
-This [forum post](https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=55527#p1061146) solved the problem for me. The idea is to get your machine to associate a specific adapter (via MAC address) with some other name (in this case, `wap0`), and then refer to that in `/etc/network/interfaces`.
-
-Finding the MAC address of your adapter is as simple as plugging it in and digging through the results of call to `ip address`. It'll look like `aa:bb:cc:dd:ee:ff`.
-
-With the MAC address in hand, you can throw it in `/etc/udev/rules.d/70-my_network_interfaces.rules`:
-
-#### /etc/udev/rules.d/70-my_network_interfaces.rules
+### `/etc/wpa_supplicant/wpa_supplicant.conf`
 
 ```text
-# Built-in wifi interface used in hostapd - identify device by MAC address
-SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="<MAC ADDRESS>", NAME="wap0"
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
+
+network={
+	ssid="network name"
+	psk="password"
+}
 ```
 
 ### Reboot
