@@ -13,8 +13,6 @@ h2, h3, h4 {
     margin: auto;
     display: block;
     padding: 1em;
-    max-width: 100%;
-    height: auto;
 }
 
 .content object {
@@ -26,7 +24,7 @@ h2, h3, h4 {
 
 /* styling for code and math */
 
-div.highlight {
+div.codehilitetable {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
@@ -34,10 +32,7 @@ div.highlight {
     margin-bottom: 2em;
 }
 
-pre {
-    overflow: auto;
-    word-wrap: normal;
-    white-space: pre;
+div.codehilitetable>pre {
     box-shadow: 0.1em 0.2em 1em -0.2em gray;
     padding: 1em;
 }

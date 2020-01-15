@@ -74,7 +74,7 @@
 <div class='markdown_insert'>
     <p>I live in New York City and work as a data scientist. Previously, I was a postdoc at the University of Wisconsin-Madison. Before that, I was a Ph.D. student at Binghamton University.</p>
 <p>Here's a picture of me, on my honeymoon in Athens in 2017.</p>
-<p><img src="/theme/images/blue-steel.jpg" width="95%" style="max-width: 460px"></p>
+<p><img class="img-fluid" src="/theme/images/blue-steel.jpg" style="max-width: 460px" width="95%"/></p>
 <p>This website was built using Pelican and deployed via Github pages (<a href="https://github.com/nolanbconaway/nolanbconaway.github.io">source repo</a>).</p>
 </div>
 <hr>
@@ -87,14 +87,10 @@ Last updated: Wed 01 January 2020
 
 <script>
   // apply bootstrap table classes/scopes
-  $('table').not('.highlighttable').addClass('table table-sm table-hover')
   $('table.table>thead>tr>th').attr('scope', 'col')
 
   // wrap all tables for overflow scrolling
   $("table.table").not('.highlighttable').not('.blogroll').wrap("<div class='table_wrap'></div>");
-
-  // add blockquote class
-  $('blockquote').addClass('blockquote')
 
   // add anchor URLS for header elements in markdown pages
   $(".markdown_insert h2,h3,h4").each(function (index) {

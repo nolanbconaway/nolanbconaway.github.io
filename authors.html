@@ -81,14 +81,10 @@
 
 <script>
   // apply bootstrap table classes/scopes
-  $('table').not('.highlighttable').addClass('table table-sm table-hover')
   $('table.table>thead>tr>th').attr('scope', 'col')
 
   // wrap all tables for overflow scrolling
   $("table.table").not('.highlighttable').not('.blogroll').wrap("<div class='table_wrap'></div>");
-
-  // add blockquote class
-  $('blockquote').addClass('blockquote')
 
   // add anchor URLS for header elements in markdown pages
   $(".markdown_insert h2,h3,h4").each(function (index) {

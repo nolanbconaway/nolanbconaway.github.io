@@ -75,7 +75,7 @@
 <div class="text-right">June 2017</div>
 <hr>
 <div class='markdown_insert'>
-    <blockquote>
+    <blockquote class="blockquote">
 <p><em>Over the Winter of 2016-2017, I scraped over 18,000 reviews published on <a href="http://pitchfork.com/">Pitchfork</a>. I published the dataset on Github, and wrote <a href="http://nbviewer.jupyter.org/github/nolanbconaway/pitchfork-data/blob/master/notebooks/author-autocorrelation.ipynb">several</a> <a href="http://nbviewer.jupyter.org/github/nolanbconaway/pitchfork-data/blob/master/notebooks/best-new-music-iid.ipynb">Jupyter</a> <a href="http://nbviewer.jupyter.org/github/nolanbconaway/pitchfork-data/blob/master/notebooks/artist-development.ipynb">Notebooks</a> <a href="http://nbviewer.jupyter.org/github/nolanbconaway/pitchfork-data/blob/master/notebooks/review-score-exploration.ipynb">exploring</a> the data. This post provides a discussion about what I found. For a more code-driven approach, check out the notebooks on <a href="https://github.com/nolanbconaway/pitchfork-data">Github</a>!</em></p>
 </blockquote>
 <h2 id="introduction">Introduction</h2>
@@ -85,14 +85,14 @@
 <p>Since 1998, Pitchfork has published five new reviews every weekday. In 2016, Pitchfork added an additional five reviews on Saturdays, as well as a "Sunday Reviews" section containing long-form articles on a classic albums (one review per week, published on Sundays). They've also occasionally published more targeted series of reviews (such as following the deaths of <a href="http://pitchfork.com/artists/438-david-bowie/">David Bowie</a> and <a href="http://pitchfork.com/artists/3397-prince/">Prince</a>).</p>
 <p>The typical review addresses a single release by a specific artist, and is attributed to a single author. All reviews are given a numerical score (0.0-10.0), are labeled by genre, report the record label (if any), and contain several paragraphs of text (the review itself). Since 2003, authors have awarded some releases the title "<em>Best New Music</em>", which means what you'd think. Best New Music albums are displayed prominently on Pitchfork, and even have their own <a href="http://pitchfork.com/reviews/best/albums/">page</a>.</p>
 <p>Album scores and Best New Music awards will be the focus of my analysis, so it's worth taking a look at those distributions.</p>
-<p><object type="image/svg+xml" data="/blog/2017/score-bmn-hist.svg"></object></p>
-<blockquote>
+<p><object data="/blog/2017/score-bmn-hist.svg" type="image/svg+xml"></object></p>
+<blockquote class="blockquote">
 <p>Note: Most high scoring albums that are <em>not</em> Best New Music are from reviews prior to the advent of Best New Music, or are reviews of classic releases.</p>
 </blockquote>
 <p>A little more than 5% of reviews are awarded Best New Music. Most scores lie between 6.4 and 7.8, with the average review getting a score of 7.0. Best New Music is typically awarded to albums scoring greater than 8.4. Scores between 8.1 and 8.4 have a decent shot at Best New Music, but many albums in that range are not given the title. </p>
 <h2 id="statistical-heaping">Statistical Heaping</h2>
 <p>Inspired by <a href="https://gutterstats.wordpress.com/2015/11/03/are-nfl-officials-biased-with-their-ball-placement/">this really cool blog post</a>, I thought about what a reviewer might do if they have a <em>general</em> sense of an album's score, but they need to pick a <em>specific</em> value. Is this a 7.8? 7.9? 7.7? The above mentioned post found that NFL officials tend to place the line of scrimmage at tidy yard numbers (i.e., 10s and 5s). The technical term for this is <a href="http://ww2.amstat.org/sections/SRMS/Proceedings/y1958/Patterns%20Of%20Heaping%20In%20The%20Reporting%20Of%20Numerical%20Data.pdf">statistical heaping</a>, and its observed commonly in survey data. So maybe Pitchfork reviewers behave similarly? I counted the number of scores at each decimal place (e.g., \( <em>.0, </em>.1... *.9 \)), here's the result:</p>
-<p><object type="image/svg+xml" data="/blog/2017/score-anchor-points.svg"></object></p>
+<p><object data="/blog/2017/score-anchor-points.svg" type="image/svg+xml"></object></p>
 <p>Those diamond markers show what you'd expect if Pitchfork reviewers were totally unbiased. The <em>Uniform Sampling</em> model is what you'd get if you picked scores at random; the <em>Normal Sampling</em> model shows what you'd get if you picked scores around a normal distribution  based on the observed scores (\(\mu=7.006, \sigma = 1.294\)). *.0 gets a slight bump in the uniform model because 10.0 is a possibility, but 10.1-10.9 are not. </p>
 <p>Obviously, the tidy, round <em>.0 value is much more frequently chosen than you'd expect given either sampling technique: _It's nearly twice as frequent as </em>.1_. There's also a slight bump at the <em>0.5 and </em>.8  marks, but those values are a bit weaker. The point is, Pitchfork reviewers absolutely show the heaping behavior: at least in this sense, the review scores are biased. </p>
 <h2 id="borderline-best-new-music-decisions">Borderline Best New Music Decisions</h2>
@@ -106,7 +106,7 @@
 </ul>
 <p>To Pitchfork's credit: all of these would be reasonable biases to observe and I found little evidence of each. I <em>did</em> find that <a href="https://twitter.com/nolanbconaway/status/875568013050658818">some genres are more likely to be considered Best New Music</a>, but I'm not sure if that constitutes bias or just Pitchfork's focus.</p>
 <p>But when I looked into whether some record labels where favored over others, the results were striking. I computed the proportion of borderline cases from each label that were Best new Music; most only had one or two borderlines cases, but here are the labels with at least ten:</p>
-<p><object type="image/svg+xml" data="/blog/2017/borderline-by-label.svg"></object></p>
+<p><object data="/blog/2017/borderline-by-label.svg" type="image/svg+xml"></object></p>
 <p>The first thing to note is that the labels are all major labels or at least big-name indie labels (with the exception of "self-released"). The second thing to note is the huge degree of differences between labels: <a href="https://en.wikipedia.org/wiki/4AD">4AD</a> got Best New Music on 8/14 borderline cases, and <a href="https://en.wikipedia.org/wiki/Thrill_Jockey">Thrill Jockey</a>, <a href="https://en.wikipedia.org/wiki/Relapse_Records">Relapse</a>, <a href="https://en.wikipedia.org/wiki/Nonesuch_Records">Nonesuch</a>, and <a href="https://en.wikipedia.org/wiki/Anti-_(record_label)">Anti-</a> collectively went 0 out of 44. </p>
 <p>That <em>feels</em> unlikely, but are those differences routine? I sent each label's data through an unbiased model, where the probability of \(k\) Best New Musics out of \(n\) borderline cases follows a Binomial distribution, with \( p=0.22 \) (the overall proportion of Best New Music among borderline cases). This model (depicted in the figure) shows how likely each label's data is <em>individually</em>, but it does not really address the question: How probable is the data <em>collectively</em>?  How likely are we to observe four labels with zero Best New Music? How likely are we to observe four labels with more than 40% Best new Music? How likely are we to observe both scenarios simultaneously?</p>
 <p>So I did some Monte Carlo sampling. I simulated each label's Best New Music record 1 million times using the above Binomial distributions. Out of the 1,000,000 samples, 4523 (0.4523%) contained four or more labels with zero Best New Music, 22469 (2.2469%) contained four or more labels with more than 30% Best New Music, and only <em>42</em> (<em>0.0042%</em>) had both. Obviously, the data we have is <em>very unlikely</em> to occur, assuming each label were awarded Best New Music with equal probability.</p>
@@ -123,14 +123,10 @@
 
 <script>
   // apply bootstrap table classes/scopes
-  $('table').not('.highlighttable').addClass('table table-sm table-hover')
   $('table.table>thead>tr>th').attr('scope', 'col')
 
   // wrap all tables for overflow scrolling
   $("table.table").not('.highlighttable').not('.blogroll').wrap("<div class='table_wrap'></div>");
-
-  // add blockquote class
-  $('blockquote').addClass('blockquote')
 
   // add anchor URLS for header elements in markdown pages
   $(".markdown_insert h2,h3,h4").each(function (index) {
