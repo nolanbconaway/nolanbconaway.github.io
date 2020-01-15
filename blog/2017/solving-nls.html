@@ -85,11 +85,11 @@
 <h2 id="what-is-a-nonlinearly-separable-classification">What is a nonlinearly separable classification?</h2>
 <p>Nonlinearly separable classifications are most straightforwardly understood through contrast with linearly separable ones: if a classification is linearly separable, you can draw a line to separate the classes. </p>
 <p>Below is an example of each. Imagine you are trying to discriminate between two classes, A and B, on the basis of two input dimensions (\(D_1\) and \(D_2\)):</p>
-<p><img class="img-fluid" src="/blog/2017/ls-nls.png"/></p>
+<p><img class="img-fluid" src="https://nolanbconaway.github.io/blog/2017/ls-nls.png"/></p>
 <p>The NLS problem above is the ubiquitous <a href="https://en.wikipedia.org/wiki/Exclusive_or">Exclusive-Or</a> (XOR) problem. Whereas you can easily separate the LS classes with a line, this task is not possible for the NLS problem. </p>
 <h2 id="why-cant-a-single-layer-network-solve-nls-classifications">Why <em>can't</em> a single layer network solve NLS classifications?</h2>
 <p>Drawing a line between the classes is like solving the classification with regression: the aim is to find the boundary the best separates the members of the two classes. And as it turns out, the traditional single-layer classifier is identical to a regression model:</p>
-<p><img class="img-fluid" height="150" src="/blog/2017/traditional-perceptron.png"/></p>
+<p><img class="img-fluid" height="150" src="https://nolanbconaway.github.io/blog/2017/traditional-perceptron.png"/></p>
 <p>The network has two input units, \(D_1\) and \(D_2\), a bias unit, and a single output unit coding the response (say, 0 codes for A, and 1 codes for B). The inputs are connected to the outputs with weights, \(W_1\) and \(W_2\). So the model's output is given by:</p>
 <p>$$
 \begin{align}
@@ -98,7 +98,7 @@ output &amp; = D_1W_1 + D_2W_2 + bias
 $$</p>
 <p>Of course, that's also the canonical formula for regression. \(W_1\) and \(W_2\) are the slopes, and the bias is the intercept. The learning objective is to find the values of \(W_1\), \(W_2\), and bias that produce values of 0 for items in category A, and 1 for items in category B.</p>
 <p>The above architecture is just a specific case of the more general multi-class network:</p>
-<p><img class="img-fluid" height="150" src="/blog/2017/traditional-multiclass-perceptron.png"/></p>
+<p><img class="img-fluid" height="150" src="https://nolanbconaway.github.io/blog/2017/traditional-multiclass-perceptron.png"/></p>
 <p>Where each class (again, A and B) gets its own output node. I've color-coded the weights so you can see how this is just two versions of the earlier network, put next to each other. So now output for each unit \(c\) is the sum of the product of each dimension \(D_k\) multiplied against the dimension's weight to the unit, \(W_{ck}\):</p>
 <p>$$
 \begin{align}
@@ -106,7 +106,7 @@ output_c &amp; = bias + \Sigma_k{D_k W_{ck}}
 \end{align}
 $$</p>
 <p>In this more general case, it's useful to store the weights in an array to take advantage of matrix algebra to compute the output:</p>
-<div class="highlight codehilitetable"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="codehilitetable highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
                     <span class="c1"># bias  D_1  D_2  # Correct Category</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span>  <span class="c1"># A</span>
@@ -138,19 +138,19 @@ $$</p>
 <p><em>Anyway</em>, the goal, of course, is to find values for \(W\) that correctly predict the category. But since this is akin to separating the categories with a line (which is what regression does), you'll never find useful values for an NLS problem: by definition, you cannot separate the classes with a line.</p>
 <h2 id="how-to-solve-the-nls-classification">How to solve the NLS classification</h2>
 <p>You definitely can't solve the NLS problem with any of the architectures above. So, the solution we came up with involves a re-envisioning of the problem, which is realized in a change to the architecture. Instead of the traditional perceptron architecture with dimensions-as-inputs and categories-as-outputs, we designed an autoassociator-based classifier:</p>
-<p><img class="img-fluid" height="200" src="/blog/2017/divergent-autoassoc.png"/></p>
+<p><img class="img-fluid" height="200" src="https://nolanbconaway.github.io/blog/2017/divergent-autoassoc.png"/></p>
 <blockquote class="blockquote">
 <p><em>Note</em>: That architecture is actually a single-layer version of Ken's <a href="https://link.springer.com/article/10.3758/BF03196806">Divergent Autoencoder</a> model, which is also very cool!</p>
 </blockquote>
 <p>I've color-coded the weights so that it doesn't look like a tangled mess. Instead of having one output unit per category, the network has one output unit per category, per dimension. The output units are split into two, category-specific, channels, which is why we call it a "<em>Divergent Autoassociator</em>".</p>
 <p>You could also imagine that network as two separate, regular autoassociators, which is formally the same (it just doesn't <em>look</em> divergent):</p>
-<p><img class="img-fluid" height="200" src="/blog/2017/divergent-autoassoc-split.png"/></p>
+<p><img class="img-fluid" height="200" src="https://nolanbconaway.github.io/blog/2017/divergent-autoassoc-split.png"/></p>
 <p>The network's goal is to "reconstruct" everything it sees in the correct category. So if \(D_1=0\) and \(D_2=1\) (i.e., <code>input = [0,1]</code>), and the network is told that belongs to category A, then the goal is for \(A_1=0\) and \(A_2=1\). The units on the opposite-category channel (\(B_1\) and \(B_2\)) are left alone.</p>
 <p>Based on that learning objective, the network needs to learn weights that accurately reconstruct each category's items on the correct channel. This produces a network which learns how dimensions are correlated within each category, rather than a network which learns how dimensions predict categories.</p>
 <h3 id="classification-with-the-divergent-autoassociator">Classification with the Divergent Autoassociator</h3>
 <p>Getting the model to classify things is about comparing the amount of <em>error</em> on each category channel. If, for example, the category A channel does a good job reconstructing <code>[0, 1]</code>, and category B does a poor job, then the model will classify the item into category A.</p>
 <p>Just to provide a sense of how the classification rule works, I calculated the optimal weights for the LS problem, and I copied over the network's output using those weights. Then, based on the output from each category, I computed the error and classification response.</p>
-<div class="highlight codehilitetable"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="codehilitetable highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span> 
                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">],</span>
@@ -176,7 +176,7 @@ $$</p>
 </pre></div>
 <h3 id="the-single-layer-nls-solution">The Single-Layer NLS Solution</h3>
 <p>So "solving" a classification in the Divergent Autoassociator involves finding a set of weights that allow each class to reconstruct its own members, but poorly reconstruct members of the other class. Here's how it's done:</p>
-<p><img class="img-fluid" height="275" src="/blog/2017/divergent-autoassoc-split-solution.png"/></p>
+<p><img class="img-fluid" height="275" src="https://nolanbconaway.github.io/blog/2017/divergent-autoassoc-split-solution.png"/></p>
 <p>To prevent things from looking like a tangled mess, I've used the two-separate-autoassociators figure. But remember, this is just a single network! I've put the optimal weight values next to each weight.</p>
 <p>Those weights result in the following outputs:</p>
 <table class="table table-sm table-hover">
@@ -264,8 +264,8 @@ $$</p>
 <p>It doesn't do anything <em>that</em> differently from the traditional architecture: we didn't add a new computational step, we didn't add preprocessing, we didn't add a hidden layer. But by looking at the computational problem from a different angle, a new solution arises.</p>
 <h1 id="explore-it-yourself">Explore it yourself!</h1>
 <p>Along with this post, I've written a couple simple python classes to explore learning in the traditional perceptron and divergent autoassociator models. They're probably not what you want to use for any rigorous study (they don't even <em>classify</em> things), but they're enough to explore what kinds of weight solutions are learned.</p>
-<p>The classes can be found <a href="/blog/2017/single_layer_nets.zip">here</a>. You can download them and import as a module like so:</p>
-<div class="highlight codehilitetable"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<p>The classes can be found <a href="https://nolanbconaway.github.io/blog/2017/single_layer_nets.zip">here</a>. You can download them and import as a module like so:</p>
+<div class="codehilitetable highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># import network objects</span>

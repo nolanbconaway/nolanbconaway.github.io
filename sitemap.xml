@@ -4,231 +4,231 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>/</loc>
-<lastmod>2020-01-15T01:38:51-00:00</lastmod>
+<loc>https://nolanbconaway.github.io/</loc>
+<lastmod>2020-01-15T01:49:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/tags.html</loc>
-<lastmod>2020-01-15T01:38:51-00:00</lastmod>
+<loc>https://nolanbconaway.github.io/tags.html</loc>
+<lastmod>2020-01-15T01:49:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/categories.html</loc>
-<lastmod>2020-01-15T01:38:51-00:00</lastmod>
+<loc>https://nolanbconaway.github.io/categories.html</loc>
+<lastmod>2020-01-15T01:49:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/authors.html</loc>
-<lastmod>2020-01-15T01:38:51-00:00</lastmod>
+<loc>https://nolanbconaway.github.io/authors.html</loc>
+<lastmod>2020-01-15T01:49:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/archives.html</loc>
-<lastmod>2020-01-15T01:38:51-00:00</lastmod>
+<loc>https://nolanbconaway.github.io/archives.html</loc>
+<lastmod>2020-01-15T01:49:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/about.html</loc>
+<loc>https://nolanbconaway.github.io/about.html</loc>
 <lastmod>2020-01-01T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/pdfs.html</loc>
+<loc>https://nolanbconaway.github.io/pdfs.html</loc>
 <lastmod>2019-12-30T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/blog/2020/2019-the-high-and-low-temperatures.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2020/2019-the-high-and-low-temperatures.html</loc>
 <lastmod>2020-01-05T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2020/deploying-my-pelican-website-to-github-pages.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2020/deploying-my-pelican-website-to-github-pages.html</loc>
 <lastmod>2020-01-01T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/underground-a-python-library-for-processing-realtime-nyc-subway-data.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/underground-a-python-library-for-processing-realtime-nyc-subway-data.html</loc>
 <lastmod>2019-10-06T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/shlack-yet-another-command-line-interface-for-slack.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/shlack-yet-another-command-line-interface-for-slack.html</loc>
 <lastmod>2019-10-03T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/kimery-levering-ken-kurtz-and-i-published-some-experiments-in-memory-and-congition.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/kimery-levering-ken-kurtz-and-i-published-some-experiments-in-memory-and-congition.html</loc>
 <lastmod>2019-09-04T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/i-set-up-a-webapp-to-monitor-my-home-network-performance.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/i-set-up-a-webapp-to-monitor-my-home-network-performance.html</loc>
 <lastmod>2019-06-06T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/a-single-sample-poisson-test.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/a-single-sample-poisson-test.html</loc>
 <lastmod>2019-05-15T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/a-python-implementation-of-the-poisson-exact-test-e-test.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/a-python-implementation-of-the-poisson-exact-test-e-test.html</loc>
 <lastmod>2019-03-24T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/a-freezable-dictionary-for-python.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/a-freezable-dictionary-for-python.html</loc>
 <lastmod>2019-03-12T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/rpi-setup.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/rpi-setup.html</loc>
 <lastmod>2019-03-06T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2019/softmax-numpy-update.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2019/softmax-numpy-update.html</loc>
 <lastmod>2019-01-05T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2018/a-flask-app-for-a-thermometer-in-my-apartment.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2018/a-flask-app-for-a-thermometer-in-my-apartment.html</loc>
 <lastmod>2018-12-05T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2018/i-scraped-the-text-of-every-strongbad-email.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2018/i-scraped-the-text-of-every-strongbad-email.html</loc>
 <lastmod>2018-11-04T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2018/jarjar-30-released.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2018/jarjar-30-released.html</loc>
 <lastmod>2018-06-20T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2017/jeff-zemla-and-i-developed-python-and-bash-code-for-sending-notifications-to-slack.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2017/jeff-zemla-and-i-developed-python-and-bash-code-for-sending-notifications-to-slack.html</loc>
 <lastmod>2017-06-29T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2017/pitchfork-roundup.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2017/pitchfork-roundup.html</loc>
 <lastmod>2017-06-17T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2017/i-logged-the-stats-for-every-ride-i-made-in-rollercoaster-tycoon-for-ipad.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2017/i-logged-the-stats-for-every-ride-i-made-in-rollercoaster-tycoon-for-ipad.html</loc>
 <lastmod>2017-05-23T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2017/softmax-numpy.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2017/softmax-numpy.html</loc>
 <lastmod>2017-03-15T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2017/solving-nls.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2017/solving-nls.html</loc>
 <lastmod>2017-01-15T00:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2016/summer-conferences.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2016/summer-conferences.html</loc>
 <lastmod>2016-07-15T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/blog/2016/whos-at-cogsci-2016.html</loc>
+<loc>https://nolanbconaway.github.io/blog/2016/whos-at-cogsci-2016.html</loc>
 <lastmod>2016-07-01T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
-<loc>/category/app.html</loc>
+<loc>https://nolanbconaway.github.io/category/app.html</loc>
 <lastmod>2019-06-06T00:00:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/category/blog.html</loc>
+<loc>https://nolanbconaway.github.io/category/blog.html</loc>
 <lastmod>2020-01-05T00:00:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/category/github.html</loc>
+<loc>https://nolanbconaway.github.io/category/github.html</loc>
 <lastmod>2019-10-06T00:00:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/category/pdf.html</loc>
+<loc>https://nolanbconaway.github.io/category/pdf.html</loc>
 <lastmod>2019-09-04T00:00:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
-<loc>/author/nolan-conaway.html</loc>
+<loc>https://nolanbconaway.github.io/author/nolan-conaway.html</loc>
 <lastmod>2020-01-05T00:00:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
