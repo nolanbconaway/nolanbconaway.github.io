@@ -16,12 +16,9 @@ ARTICLE_URL = "blog/{date:%Y}/{slug}.html"
 PAGE_SAVE_AS = "{slug}.html"
 PAGE_URL = "{slug}.html"
 STATIC_PATHS = ["pdfs"]
-PLUGIN_PATHS = [
-    "plugins",
-]
-PLUGINS = [
-    "bootstrapify",
-]
+PLUGIN_PATHS = ["plugins"]
+PLUGINS = ["bootstrapify", "sitemap"]
+
 MARKDOWN = {
     "extensions": [EmojiExtension.create_from_json("./resources/emojis.json")],
     "extension_configs": {
@@ -37,4 +34,9 @@ BOOTSTRAPIFY = {
     "table": ["table", "table-sm", "table-hover"],
     "img": ["img-fluid"],
     "blockquote": ["blockquote"],
+}
+
+SITEMAP = {
+    "format": "xml",
+    "priorities": {"articles": 1.0, "pages": 0.5, "indexes": 0.0,},
 }
