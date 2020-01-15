@@ -34,6 +34,7 @@ MARKDOWN = {
 }
 
 BOOTSTRAPIFY = {
-    # "table": ["table", "table-striped"],
-    "img": ["img-fluid"]
+    "table": ["table", "table-sm", "table-hover"],
+    "img": ["img-fluid"],
+    "blockquote": ["blockquote"],
 }
