@@ -32,6 +32,7 @@ MARKDOWN = {
 
 BOOTSTRAPIFY = {
     "table": ["table", "table-sm", "table-hover"],
+    "div.highlight": ["codehilitetable"],
     "img": ["img-fluid"],
     "blockquote": ["blockquote"],
 }
