@@ -2,7 +2,6 @@
 
 from emojiextension import EmojiExtension
 
-
 AUTHOR = "Nolan Conaway"
 SITENAME = "Nolan Conaway's Blog"
 SITEURL = ""
@@ -17,6 +16,12 @@ ARTICLE_URL = "blog/{date:%Y}/{slug}.html"
 PAGE_SAVE_AS = "{slug}.html"
 PAGE_URL = "{slug}.html"
 STATIC_PATHS = ["pdfs"]
+PLUGIN_PATHS = [
+    "plugins",
+]
+PLUGINS = [
+    "bootstrapify",
+]
 MARKDOWN = {
     "extensions": [EmojiExtension.create_from_json("./resources/emojis.json")],
     "extension_configs": {
@@ -26,4 +31,9 @@ MARKDOWN = {
         "markdown.extensions.meta": {},
     },
     "output_format": "html5",
+}
+
+BOOTSTRAPIFY = {
+    # "table": ["table", "table-striped"],
+    "img": ["img-fluid"]
 }
