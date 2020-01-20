@@ -53,4 +53,4 @@ On push to the `dev` branch, Github will set up a python 3.7 environment with my
 
 I found an [action](https://github.com/marketplace/actions/push-git-subdirectory-as-branch) that will push a subdirectory to another branch of the repo. I set that up to send the static site directory to the `master` branch. Github will then automatically deploy the site since i am using my `username.github.io` repo! ::confetti_ball::
 
-So the flow is that I make all updates to `dev` which propagate automatically to `master` and then deployment on push. Beautiful!
+So the flow is that I make all updates to `dev` which propagate automatically to `master` and then deployment on push. Beautiful! You can check out the source code on [github](https://github.com/nolanbconaway/nolanbconaway.github.io/tree/dev).
