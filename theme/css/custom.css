@@ -53,13 +53,19 @@ blockquote.blockquote {
 
 /* table styling */
 
-table.table:not(.blogroll) {
+table.table:not(.blogroll .publications) {
     width: 90%;
     margin: 0 auto;
 }
 
 td.badge_cell {
     text-align: center;
+    vertical-align: middle;
+    width: 7%;
+}
+
+td.badge_cell>a.badge {
+    font-size: 1em;
 }
 
 div.table_wrap {
