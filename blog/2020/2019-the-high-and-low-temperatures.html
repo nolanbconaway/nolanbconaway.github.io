@@ -80,7 +80,7 @@
 <p>But I think the data can tell a story. At least some of it. This post tells the stories of unusual days in my apartment, from the perspective of temperature measurements.</p>
 <h2 id="describing-a-days-temperatures">Describing a day's temperatures</h2>
 <p>Early on, I wrote out a SQL view that computes summary statistics on each day's temperature readings. It shows me descriptives like:</p>
-<table class="table table-sm table-hover">
+<table class="table-hover table table-sm">
 <thead>
 <tr>
 <th>dt</th>
@@ -165,7 +165,7 @@
 <p>On December 16 we were burgled (<strong>everyone was ok!</strong>). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the time the burglar entered the apartment. The detective that caught our case thought this was <em>awesome</em>!</p>
 <h2 id="anomaly-detection">Anomaly Detection</h2>
 <p>We can also use statistics to identify days with unusual properties. I queried my database with Python like:</p>
-<div class="codehilitetable highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight codehilitetable"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
 
@@ -187,7 +187,7 @@
 </pre></div>
 <p>If we assume all days are drawn from a multivariate normal distribution across the summary stat metrics, \(x \sim \mathcal{N}\left(\mu, \Sigma\right) \), outliers would be considered dates with very low \( p\left(x \vert  \mathcal{N}\left(\mu, \Sigma\right)\right) \).</p>
 <p>I normalized the stats and calculated the empirical parameters for the multivariate Normal distribution. Then I used <code>scipy.stats</code> to do the heavy lifting.</p>
-<div class="codehilitetable highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight codehilitetable"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span>
 
 <span class="n">zscores</span> <span class="o">=</span> <span class="p">(</span>
@@ -201,7 +201,7 @@
 <span class="n">density</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">zscores</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 </pre></div>
 <p>Then I picked out the days with the lowest densities! Here are those dates:</p>
-<table class="table table-sm table-hover">
+<table class="table-hover table table-sm">
 <thead>
 <tr>
 <th>dt</th>
