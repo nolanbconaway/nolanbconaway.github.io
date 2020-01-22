@@ -61,7 +61,8 @@ table.table:not(.blogroll .publications) {
 td.badge_cell {
     text-align: center;
     vertical-align: middle;
-    width: 7%;
+    max-width: 5em;
+    width: 5em;
 }
 
 td.badge_cell>a.badge {
