@@ -29,6 +29,6 @@ jobs:
       - name: Deploy To Master Branch
         uses: peaceiris/actions-gh-pages@v3
         env:
-          publish_branch: master
-          publish_dir: output
+          personal_token: master
+          publish_dir: ./output
           personal_token: ${{ secrets.ACCESS_TOKEN }}
