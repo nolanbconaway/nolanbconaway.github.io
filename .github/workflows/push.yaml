@@ -31,4 +31,4 @@ jobs:
         env:
           publish_branch: master
           publish_dir: ./output
-          personal_token: ${{ secrets.ACCESS_TOKEN }}
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
