@@ -77,7 +77,7 @@
 <div class='markdown_insert'>
     <p>🎉 If you're reading this, you're looking at my new website! 🎉</p>
 <p>I ditched Jekyll because I didn't want to have to maintain a ruby installation on my machine. My new site runs on Pelican and I hacked together a deployment flow to Github pages. Here's that hack:</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Main Workflow</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Main Workflow</span>
 
 <span class="nt">on</span><span class="p">:</span>
   <span class="nt">push</span><span class="p">:</span>
@@ -102,19 +102,19 @@
       <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Build Production Site</span>
         <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
           <span class="no">make publish</span>
+          <span class="no">cp readme.md output/readme.md</span>
           <span class="no">touch output/.nojekyll</span>
 
       <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy To Master Branch</span>
-        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">s0/git-publish-subdir-action@master</span>
-        <span class="nt">env</span><span class="p">:</span>
-          <span class="nt">REPO</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">self</span>
-          <span class="nt">BRANCH</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
-          <span class="nt">FOLDER</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">output</span>
-          <span class="nt">GITHUB_TOKEN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">peaceiris/actions-gh-pages@v3</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">publish_branch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+          <span class="nt">publish_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./output</span>
+          <span class="nt">personal_token</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.PERSONAL_TOKEN }}</span>
 </code></pre></div>
 <h3 id="translation">Translation...</h3>
 <p>On push to the <code>dev</code> branch, Github will set up a python 3.7 environment with my requirements.txt. It'll build the static site into an <code>output</code> directory using <code>make publish</code>. I added a <code>.nojekyll</code> file so that Github knows it's not working with a Jekyll page.</p>
-<p>I found an <a href="https://github.com/marketplace/actions/push-git-subdirectory-as-branch">action</a> that will push a subdirectory to another branch of the repo. I set that up to send the static site directory to the <code>master</code> branch. Github will then automatically deploy the site since i am using my <code>username.github.io</code> repo! 🎊</p>
+<p>I found an <a href="https://github.com/peaceiris/actions-gh-pages">action</a> that will publish a directory to github pages. I set that up to send the static site directory to the <code>master</code> branch. Github will then automatically deploy the site since i am using my <code>username.github.io</code> repo! 🎊</p>
 <p>So the flow is that I make all updates to <code>dev</code> which propagate automatically to <code>master</code> and then deployment on push. Beautiful! You can check out the source code on <a href="https://github.com/nolanbconaway/nolanbconaway.github.io/tree/dev">github</a>.</p>
 </div>
     </div>
