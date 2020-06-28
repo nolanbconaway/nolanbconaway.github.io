@@ -106,7 +106,7 @@ output_c &amp; = bias + \Sigma_k{D_k W_{ck}}
 \end{align}
 $$</p>
 <p>In this more general case, it's useful to store the weights in an array to take advantage of matrix algebra to compute the output:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
                     <span class="c1"># bias  D_1  D_2  # Correct Category</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span>  <span class="c1"># A</span>
@@ -150,7 +150,7 @@ $$</p>
 <h3 id="classification-with-the-divergent-autoassociator">Classification with the Divergent Autoassociator</h3>
 <p>Getting the model to classify things is about comparing the amount of <em>error</em> on each category channel. If, for example, the category A channel does a good job reconstructing <code>[0, 1]</code>, and category B does a poor job, then the model will classify the item into category A.</p>
 <p>Just to provide a sense of how the classification rule works, I calculated the optimal weights for the LS problem, and I copied over the network's output using those weights. Then, based on the output from each category, I computed the error and classification response.</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span> 
                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">],</span>
@@ -179,7 +179,7 @@ $$</p>
 <p><img class="img-fluid" height="275" src="https://nolanbconaway.github.io/blog/2017/divergent-autoassoc-split-solution.png"/></p>
 <p>To prevent things from looking like a tangled mess, I've used the two-separate-autoassociators figure. But remember, this is just a single network! I've put the optimal weight values next to each weight.</p>
 <p>Those weights result in the following outputs:</p>
-<table class="table-hover table-sm table">
+<table class="table-sm table table-hover">
 <thead>
 <tr>
 <th>Class</th>
@@ -265,7 +265,7 @@ $$</p>
 <h1 id="explore-it-yourself">Explore it yourself!</h1>
 <p>Along with this post, I've written a couple simple python classes to explore learning in the traditional perceptron and divergent autoassociator models. They're probably not what you want to use for any rigorous study (they don't even <em>classify</em> things), but they're enough to explore what kinds of weight solutions are learned.</p>
 <p>The classes can be found <a href="https://nolanbconaway.github.io/blog/2017/single_layer_nets.zip">here</a>. You can download them and import as a module like so:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># import network objects</span>
