@@ -10,7 +10,7 @@ We were rewatching some old Friends episodes when I took notice that the phrase 
 
 I ended up building a whole website so that it would be easy to ask arbitrary questions about phrase frequency in different TV shows. I [deployed it on heroku](https://friends-omg.herokuapp.com/) so you can ask these questions too. 
 
-This app describes the source data I'm using and 
+This post describes the source data I'm using and looks into a few of my own curiosities! Enjoy,  friends ::right_pointing_magnifying_glass:: .
 
 ## Source data
 
