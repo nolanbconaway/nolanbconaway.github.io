@@ -4,7 +4,6 @@ date: 2019-03-06
 category: blog
 slug: rpi-setup
 keywords: raspberry pi, headless, tutorial
-
 ---
 
 I do a lot of projects that involve raspberry pis. At this point, there are three tucked away in different corners of my apartment (one runs an online [temperature sensor](/blog/2018/apartment-temp)). They all run headless and I SSH into them occasionally to see if anything has broken.
