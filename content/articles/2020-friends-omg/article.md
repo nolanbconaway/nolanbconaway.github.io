@@ -24,7 +24,7 @@ Luckily, other smart people are asking similar questions of TV show script data,
 - [Colin Pollock](https://github.com/colinpollock/seinfeld-scripts) had a ready-to-go sqlite database with every Seinfeld script.
 - I found a Sex and the City script CSV on [Kaggle](https://www.kaggle.com/snapcrack/every-sex-and-the-city-script). It needed some manual cleaning and so now I'm pretty sure that I [host](http://nolanc.heliohost.org/omg-data/satc.csv) the cleanest Sex and the City database online.
 
-I wrote out [a python module](https://github.com/nolanbconaway/friends-omg/tree/master/build) to transfer data from each of these sources into a single sqlite database. Each show has its own [table](https://github.com/nolanbconaway/friends-omg/blob/master/build/ddl.sql), and its own python script to transform the raw source data into a schema these four columns:
+I wrote out [a python module](https://github.com/nolanbconaway/friends-omg/tree/master/build) to transfer data from each of these sources into a single sqlite database. Each show has its own [table](https://github.com/nolanbconaway/friends-omg/blob/master/build/ddl.sql), and its own python script to transform the raw source data into a schema composed of these four columns:
 
 | Column                | Type      | Example        |
 |-----------------------|-----------|----------------|
@@ -51,9 +51,11 @@ You can run that query once per show to get all the counts you want!
 
 This approach doesn't really work with smaller phrases (e.g., if you want to count lines containing "dog", you'll also get lines containing "hotdog"). It also fails to account for how TV scripts use punctuation to express things differently (e.g., "Oh... My... God..." is not "Oh My God"). But whatever this is fast and easy.
 
+You can download the full (gzipped) SQLite3 database [here](http://nolanc.heliohost.org/omg-data/data.db.gz) (it's not very large) ::face_with_tongue_wink_eye:: .
+
 ## Show Me the Numbers Already
 
-You can compute the frequencies of any phrase you'd like using the [app](https://friends-omg.herokuapp.com/) but below are some phrases that I think are interesting.
+You can compute the frequencies of any phrase you'd like using the [app](https://friends-omg.herokuapp.com/) but I've also taken the liberty of exploring some of my own curiosities!
 
 ### Oh My God ([click](https://friends-omg.herokuapp.com/?q=oh+my+god))
 
