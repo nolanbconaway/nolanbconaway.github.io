@@ -78,7 +78,7 @@
 <div class='markdown_insert'>
     <p>We were rewatching some old Friends episodes when I took notice that the phrase <em>"oh my god"</em> comes up a lot in that show. I am a <em>professional data scientist</em> 📈 📊 , so I set to quantify exactly just how much more often they say "oh my god" in Friends compared to other shows.</p>
 <p>I ended up building a whole website so that it would be easy to ask arbitrary questions about phrase frequency in different TV shows. I <a href="https://friends-omg.herokuapp.com/">deployed it on heroku</a> so you can ask these questions too. </p>
-<p>This app describes the source data I'm using and </p>
+<p>This post describes the source data I'm using and looks into a few of my own curiosities! Enjoy,  friends 🔎 .</p>
 <h2 id="source-data">Source data</h2>
 <p>Once you have well-structured data, answering the question "How much do they say phrase <em>X</em> in each show?" is fairly easy. In the simplest case, you can count the number of lines containing a string (thats what I did). </p>
 <p>But as usual, obtaining said well-structured data is not easy.</p>
@@ -89,7 +89,7 @@
 <li>I found a Sex and the City script CSV on <a href="https://www.kaggle.com/snapcrack/every-sex-and-the-city-script">Kaggle</a>. It needed some manual cleaning and so now I'm pretty sure that I <a href="http://nolanc.heliohost.org/omg-data/satc.csv">host</a> the cleanest Sex and the City database online.</li>
 </ul>
 <p>I wrote out <a href="https://github.com/nolanbconaway/friends-omg/tree/master/build">a python module</a> to transfer data from each of these sources into a single sqlite database. Each show has its own <a href="https://github.com/nolanbconaway/friends-omg/blob/master/build/ddl.sql">table</a>, and its own python script to transform the raw source data into a schema these four columns:</p>
-<table class="table-hover table table-sm">
+<table class="table-hover table-sm table">
 <thead>
 <tr>
 <th>Column</th>
@@ -136,7 +136,7 @@
 <h2 id="show-me-the-numbers-already">Show Me the Numbers Already</h2>
 <p>You can compute the frequencies of any phrase you'd like using the <a href="https://friends-omg.herokuapp.com/">app</a> but below are some phrases that I think are interesting.</p>
 <h3 id="oh-my-god-click">Oh My God (<a href="https://friends-omg.herokuapp.com/?q=oh+my+god">click</a>)</h3>
-<table class="table-hover table table-sm">
+<table class="table-hover table-sm table">
 <thead>
 <tr>
 <th>Show</th>
@@ -180,7 +180,7 @@
 <p><em>Oh My God</em>.</p>
 <h3 id="talking-about-new-york-click">Talking about New York (<a href="https://friends-omg.herokuapp.com/?q=new+york">click</a>)</h3>
 <p>All three shows are set around the same time period in New York City. But characters in Sex and the City talk about New York the most:</p>
-<table class="table-hover table table-sm">
+<table class="table-hover table-sm table">
 <thead>
 <tr>
 <th>Show</th>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Nolan Conaway's Blog</title><link href="https://nolanbconaway.github.io/" rel="alternate"></link><link href="https://nolanbconaway.github.io/feeds/all-en.atom.xml" rel="self"></link><id>https://nolanbconaway.github.io/</id><updated>2020-09-13T00:00:00-04:00</updated><entry><title>In which I demonstrate that they say "Oh My God" a lot in the show "Friends"</title><link href="https://nolanbconaway.github.io/blog/2020/friends-omg.html" rel="alternate"></link><published>2020-09-13T00:00:00-04:00</published><updated>2020-09-13T00:00:00-04:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2020-09-13:/blog/2020/friends-omg.html</id><summary type="html">&lt;p&gt;We were rewatching some old Friends episodes when I took notice that the phrase &lt;em&gt;"oh my god"&lt;/em&gt; comes up a lot in that show. I am a &lt;em&gt;professional data scientist&lt;/em&gt; 📈 📊 , so I set to quantify exactly just how much more often they say "oh my god" in Friends compared to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We were rewatching some old Friends episodes when I took notice that the phrase &lt;em&gt;"oh my god"&lt;/em&gt; comes up a lot in that show. I am a &lt;em&gt;professional data scientist&lt;/em&gt; 📈 📊 , so I set to quantify exactly just how much more often they say "oh my god" in Friends compared to other shows.&lt;/p&gt;
 &lt;p&gt;I ended up building a whole website so that it would be easy to ask arbitrary questions about phrase frequency in different TV shows. I &lt;a href="https://friends-omg.herokuapp.com/"&gt;deployed it on heroku&lt;/a&gt; so you can ask these questions too. &lt;/p&gt;
-&lt;p&gt;This app describes the source data I'm using and &lt;/p&gt;
+&lt;p&gt;This post describes the source data I'm using and looks into a few of my own curiosities! Enjoy,  friends 🔎 .&lt;/p&gt;
 &lt;h2 id="source-data"&gt;Source data&lt;/h2&gt;
 &lt;p&gt;Once you have well-structured data, answering the question "How much do they say phrase &lt;em&gt;X&lt;/em&gt; in each show?" is fairly easy. In the simplest case, you can count the number of lines containing a string (thats what I did). &lt;/p&gt;
 &lt;p&gt;But as usual, obtaining said well-structured data is not easy.&lt;/p&gt;
@@ -12,7 +12,7 @@
 &lt;li&gt;I found a Sex and the City script CSV on &lt;a href="https://www.kaggle.com/snapcrack/every-sex-and-the-city-script"&gt;Kaggle&lt;/a&gt;. It needed some manual cleaning and so now I'm pretty sure that I &lt;a href="http://nolanc.heliohost.org/omg-data/satc.csv"&gt;host&lt;/a&gt; the cleanest Sex and the City database online.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I wrote out &lt;a href="https://github.com/nolanbconaway/friends-omg/tree/master/build"&gt;a python module&lt;/a&gt; to transfer data from each of these sources into a single sqlite database. Each show has its own &lt;a href="https://github.com/nolanbconaway/friends-omg/blob/master/build/ddl.sql"&gt;table&lt;/a&gt;, and its own python script to transform the raw source data into a schema these four columns:&lt;/p&gt;
-&lt;table class="table-hover table table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Column&lt;/th&gt;
@@ -59,7 +59,7 @@
 &lt;h2 id="show-me-the-numbers-already"&gt;Show Me the Numbers Already&lt;/h2&gt;
 &lt;p&gt;You can compute the frequencies of any phrase you'd like using the &lt;a href="https://friends-omg.herokuapp.com/"&gt;app&lt;/a&gt; but below are some phrases that I think are interesting.&lt;/p&gt;
 &lt;h3 id="oh-my-god-click"&gt;Oh My God (&lt;a href="https://friends-omg.herokuapp.com/?q=oh+my+god"&gt;click&lt;/a&gt;)&lt;/h3&gt;
-&lt;table class="table-hover table table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Show&lt;/th&gt;
@@ -103,7 +103,7 @@
 &lt;p&gt;&lt;em&gt;Oh My God&lt;/em&gt;.&lt;/p&gt;
 &lt;h3 id="talking-about-new-york-click"&gt;Talking about New York (&lt;a href="https://friends-omg.herokuapp.com/?q=new+york"&gt;click&lt;/a&gt;)&lt;/h3&gt;
 &lt;p&gt;All three shows are set around the same time period in New York City. But characters in Sex and the City talk about New York the most:&lt;/p&gt;
-&lt;table class="table-hover table table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Show&lt;/th&gt;
@@ -149,7 +149,7 @@
 &lt;p&gt;But I think the data can tell a story. At least some of it. This post tells the stories of unusual days in my apartment, from the perspective of temperature measurements.&lt;/p&gt;
 &lt;h2 id="describing-a-days-temperatures"&gt;Describing a day's temperatures&lt;/h2&gt;
 &lt;p&gt;Early on, I wrote out a SQL view that computes summary statistics on each day's temperature readings. It shows me descriptives like:&lt;/p&gt;
-&lt;table class="table-hover table table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;dt&lt;/th&gt;
@@ -270,7 +270,7 @@
 &lt;span class="n"&gt;density&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scipy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;multivariate_normal&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zscores&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mu&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sigma&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then I picked out the days with the lowest densities! Here are those dates:&lt;/p&gt;
-&lt;table class="table-hover table table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;dt&lt;/th&gt;
@@ -400,7 +400,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;An example to make things more concrete. Search platforms like google/bing/yahoo allow you to bid a certain amount to show an ad when someone searches for a given keyword. You only pay the search engine if the ad is clicked on. They usually won't charge you the full price of the bid, but some unknown lower amount that we refer to as the cost-per-click (CPC).&lt;/p&gt;
 &lt;p&gt;Imagine we are hoping to pay a 100 cent ($1 USD) CPC.  We can measure how much we actually paid for each click, but as clicks come in they have variable prices:&lt;/p&gt;
-&lt;table class="table-hover table table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Time&lt;/th&gt;
@@ -465,7 +465,7 @@ $$&lt;/p&gt;
 &lt;p&gt;When \(N=50\), 96.7% of samples from the distribution would have a lower average value (conversely, only 3.3% of samples would have a greater value). We're much less likely to obtain \(\bar{x}=102.6\) by chance, and I might suggest looking into how CPCs are being targeted.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>A python implementation of the Poisson exact test (e-test).</title><link href="https://nolanbconaway.github.io/blog/2019/a-python-implementation-of-the-poisson-exact-test-e-test.html" rel="alternate"></link><published>2019-03-24T00:00:00-04:00</published><updated>2019-03-24T00:00:00-04:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2019-03-24:/blog/2019/a-python-implementation-of-the-poisson-exact-test-e-test.html</id><summary type="html">&lt;p&gt;At work we are doing tests on different paid search optimization tools. We wanted to see if a new tool offered improvements over what we had been using. In reality we are comparing the two on all sorts of metrics, but as an example we can focus on comparisons with …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At work we are doing tests on different paid search optimization tools. We wanted to see if a new tool offered improvements over what we had been using. In reality we are comparing the two on all sorts of metrics, but as an example we can focus on comparisons with respect to the cost paid per click, &lt;em&gt;CPC&lt;/em&gt;, measured in USD.&lt;/p&gt;
 &lt;p&gt;Cost per click is an example of a Poisson distributed variable. We started measuring the CPC during some control period using the current tools, then switched to the new tool in a test period.&lt;/p&gt;
 &lt;p&gt;Those data might look something like:&lt;/p&gt;
-&lt;table class="table-hover table table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -1088,7 +1088,7 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;img class="img-fluid" height="275" src="https://nolanbconaway.github.io/blog/2017/divergent-autoassoc-split-solution.png"/&gt;&lt;/p&gt;
 &lt;p&gt;To prevent things from looking like a tangled mess, I've used the two-separate-autoassociators figure. But remember, this is just a single network! I've put the optimal weight values next to each weight.&lt;/p&gt;
 &lt;p&gt;Those weights result in the following outputs:&lt;/p&gt;
-&lt;table class="table-hover table table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Class&lt;/th&gt;
