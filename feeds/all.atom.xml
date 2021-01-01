@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Nolan Conaway's Blog</title><link href="https://nolanbconaway.github.io/" rel="alternate"></link><link href="https://nolanbconaway.github.io/feeds/all.atom.xml" rel="self"></link><id>https://nolanbconaway.github.io/</id><updated>2021-01-01T00:00:00-05:00</updated><entry><title>Binoculars, a python package for Binomial confidence intervals.</title><link href="https://nolanbconaway.github.io/blog/2021/binoculars.html" rel="alternate"></link><published>2021-01-01T00:00:00-05:00</published><updated>2021-01-01T00:00:00-05:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2021-01-01:/blog/2021/binoculars.html</id><summary type="html">&lt;p&gt;I recently published a package (&lt;a href="https://pypi.org/project/binoculars/"&gt;📦 click&lt;/a&gt;) called "binoculars", and all it does is calculate confidence intervals for binomial proportions. You can &lt;code&gt;pip install binoculars&lt;/code&gt; or contribute via &lt;a href="https://github.com/nolanbconaway/binoculars"&gt;GitHub&lt;/a&gt;, etc. &lt;/p&gt;
 &lt;p&gt;Usage is pretty simple:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;binoculars&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;binomial_confidence&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;binoculars&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;binomial_confidence&lt;/span&gt;
 
 &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;
 
 &lt;span class="n"&gt;binomial_confidence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'jeffrey'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# (0.1307892803998113, 0 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I recently published a package (&lt;a href="https://pypi.org/project/binoculars/"&gt;📦 click&lt;/a&gt;) called "binoculars", and all it does is calculate confidence intervals for binomial proportions. You can &lt;code&gt;pip install binoculars&lt;/code&gt; or contribute via &lt;a href="https://github.com/nolanbconaway/binoculars"&gt;GitHub&lt;/a&gt;, etc. &lt;/p&gt;
 &lt;p&gt;Usage is pretty simple:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;binoculars&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;binomial_confidence&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;binoculars&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;binomial_confidence&lt;/span&gt;
 
 &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;
 
@@ -19,10 +19,10 @@
 &lt;p&gt;❓❓❓ But &lt;em&gt;why the heck did I write a whole package to calculate confidence intervals for binomial proportions?&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id="reason-1-binomial-certainty-comes-up-constantly"&gt;Reason 1: Binomial certainty comes up constantly.&lt;/h2&gt;
 &lt;p&gt;Lots of statistics problems come around to the issue of certainty in the estimation of a binomial proportion. We all have data in which there are some \(N\) observations, out of which some \(k\) successfully do something, and so you want to understand the success rate \(\hat{p}= k \div N\). In the simplest case, you have some reference \(p\) value and you want to know if your \(\hat{p}\) is very different from that. Let's be concrete with some examples:&lt;/p&gt;
-&lt;ol&gt;
+&lt;ul&gt;
 &lt;li&gt;You've got an ecommerce site and you want to determine if the conversion rate, \(\text{purchases} \div \text{visits}\), this month is different from last year.&lt;/li&gt;
 &lt;li&gt;You want to know if the employment rate of a subpopulation, \(\text{employed} \div \text{people}\), is different from the national average.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
 &lt;p&gt;This comes up entirely too often in my work and it probably does in yours. It &lt;em&gt;ought to be&lt;/em&gt; super easy to calculate a confidence interval on \(\text{Binomial}(p, N )\), where \(p\) is set to your reference proportion and \(N\) is the number of observations in your sample. Then you check if your \(\hat{p}\) is within the confidence interval and report those numbers. But it is &lt;em&gt;not&lt;/em&gt; that.&lt;/p&gt;
 &lt;h2 id="reason-2-lots-of-people-get-this-wrong"&gt;Reason 2: Lots of people get this wrong.&lt;/h2&gt;
 &lt;p&gt;A casual google search for "binomial confidence interval" will invariably lead you to this &lt;a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval"&gt;&lt;em&gt;outstanding wikipedia page&lt;/em&gt;&lt;/a&gt;. I have returned to this page more times than I can count.&lt;/p&gt;
@@ -31,7 +31,7 @@
 p \pm z \sqrt{\frac{p (1 - p)}{N}}
 $$&lt;/p&gt;
 &lt;p&gt;That math is not a lot, so you can do one-liners in python and SQL. Also, it is &lt;em&gt;symmetrical&lt;/em&gt;, which means you write clean code like:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ci&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.96&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ci&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.96&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;ci&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;ci&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;But the &lt;em&gt;symmetry&lt;/em&gt; is the problem! By way of demonstrating the terribleness here, I calculated (&lt;a href="https://deepnote.com/project/e17fa473-51c6-45aa-8de0-980be7d2dc5f"&gt;📓 click&lt;/a&gt;) the lower bound of 95% confidence with the Normal approximation as a function of \(N\) with a static \(\hat{p}\) of 0.01, 0.05, and 0.1:&lt;/p&gt;
@@ -54,7 +54,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Binoculars won't help if you're doing this in SQL. But I often find myself needing a quick confidence interval for a dashboard, etc. If this sounds like you, the Wilson interval is your jam. Jeffrey's interval involves a lot of Beta distribution math which gets &lt;em&gt;narsty&lt;/em&gt;. &lt;/p&gt;
 &lt;p&gt;The Wilson interval isn't exactly &lt;em&gt;pretty&lt;/em&gt;, but you can probably implement it as a user-defined-function on your database without a lot of hassle. &lt;/p&gt;
 &lt;p&gt;If you're using DBT, you can also implement it as a macro!&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;macro&lt;/span&gt; &lt;span class="nv"&gt;wilson_interval&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;tail&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1.96&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;macro&lt;/span&gt; &lt;span class="nv"&gt;wilson_interval&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;tail&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1.96&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
 
 &lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'lower'&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
 &lt;span class="x"&gt; (&lt;/span&gt;
@@ -72,7 +72,7 @@ $$&lt;/p&gt;
 &lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;endmacro&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Which gets called like:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;with t as ( select 500 as n, 0.2 as p )&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;with t as ( select 500 as n, 0.2 as p )&lt;/span&gt;
 &lt;span class="x"&gt;select &lt;/span&gt;
 &lt;span class="x"&gt;  t.*,&lt;/span&gt;
 &lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;wilson_interval&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'p'&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'n'&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'lower'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; as ci_lower,&lt;/span&gt;
@@ -82,15 +82,15 @@ $$&lt;/p&gt;
 &lt;p&gt;That sort of math is is exactly what you'd &lt;em&gt;want&lt;/em&gt; to hide in a macro, anyway 😉.&lt;/p&gt;
 &lt;h3 id="please-contribute"&gt;🙏 Please contribute!&lt;/h3&gt;
 &lt;p&gt;Binoculars currently focuses on estimating uncertainty given \(\text{Binomial}(\hat{p}, N)\). It's missing several well-defined methods on that &lt;a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval"&gt;awesome wiki page&lt;/a&gt;, and there are a lot of similar questions to be asked! Such as:&lt;/p&gt;
-&lt;ol&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;em&gt;Uncertainty about the odds-ratio between two binomial samples?&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
 &lt;p&gt;$$
 \text{odds} = \frac{k_1}{N_1} \div \frac{k_2}{N_2}
 $$&lt;/p&gt;
-&lt;ol&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;em&gt;Uncertainty about the difference between two binomial samples?&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
 &lt;p&gt;$$
 \text{diff} = \frac{k_1}{N_1} - \frac{k_2}{N_2}
 $$&lt;/p&gt;
@@ -108,7 +108,7 @@ $$&lt;/p&gt;
 &lt;li&gt;I found a Sex and the City script CSV on &lt;a href="https://www.kaggle.com/snapcrack/every-sex-and-the-city-script"&gt;Kaggle&lt;/a&gt;. It needed some manual cleaning and so now I'm pretty sure that I &lt;a href="http://nolanc.heliohost.org/omg-data/satc.csv"&gt;host&lt;/a&gt; the cleanest Sex and the City database online.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I wrote out &lt;a href="https://github.com/nolanbconaway/friends-omg/tree/master/build"&gt;a python module&lt;/a&gt; to transfer data from each of these sources into a single sqlite database. Each show has its own &lt;a href="https://github.com/nolanbconaway/friends-omg/blob/master/build/ddl.sql"&gt;table&lt;/a&gt;, and its own python script to transform the raw source data into a schema composed of these four columns:&lt;/p&gt;
-&lt;table class="table-hover table-sm table"&gt;
+&lt;table class="table-sm table table-hover"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Column&lt;/th&gt;
@@ -140,7 +140,7 @@ $$&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Once those data are in place, it's easy to do a count of lines containing any phrase:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
   &lt;span class="k"&gt;select&lt;/span&gt; 
     &lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="k"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line_text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="k"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'%{phrase}%'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
@@ -156,7 +156,7 @@ $$&lt;/p&gt;
 &lt;h2 id="show-me-the-numbers-already"&gt;Show Me the Numbers Already&lt;/h2&gt;
 &lt;p&gt;You can compute the frequencies of any phrase you'd like using the &lt;a href="https://friends-omg.herokuapp.com/"&gt;app&lt;/a&gt; but I've also taken the liberty of exploring some of my own curiosities!&lt;/p&gt;
 &lt;h3 id="oh-my-god-click"&gt;Oh My God (&lt;a href="https://friends-omg.herokuapp.com/?q=oh+my+god"&gt;click&lt;/a&gt;)&lt;/h3&gt;
-&lt;table class="table-hover table-sm table"&gt;
+&lt;table class="table-sm table table-hover"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Show&lt;/th&gt;
@@ -200,7 +200,7 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Oh My God&lt;/em&gt;.&lt;/p&gt;
 &lt;h3 id="talking-about-new-york-click"&gt;Talking about New York (&lt;a href="https://friends-omg.herokuapp.com/?q=new+york"&gt;click&lt;/a&gt;)&lt;/h3&gt;
 &lt;p&gt;All three shows are set around the same time period in New York City. But characters in Sex and the City talk about New York the most:&lt;/p&gt;
-&lt;table class="table-hover table-sm table"&gt;
+&lt;table class="table-sm table table-hover"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Show&lt;/th&gt;
@@ -246,7 +246,7 @@ $$&lt;/p&gt;
 &lt;p&gt;But I think the data can tell a story. At least some of it. This post tells the stories of unusual days in my apartment, from the perspective of temperature measurements.&lt;/p&gt;
 &lt;h2 id="describing-a-days-temperatures"&gt;Describing a day's temperatures&lt;/h2&gt;
 &lt;p&gt;Early on, I wrote out a SQL view that computes summary statistics on each day's temperature readings. It shows me descriptives like:&lt;/p&gt;
-&lt;table class="table-hover table-sm table"&gt;
+&lt;table class="table-sm table table-hover"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;dt&lt;/th&gt;
@@ -331,7 +331,7 @@ $$&lt;/p&gt;
 &lt;p&gt;On December 16 we were burgled (&lt;strong&gt;everyone was ok!&lt;/strong&gt;). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the time the burglar entered the apartment. The detective that caught our case thought this was &lt;em&gt;awesome&lt;/em&gt;!&lt;/p&gt;
 &lt;h2 id="anomaly-detection"&gt;Anomaly Detection&lt;/h2&gt;
 &lt;p&gt;We can also use statistics to identify days with unusual properties. I queried my database with Python like:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;
 
@@ -353,7 +353,7 @@ $$&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we assume all days are drawn from a multivariate normal distribution across the summary stat metrics, \(x \sim \mathcal{N}\left(\mu, \Sigma\right) \), outliers would be considered dates with very low \( p\left(x \vert  \mathcal{N}\left(\mu, \Sigma\right)\right) \).&lt;/p&gt;
 &lt;p&gt;I normalized the stats and calculated the empirical parameters for the multivariate Normal distribution. Then I used &lt;code&gt;scipy.stats&lt;/code&gt; to do the heavy lifting.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;scipy.stats&lt;/span&gt;
 
 &lt;span class="n"&gt;zscores&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
@@ -367,7 +367,7 @@ $$&lt;/p&gt;
 &lt;span class="n"&gt;density&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scipy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;multivariate_normal&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zscores&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mu&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sigma&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then I picked out the days with the lowest densities! Here are those dates:&lt;/p&gt;
-&lt;table class="table-hover table-sm table"&gt;
+&lt;table class="table-sm table table-hover"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;dt&lt;/th&gt;
@@ -447,11 +447,11 @@ $$&lt;/p&gt;
 &lt;p&gt;And for good measure, &lt;a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-03-22"&gt;here&lt;/a&gt; is the least anomalous date according to my very naive model.&lt;/p&gt;
 &lt;p&gt;&lt;object data="https://nolanbconaway.github.io/blog/2020/nonanomaly.svg" type="image/svg+xml"&gt;&lt;/object&gt;&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Deploying my Pelican website to Github Pages.</title><link href="https://nolanbconaway.github.io/blog/2020/deploying-my-pelican-website-to-github-pages.html" rel="alternate"></link><published>2020-01-01T00:00:00-05:00</published><updated>2020-01-01T00:00:00-05:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2020-01-01:/blog/2020/deploying-my-pelican-website-to-github-pages.html</id><summary type="html">&lt;p&gt;🎉 If you're reading this, you're looking at my new website! 🎉&lt;/p&gt;
 &lt;p&gt;I ditched Jekyll because I didn't want to have to maintain a ruby installation on my machine. My new site runs on Pelican and I hacked together a deployment flow to Github pages. Here's that hack:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Main Workflow&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Main Workflow&lt;/span&gt;
 
 &lt;span class="nt"&gt;on …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;🎉 If you're reading this, you're looking at my new website! 🎉&lt;/p&gt;
 &lt;p&gt;I ditched Jekyll because I didn't want to have to maintain a ruby installation on my machine. My new site runs on Pelican and I hacked together a deployment flow to Github pages. Here's that hack:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Main Workflow&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Main Workflow&lt;/span&gt;
 
 &lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
   &lt;span class="nt"&gt;push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -497,7 +497,7 @@ $$&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;An example to make things more concrete. Search platforms like google/bing/yahoo allow you to bid a certain amount to show an ad when someone searches for a given keyword. You only pay the search engine if the ad is clicked on. They usually won't charge you the full price of the bid, but some unknown lower amount that we refer to as the cost-per-click (CPC).&lt;/p&gt;
 &lt;p&gt;Imagine we are hoping to pay a 100 cent ($1 USD) CPC.  We can measure how much we actually paid for each click, but as clicks come in they have variable prices:&lt;/p&gt;
-&lt;table class="table-hover table-sm table"&gt;
+&lt;table class="table-sm table table-hover"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Time&lt;/th&gt;
@@ -538,7 +538,7 @@ $$&lt;/p&gt;
 &lt;p&gt;For example, the CDF of \(\mathsf{Poisson}(N \mu)\) would tell us the proportion of values which are greater than or less than \(N\bar{x}\).&lt;/p&gt;
 &lt;p&gt;If only a small proportion of values from the CPC distribution \(\mathsf{Poisson}(5 \cdot 100)\) are greater than \(5 \cdot 102.6\), this would indicate that it is unlikely to have obtained \(\bar{x}=102.6\) by chance and thus maybe there's something wrong with the CPC targeting.&lt;/p&gt;
 &lt;h3 id="in-python"&gt;In Python&lt;/h3&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scipy.stats&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;poisson&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scipy.stats&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;poisson&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;xbar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;102.6&lt;/span&gt;
@@ -549,7 +549,7 @@ $$&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That shows that 72.9% of \(N=5\) samples from a distribution with \(\mu=100\) would have an average value of less than \(\bar{x}=102.6\). Conversely, 27.1% of samples would have a greater value. So our samples aren't very unlikely given a CPC of 100.&lt;/p&gt;
 &lt;p&gt;As you increase the number of samples you'd expect \(\bar{x}=102.6\) to become more and more unlikely.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
 &lt;span class="o"&gt;...&lt;/span&gt;     &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;poisson&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cdf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;xbar&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;mu&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="o"&gt;...&lt;/span&gt;
 &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="mf"&gt;0.7994310510662929&lt;/span&gt;
@@ -562,7 +562,7 @@ $$&lt;/p&gt;
 &lt;p&gt;When \(N=50\), 96.7% of samples from the distribution would have a lower average value (conversely, only 3.3% of samples would have a greater value). We're much less likely to obtain \(\bar{x}=102.6\) by chance, and I might suggest looking into how CPCs are being targeted.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>A python implementation of the Poisson exact test (e-test).</title><link href="https://nolanbconaway.github.io/blog/2019/a-python-implementation-of-the-poisson-exact-test-e-test.html" rel="alternate"></link><published>2019-03-24T00:00:00-04:00</published><updated>2019-03-24T00:00:00-04:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2019-03-24:/blog/2019/a-python-implementation-of-the-poisson-exact-test-e-test.html</id><summary type="html">&lt;p&gt;At work we are doing tests on different paid search optimization tools. We wanted to see if a new tool offered improvements over what we had been using. In reality we are comparing the two on all sorts of metrics, but as an example we can focus on comparisons with …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At work we are doing tests on different paid search optimization tools. We wanted to see if a new tool offered improvements over what we had been using. In reality we are comparing the two on all sorts of metrics, but as an example we can focus on comparisons with respect to the cost paid per click, &lt;em&gt;CPC&lt;/em&gt;, measured in USD.&lt;/p&gt;
 &lt;p&gt;Cost per click is an example of a Poisson distributed variable. We started measuring the CPC during some control period using the current tools, then switched to the new tool in a test period.&lt;/p&gt;
 &lt;p&gt;Those data might look something like:&lt;/p&gt;
-&lt;table class="table-hover table-sm table"&gt;
+&lt;table class="table-sm table table-hover"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -599,7 +599,7 @@ $$&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 id="usage"&gt;Usage&lt;/h2&gt;
 &lt;p&gt;Just plug in the numbers to get your answer!&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;poisson_etest&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;poisson_etest&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;poisson_etest&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;poisson_etest&lt;/span&gt;
 
 &lt;span class="n"&gt;control_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt;
 &lt;span class="n"&gt;control_clicks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;
@@ -613,13 +613,13 @@ $$&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We believe more in the estimate of each period's CPC if we have more clicks. That is, I wouldn't say we know much about the CPC of the Test period after only obtaining a single click. Conversely, we have a strong estimate of the CPC after many hundreds.&lt;/p&gt;
 &lt;p&gt;This test is useful in that it accounts for the sample size accordingly. Keeping the CPC's the same, lets check on the results if we had over 100 clicks in each period:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;control_clicks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;105&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;control_clicks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;105&lt;/span&gt;
 &lt;span class="n"&gt;test_clicks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
 &lt;span class="n"&gt;control_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;control_clicks&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
 &lt;span class="n"&gt;test_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;test_clicks&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now, the probability that the two were generated from the same distribution is much smaller:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;poisson_etest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;control_cost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_cost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;control_clicks&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_clicks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;poisson_etest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;control_cost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_cost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;control_clicks&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_clicks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="c1"&gt;# 0.0034409891789582165&lt;/span&gt;
@@ -638,15 +638,15 @@ $$&lt;/p&gt;
 &lt;h2 id="boot-it-up"&gt;Boot it up&lt;/h2&gt;
 &lt;p&gt;With SSH enabled, you should be able to connect to the pi remotely via ethernet the very first time you boot it up. You won't know the machine's IP address ahead of time, but you can get that info a bunch of different ways (I use &lt;a href="https://inetapp.de/en/inetx.html"&gt;iNet Network Scanner&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Once you discover the IP address, ssh in. The default username and password are, of course, &lt;code&gt;pi&lt;/code&gt; and &lt;code&gt;raspberry&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh pi@&amp;lt;IP Address&amp;gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh pi@&amp;lt;IP Address&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="step-1-update-upgrade"&gt;Step 1: update / upgrade&lt;/h2&gt;
 &lt;p&gt;Get this out of the way. Should take a few mins, depending on the speed of your network.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get upgrade -y
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get upgrade -y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="step-2-raspi-config"&gt;Step 2: raspi-config&lt;/h2&gt;
 &lt;p&gt;By default the locale for raspberry pis are set to &lt;code&gt;en_GB.UTF8&lt;/code&gt;. I, like many other people, live in NYC. So I need to change the locale (keyboard layout, character set, timezone, etc) for myself. Do this with the built-in GUI tool &lt;code&gt;raspi-config&lt;/code&gt;. Run it under sudo:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo raspi-config
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo raspi-config
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You'll get a display that looks like:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Raspi Config" class="img-fluid" src="https://nolanbconaway.github.io/blog/2019/main.png"/&gt;&lt;/p&gt;
@@ -667,14 +667,14 @@ $$&lt;/p&gt;
 &lt;p&gt;There are &lt;a href="https://www.google.com/search?q=raspberry+pi+wireless+connection"&gt;like a million posts on how to configure a wifi connection&lt;/a&gt;. The &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md"&gt;authoritative guide on the subject&lt;/a&gt; can be found on raspberrypi.org, and you might just want to do that.&lt;/p&gt;
 &lt;p&gt;As for me, I don't know how &lt;em&gt;not&lt;/em&gt; to break this stuff. So I just copy over config from another, working, raspberry pi. My config looks like:&lt;/p&gt;
 &lt;h3 id="etcnetworkinterfaces"&gt;&lt;code&gt;/etc/network/interfaces&lt;/code&gt;&lt;/h3&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;source-directory /etc/network/interfaces.d
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;source-directory /etc/network/interfaces.d
 
 auto wlan0
 iface wlan0 inet manual
 wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="etcwpa_supplicantwpa_supplicantconf"&gt;&lt;code&gt;/etc/wpa_supplicant/wpa_supplicant.conf&lt;/code&gt;&lt;/h3&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=US
 
@@ -697,16 +697,16 @@ network={
 &lt;p&gt;The idea here is that you create a &lt;code&gt;key&lt;/code&gt; on the machine you are using to ssh into the pi &lt;em&gt;from&lt;/em&gt; (that is, the computer you are in front of). Then you paste that key in a special place on the pi. When you try to log in, ssh will compare the keys and let you in without a password if they match.&lt;/p&gt;
 &lt;p&gt;First thing, you'll need to make your key. Keys are unique to the machine you are ssh-ing &lt;em&gt;from&lt;/em&gt;, so if you've done this before you don't need to do it again. &lt;a href="https://docs.joyent.com/public-cloud/getting-started/ssh-keys/generating-an-ssh-key-manually/manually-generating-your-ssh-key-in-mac-os-x"&gt;Here's a tutorial on how you'd make an ssh key on a mac&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Your key will probably live in &lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt; and will look something like:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh-rsa &amp;lt;lots of letters and numbers&amp;gt;&lt;span class="o"&gt;==&lt;/span&gt; user@host
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh-rsa &amp;lt;lots of letters and numbers&amp;gt;&lt;span class="o"&gt;==&lt;/span&gt; user@host
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;One you have that key copy-pasteable, you can run this command on your raspberry pi:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir .ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; nano .ssh/authorized_keys
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir .ssh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; nano .ssh/authorized_keys
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Paste the key from your computer in that bad boy, save the file (&lt;code&gt;ctrl-O&lt;/code&gt;), then log out and log back in. When you log back in, you shouldn't be asked for your password.&lt;/p&gt;
 &lt;h2 id="step-6-change-the-username-and-password"&gt;Step 6: Change the username and password.&lt;/h2&gt;
 &lt;p&gt;Everybody knows the default login for a raspberry pi (or at least, lots of people). So for security you'll want to change them. Changing the username can be a bit of a hassle since you need to move around the user home, etc, so I only change the username if I plan on opening my firewall to allow outside connections (gotta have that &lt;em&gt;extra&lt;/em&gt; security).&lt;/p&gt;
 &lt;p&gt;In either case, &lt;em&gt;definitely&lt;/em&gt; change the password. You can do that with:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;passwd
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;passwd
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;So easy.&lt;/p&gt;
 &lt;h2 id="step-7-installations"&gt;Step 7: Installations&lt;/h2&gt;
@@ -720,11 +720,11 @@ network={
 &lt;p&gt;Now you get to install the stuff you want to use for your projects. Each project requires different tooling, so below I'll list some of the common items I install each time:&lt;/p&gt;
 &lt;h3 id="mailutils"&gt;mailutils&lt;/h3&gt;
 &lt;p&gt;I run a lot of stuff in cron and I want to make sure I get notified if a job fails. If you install mailtutils, cron errors will automatically go to mail and you'll get an indicator if there was a failure when you log in.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get install mailutils
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get install mailutils
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="zsh-oh-my-zsh"&gt;zsh, oh-my-zsh&lt;/h3&gt;
 &lt;p&gt;I love zsh. &lt;em&gt;Love it&lt;/em&gt;. It's even better when you use &lt;a href="https://github.com/robbyrussell/oh-my-zsh"&gt;oh-my-zsh&lt;/a&gt; as a configuration manager.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get install zsh&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get install zsh&lt;span class="p"&gt;;&lt;/span&gt;
 sh -c &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That's all. Have fun spending the next hour &lt;a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes"&gt;picking your theme&lt;/a&gt;.&lt;/p&gt;
@@ -735,16 +735,16 @@ sh -c &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;
 &lt;p&gt;I use python for basically everything. I prefer to keep the raspberry pi pre-installed python clean, so I opt to install my own python.&lt;/p&gt;
 &lt;p&gt;There are a bunch if tutorials on how to build a python distribution on a raspberry pi. &lt;a href="https://gist.github.com/SeppPenner/6a5a30ebc8f79936fa136c524417761d"&gt;Here is one&lt;/a&gt;. Even if you know what you're doing, it takes freaking forever to &lt;code&gt;configure &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install&lt;/code&gt; the thing. If you do not know what you are doing (I do not know what &lt;em&gt;I&lt;/em&gt; am doing), it'll take you that amount of freaking forever to learn something is wrong and that you have to do a different &lt;code&gt;configure &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Learn from my mistakes. Use &lt;a href="https://github.com/jjhelmus/berryconda"&gt;Berryconda&lt;/a&gt;. Berryconda is pre-built conda distribution for raspberry pi. It only takes a few minutes to set up and it "just works". Follow the instructions on the github page to install. It should be something like:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
 chmod +x Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
 ./Berryconda3-2.0.0-Linux-armv7l.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That'll walk you through the installation.&lt;/p&gt;
 &lt;p&gt;If you installed zsh, you'll want to make sure to put the berryconda binary directory on your path (so that zsh knows what to do when you refer to &lt;code&gt;python&lt;/code&gt;). Add a line like this to your &lt;code&gt;~/.zshrc&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/berryconda3/bin"&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/berryconda3/bin"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Where &lt;code&gt;$HOME/berryconda3/bin&lt;/code&gt; is wherever you decided to install berryconda. Then, you should confirm that your python3 command refers to the berryconda install:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;which python3
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;which python3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Should output something like &lt;code&gt;/home/pi/berryconda3/bin/python3&lt;/code&gt; not &lt;code&gt;/usr/bin/python3&lt;/code&gt;.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>An update on the softmax function for numpy.</title><link href="https://nolanbconaway.github.io/blog/2019/softmax-numpy-update.html" rel="alternate"></link><published>2019-01-05T00:00:00-05:00</published><updated>2019-01-05T00:00:00-05:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2019-01-05:/blog/2019/softmax-numpy-update.html</id><summary type="html">&lt;p&gt;As of early 2019, my post on a &lt;a href="/blog/2017/softmax-numpy"&gt;softmax function for numpy&lt;/a&gt; accounts for 83% of traffic to my website (~16k views in 2018). I recently found that, as of version 1.2.0, scipy has included an implementation of the softmax in its special functions.&lt;/p&gt;
 &lt;p&gt;Some info on the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As of early 2019, my post on a &lt;a href="/blog/2017/softmax-numpy"&gt;softmax function for numpy&lt;/a&gt; accounts for 83% of traffic to my website (~16k views in 2018). I recently found that, as of version 1.2.0, scipy has included an implementation of the softmax in its special functions.&lt;/p&gt;
@@ -756,7 +756,7 @@ chmod +x Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;a
 &lt;/ul&gt;
 &lt;p&gt;Originally, the proposed function looked very much like the one I had posted, but then &lt;a href="https://github.com/pv"&gt;a very smart person&lt;/a&gt; realized that you could use existing tooling around &lt;a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html#scipy.special.logsumexp"&gt;scipy.special.logsumexp&lt;/a&gt; to make things much cleaner.&lt;/p&gt;
 &lt;p&gt;So now the function is &lt;a href="https://github.com/scipy/scipy/blob/master/scipy/special/_logsumexp.py#L215"&gt;a freaking one-liner&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;softmax&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;softmax&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;logsumexp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;keepdims&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I 100% prefer importing a function from scipy over pasting a hand-written one. Especially given the beauty of that puppy. But the two functions are not totally swappable, there are a couple important changes in behavior:&lt;/p&gt;
@@ -767,7 +767,7 @@ chmod +x Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;a
 &lt;h2 id="a-quick-performance-comparison"&gt;A quick performance comparison&lt;/h2&gt;
 &lt;p&gt;I figured scipy had some magic stuff going on with &lt;code&gt;logsumexp&lt;/code&gt;, and their function would be both more beautiful &lt;em&gt;and&lt;/em&gt; performant than mine.&lt;/p&gt;
 &lt;p&gt;But I ran a quick handful of tests just for kicks. First I wrote up a decorator to print function exec time to the console and wrapped my softmax and scipy softmax in it.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wraps&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wraps&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;scipy.special&lt;/span&gt;
@@ -810,7 +810,7 @@ chmod +x Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;a
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;scipy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;special&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;softmax&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;theta&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I ran each function on 2D arrays of varying sizes and checked for differences in the results.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;sizes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;sizes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,),&lt;/span&gt;
     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
@@ -836,7 +836,7 @@ chmod +x Berryconda3-2.0.0-Linux-armv7l.sh &lt;span class="o"&gt;&amp;amp;&amp;a
 &lt;p&gt;&lt;a href="https://nolanbconaway.github.io/blog/2019/test.py"&gt;Here is the full script&lt;/a&gt;, in case you want to toy around with it.&lt;/p&gt;
 &lt;h3 id="results"&gt;Results&lt;/h3&gt;
 &lt;p&gt;My function was ... faster?&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Running&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Running&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;
 &lt;span class="n"&gt;softmax_nolan&lt;/span&gt; &lt;span class="n"&gt;took&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0004&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;
 &lt;span class="n"&gt;softmax_scipy&lt;/span&gt; &lt;span class="n"&gt;took&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0162&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;
 
@@ -934,7 +934,7 @@ p(C_n) =
 $$&lt;/p&gt;
 &lt;p&gt;The use of exponentials serves to normalize \(X\), and it also allows the function to be parameterized. In the above equation, I threw in a free parameter, \(\theta\) (\(\theta \geq 0\)), that broadly controls &lt;em&gt;determinism&lt;/em&gt;. Within the exponentiation, \(\theta\) makes larger values of  \(X\) larger-er, so if you set \(\theta\) to a large value, the softmax really squashes things: Elements of \(X\) with anything but the largest values will have a probability very close to zero. When \(\theta = 1\), it's as if the parameter was never there.&lt;/p&gt;
 &lt;p&gt;I use this sort of function all the time to simulate how people make decisions based on evidence. But unfortunately, there is no built in &lt;code&gt;numpy&lt;/code&gt; function to compute the softmax. For years I have been writing code like this:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;2.8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;7.3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;  &lt;span class="c1"&gt;# evidence for each choice&lt;/span&gt;
 &lt;span class="n"&gt;theta&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;2.0&lt;/span&gt;                         &lt;span class="c1"&gt;# determinism parameter&lt;/span&gt;
 
@@ -943,7 +943,7 @@ $$&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Of course, usually &lt;code&gt;X&lt;/code&gt; and &lt;code&gt;theta&lt;/code&gt; come from somewhere else. This works well if you are only simulating one decision: the softmax requires literally two lines of code and its easily readable. But things get thornier if you want to simulate many choices. For example, what if &lt;code&gt;X&lt;/code&gt; is a matrix where rows correspond to the different choices, and the columns correspond to the options?&lt;/p&gt;
 &lt;p&gt;In the 2D case, you can either run a loop through the rows of &lt;code&gt;X&lt;/code&gt; or use &lt;code&gt;numpy&lt;/code&gt; matrix &lt;a href="https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html"&gt;broadcasting&lt;/a&gt;. Here's the loop solution:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;
     &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;2.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;7.3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;6.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;8.8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;5.3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;2.7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;5.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;9.6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;7.4&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
@@ -959,7 +959,7 @@ $$&lt;/p&gt;
 &lt;p&gt;At this point it feels more useful to write a generalized softmax function.&lt;/p&gt;
 &lt;h2 id="my-softmax-function"&gt;My softmax function&lt;/h2&gt;
 &lt;p&gt;After years of copying one-off softmax code between scripts, I decided to make things a little &lt;a href="https://en.wikipedia.org/wiki/Don't_repeat_yourself"&gt;dry&lt;/a&gt;-er: I sat down and wrote a darn softmax function. The goal was to support \(X\) of any dimensionality, and to allow the user to softmax over an arbitrary axis. Here's the function:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;softmax&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;theta&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;softmax&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;theta&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;    Compute the softmax of each element along an axis of X.&lt;/span&gt;
 
@@ -1028,7 +1028,7 @@ $$&lt;/p&gt;
 &lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;The function works beautifully and has a nice safeguard against overflow in the exponential. And, if you're like me, including it will prevent you from writing a handful of one-off implementations of the softmax. I'll round this out with a few examples of its usage:&lt;/p&gt;
 &lt;h3 id="2d-usage"&gt;2D Usage&lt;/h3&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;
     &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;2.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;7.3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;6.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;8.8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;5.3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;2.7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;5.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;9.6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;7.4&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
@@ -1053,7 +1053,7 @@ $$&lt;/p&gt;
            &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="3d-and-beyond"&gt;3D (and beyond!)&lt;/h3&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uniform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uniform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;
 &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[[&lt;/span&gt; &lt;span class="mf"&gt;0.844&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.237&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
         &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.364&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.768&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
@@ -1112,7 +1112,7 @@ output_c &amp;amp; = bias + \Sigma_k{D_k W_{ck}}
 \end{align}
 $$&lt;/p&gt;
 &lt;p&gt;In this more general case, it's useful to store the weights in an array to take advantage of matrix algebra to compute the output:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 
                     &lt;span class="c1"&gt;# bias  D_1  D_2  # Correct Category&lt;/span&gt;
 &lt;span class="n"&gt;inputs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;    &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;   &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;  &lt;span class="c1"&gt;# A&lt;/span&gt;
@@ -1156,7 +1156,7 @@ $$&lt;/p&gt;
 &lt;h3 id="classification-with-the-divergent-autoassociator"&gt;Classification with the Divergent Autoassociator&lt;/h3&gt;
 &lt;p&gt;Getting the model to classify things is about comparing the amount of &lt;em&gt;error&lt;/em&gt; on each category channel. If, for example, the category A channel does a good job reconstructing &lt;code&gt;[0, 1]&lt;/code&gt;, and category B does a poor job, then the model will classify the item into category A.&lt;/p&gt;
 &lt;p&gt;Just to provide a sense of how the classification rule works, I calculated the optimal weights for the LS problem, and I copied over the network's output using those weights. Then, based on the output from each category, I computed the error and classification response.&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 
 &lt;span class="n"&gt;inputs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;   &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; 
                     &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
@@ -1185,7 +1185,7 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;img class="img-fluid" height="275" src="https://nolanbconaway.github.io/blog/2017/divergent-autoassoc-split-solution.png"/&gt;&lt;/p&gt;
 &lt;p&gt;To prevent things from looking like a tangled mess, I've used the two-separate-autoassociators figure. But remember, this is just a single network! I've put the optimal weight values next to each weight.&lt;/p&gt;
 &lt;p&gt;Those weights result in the following outputs:&lt;/p&gt;
-&lt;table class="table-hover table-sm table"&gt;
+&lt;table class="table-sm table table-hover"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Class&lt;/th&gt;
@@ -1271,7 +1271,7 @@ $$&lt;/p&gt;
 &lt;h1 id="explore-it-yourself"&gt;Explore it yourself!&lt;/h1&gt;
 &lt;p&gt;Along with this post, I've written a couple simple python classes to explore learning in the traditional perceptron and divergent autoassociator models. They're probably not what you want to use for any rigorous study (they don't even &lt;em&gt;classify&lt;/em&gt; things), but they're enough to explore what kinds of weight solutions are learned.&lt;/p&gt;
 &lt;p&gt;The classes can be found &lt;a href="https://nolanbconaway.github.io/blog/2017/single_layer_nets.zip"&gt;here&lt;/a&gt;. You can download them and import as a module like so:&lt;/p&gt;
-&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;div class="codehilitetable highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_printoptions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;precision&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c1"&gt;# import network objects&lt;/span&gt;
