@@ -29,8 +29,8 @@ Et-cetra.
 
 Lots of statistics problems come around to the issue of certainty in the estimation of a binomial proportion. We all have data in which there are some \\(N\\) observations, out of which some \\(k\\) successfully do something, and so you want to understand the success rate \\(\hat{p}= k \div N\\). In the simplest case, you have some reference \\(p\\) value and you want to know if your \\(\hat{p}\\) is very different from that. Let's be concrete with some examples:
 
-1. You've got an ecommerce site and you want to determine if the conversion rate, \\(\text{purchases} \div \text{visits}\\), this month is different from last year.
-2. You want to know if the employment rate of a subpopulation, \\(\text{employed} \div \text{people}\\), is different from the national average.
+- You've got an ecommerce site and you want to determine if the conversion rate, \\(\text{purchases} \div \text{visits}\\), this month is different from last year.
+- You want to know if the employment rate of a subpopulation, \\(\text{employed} \div \text{people}\\), is different from the national average.
 
 This comes up entirely too often in my work and it probably does in yours. It _ought to be_ super easy to calculate a confidence interval on \\(\text{Binomial}(p, N )\\), where \\(p\\) is set to your reference proportion and \\(N\\) is the number of observations in your sample. Then you check if your \\(\hat{p}\\) is within the confidence interval and report those numbers. But it is _not_ that.
 
@@ -116,13 +116,13 @@ That sort of math is is exactly what you'd _want_ to hide in a macro, anyway ::w
 
 Binoculars currently focuses on estimating uncertainty given \\(\text{Binomial}(\hat{p}, N)\\). It's missing several well-defined methods on that [awesome wiki page](https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval), and there are a lot of similar questions to be asked! Such as:
 
-1. *Uncertainty about the odds-ratio between two binomial samples?*
+- *Uncertainty about the odds-ratio between two binomial samples?*
 
 $$
 \text{odds} = \frac{k_1}{N_1} \div \frac{k_2}{N_2}
 $$
 
-2. *Uncertainty about the difference between two binomial samples?*
+- *Uncertainty about the difference between two binomial samples?*
 
 $$
 \text{diff} = \frac{k_1}{N_1} - \frac{k_2}{N_2}
