@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Nolan Conaway's Blog</title>
+  <meta charset="utf-8" />
+
+  <!-- describe the site -->
+  <meta name="description" content="Nolan Conaway's Blog">
+<meta name="keywords" content="python, statistics, binomial, confidence">
+  <meta name="author" content="Nolan Conaway">
+
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/theme/images/favicon.ico">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80719882-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-80719882-1');
+  </script>
+
+  <!-- mathjax -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+  <!-- bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- custom -->
+  <link rel="stylesheet" href="/theme/css/pygment.css">
+  <link rel="stylesheet" href="/theme/css/custom.css">
+</head>
+
+<body id="index" class="home">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pdfs">PDFs</a></li>
+          <li class="nav-item"><a class="nav-link" href="/apps">Apps</a></li>
+        </ul>
+        <a class="navbar-brand" href="https://github.com/nolanbconaway">
+          <img src="/theme/images/GitHub-Mark-Light-64px.png" width="30" height="30" alt="Github">
+        </a>
+      </div>
+    </nav>
+
+    <hr>
+
+    <div class="content">
+<h1>Binoculars, a python package for Binomial confidence intervals.</h1>
+<div class="text-right">January 2021</div>
+<hr>
+<div class='markdown_insert'>
+    <p>I recently published a package (<a href="https://pypi.org/project/binoculars/">📦 click</a>) called "binoculars", and all it does is calculate confidence intervals for binomial proportions. You can <code>pip install binoculars</code> or contribute via <a href="https://github.com/nolanbconaway/binoculars">GitHub</a>, etc. </p>
+<p>Usage is pretty simple:</p>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="kn">from</span> <span class="nn">binoculars</span> <span class="kn">import</span> <span class="n">binomial_confidence</span>
+
+<span class="n">N</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.2</span>
+
+<span class="n">binomial_confidence</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'jeffrey'</span><span class="p">)</span> <span class="c1"># (0.1307892803998113, 0.28628125447599173)</span>
+<span class="n">binomial_confidence</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'normal'</span><span class="p">)</span>  <span class="c1"># (0.12160000000000001, 0.2784)</span>
+<span class="n">binomial_confidence</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'wilson'</span><span class="p">)</span>  <span class="c1"># (0.1333659225590988, 0.28883096192650237)</span>
+</code></pre></div>
+<p>Et-cetra.</p>
+<p>❓❓❓ But <em>why the heck did I write a whole package to calculate confidence intervals for binomial proportions?</em></p>
+<h2 id="reason-1-binomial-certainty-comes-up-constantly">Reason 1: Binomial certainty comes up constantly.</h2>
+<p>Lots of statistics problems come around to the issue of certainty in the estimation of a binomial proportion. We all have data in which there are some \(N\) observations, out of which some \(k\) successfully do something, and so you want to understand the success rate \(\hat{p}= k \div N\). In the simplest case, you have some reference \(p\) value and you want to know if your \(\hat{p}\) is very different from that. Let's be concrete with some examples:</p>
+<ol>
+<li>You've got an ecommerce site and you want to determine if the conversion rate, \(\text{purchases} \div \text{visits}\), this month is different from last year.</li>
+<li>You want to know if the employment rate of a subpopulation, \(\text{employed} \div \text{people}\), is different from the national average.</li>
+</ol>
+<p>This comes up entirely too often in my work and it probably does in yours. It <em>ought to be</em> super easy to calculate a confidence interval on \(\text{Binomial}(p, N )\), where \(p\) is set to your reference proportion and \(N\) is the number of observations in your sample. Then you check if your \(\hat{p}\) is within the confidence interval and report those numbers. But it is <em>not</em> that.</p>
+<h2 id="reason-2-lots-of-people-get-this-wrong">Reason 2: Lots of people get this wrong.</h2>
+<p>A casual google search for "binomial confidence interval" will invariably lead you to this <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval"><em>outstanding wikipedia page</em></a>. I have returned to this page more times than I can count.</p>
+<p>Most people end up implementing the <strong>"Normal Approximation"</strong> which is super easy and super terrible.</p>
+<p>$$
+p \pm z \sqrt{\frac{p (1 - p)}{N}}
+$$</p>
+<p>That math is not a lot, so you can do one-liners in python and SQL. Also, it is <em>symmetrical</em>, which means you write clean code like:</p>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="n">ci</span> <span class="o">=</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span> <span class="o">/</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">ci</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="n">ci</span>
+</code></pre></div>
+<p>But the <em>symmetry</em> is the problem! By way of demonstrating the terribleness here, I calculated (<a href="https://deepnote.com/project/e17fa473-51c6-45aa-8de0-980be7d2dc5f">📓 click</a>) the lower bound of 95% confidence with the Normal approximation as a function of \(N\) with a static \(\hat{p}\) of 0.01, 0.05, and 0.1:</p>
+<p><object data="https://nolanbconaway.github.io/blog/2021/Normal.svg" type="image/svg+xml"></object></p>
+<p>I took the liberty of annotating exactly where it is terrible. You can see that in <em>many real world cases</em> the Normal approximation produces a lower bound &lt; 0. We'd also see upper bounds &gt; 1 if we had looked at \(\hat{p} = 0.99, 0.95, 0.9\), etc, because of the <em>symmetry</em>.</p>
+<p>That's troubling not only because it should be impossible, but also because it suggests an <strong>underestimation</strong> of the uncertainty at the upper bound. Using the normal approximation in these cases might lead you to a fully incorrect conclusion 😬. </p>
+<p>I don't know about y'all, but I commonly deal with Binomials at \(N&lt;100\) and \(\hat{p}&lt;0.1\), so this is super concerning for me.</p>
+<h2 id="back-to-binoculars">Back to Binoculars...</h2>
+<p>We have a situation in which the easiest method for computing Binomial uncertainty is both the most popular and is patently <em>wrong</em> in many common cases. It <em>ought to be</em> just as easy to choose a more accurate method, and with Binoculars, it is!</p>
+<p>So, what method should <em>you</em> use?</p>
+<ol>
+<li>
+<p>Do <strong>not</strong> use the normal approximation if you have any other option.</p>
+</li>
+<li>
+<p>If you are using Python, you have other options! (thanks to Binoculars 😀). I like Jeffrey's interval because I am partial to Bayes but the Wilson interval is also very good.</p>
+</li>
+</ol>
+<h3 id="in-sql">In SQL?</h3>
+<p>Binoculars won't help if you're doing this in SQL. But I often find myself needing a quick confidence interval for a dashboard, etc. If this sounds like you, the Wilson interval is your jam. Jeffrey's interval involves a lot of Beta distribution math which gets <em>narsty</em>. </p>
+<p>The Wilson interval isn't exactly <em>pretty</em>, but you can probably implement it as a user-defined-function on your database without a lot of hassle. </p>
+<p>If you're using DBT, you can also implement it as a macro!</p>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">wilson_interval</span><span class="o">(</span><span class="nv">col_p</span><span class="o">,</span> <span class="nv">col_n</span><span class="o">,</span> <span class="nv">tail</span><span class="o">,</span> <span class="nv">z</span><span class="o">=</span><span class="m">1.96</span><span class="o">)</span> -<span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span>- <span class="k">if</span> <span class="nv">tail</span> <span class="o">==</span> <span class="s1">'lower'</span> -<span class="cp">%}</span><span class="x"></span>
+<span class="x"> (</span>
+<span class="x">   </span><span class="cp">{{</span><span class="nv">col_p</span><span class="cp">}}</span><span class="x"> + </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> * </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> / (2 * </span><span class="cp">{{</span><span class="nv">col_n</span><span class="cp">}}</span><span class="x">) </span>
+<span class="x">   - </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> * sqrt((</span><span class="cp">{{</span><span class="nv">col_p</span><span class="cp">}}</span><span class="x"> * (1 - </span><span class="cp">{{</span><span class="nv">col_p</span><span class="cp">}}</span><span class="x">) + </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> * </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> / (4 * </span><span class="cp">{{</span><span class="nv">col_n</span><span class="cp">}}</span><span class="x">)) / </span><span class="cp">{{</span><span class="nv">col_n</span><span class="cp">}}</span><span class="x">)</span>
+<span class="x">  ) / (1 + </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> * </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> / </span><span class="cp">{{</span><span class="nv">col_n</span><span class="cp">}}</span><span class="x">)</span>
+
+<span class="cp">{%</span>- <span class="k">elif</span> <span class="nv">tail</span> <span class="o">==</span> <span class="s1">'upper'</span> -<span class="cp">%}</span><span class="x"></span>
+<span class="x"> (</span>
+<span class="x">   </span><span class="cp">{{</span><span class="nv">col_p</span><span class="cp">}}</span><span class="x"> + </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> * </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> / (2 * </span><span class="cp">{{</span><span class="nv">col_n</span><span class="cp">}}</span><span class="x">) </span>
+<span class="x">   + </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> * sqrt((</span><span class="cp">{{</span><span class="nv">col_p</span><span class="cp">}}</span><span class="x"> * (1 - </span><span class="cp">{{</span><span class="nv">col_p</span><span class="cp">}}</span><span class="x">) + </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> * </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> / (4 * </span><span class="cp">{{</span><span class="nv">col_n</span><span class="cp">}}</span><span class="x">)) / </span><span class="cp">{{</span><span class="nv">col_n</span><span class="cp">}}</span><span class="x">)</span>
+<span class="x">  ) / (1 + </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> * </span><span class="cp">{{</span><span class="nv">z</span><span class="cp">}}</span><span class="x"> / </span><span class="cp">{{</span><span class="nv">col_n</span><span class="cp">}}</span><span class="x">)</span>
+
+<span class="cp">{%</span>- <span class="k">endif</span> -<span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> -<span class="cp">%}</span><span class="x"></span>
+</code></pre></div>
+<p>Which gets called like:</p>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="x">with t as ( select 500 as n, 0.2 as p )</span>
+<span class="x">select </span>
+<span class="x">  t.*,</span>
+<span class="x">  </span><span class="cp">{{</span> <span class="nv">wilson_interval</span><span class="o">(</span><span class="s1">'p'</span><span class="o">,</span> <span class="s1">'n'</span><span class="o">,</span> <span class="s1">'lower'</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> as ci_lower,</span>
+<span class="x">  </span><span class="cp">{{</span> <span class="nv">wilson_interval</span><span class="o">(</span><span class="s1">'p'</span><span class="o">,</span> <span class="s1">'n'</span><span class="o">,</span> <span class="s1">'upper'</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> as ci_upper</span>
+<span class="x">from t</span>
+</code></pre></div>
+<p>That sort of math is is exactly what you'd <em>want</em> to hide in a macro, anyway 😉.</p>
+<h3 id="please-contribute">🙏 Please contribute!</h3>
+<p>Binoculars currently focuses on estimating uncertainty given \(\text{Binomial}(\hat{p}, N)\). It's missing several well-defined methods on that <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval">awesome wiki page</a>, and there are a lot of similar questions to be asked! Such as:</p>
+<ol>
+<li><em>Uncertainty about the odds-ratio between two binomial samples?</em></li>
+</ol>
+<p>$$
+\text{odds} = \frac{k_1}{N_1} \div \frac{k_2}{N_2}
+$$</p>
+<ol>
+<li><em>Uncertainty about the difference between two binomial samples?</em></li>
+</ol>
+<p>$$
+\text{diff} = \frac{k_1}{N_1} - \frac{k_2}{N_2}
+$$</p>
+<p>I've found some <a href="https://www.ncbi.nlm.nih.gov/books/NBK431098/">Normal Approximation-looking math</a> for this stuff, and it'd be great to work out a function to make this available generally!</p>
+<p>Binoculars is open sourced on <a href="https://github.com/nolanbconaway/binoculars">GitHub</a>, submit issues with your complaints or PRs with your solutions 😗.</p>
+</div>
+    </div>
+
+  </div>
+</body>
+
+<script>
+  // apply bootstrap table classes/scopes
+  $('table.table>thead>tr>th').attr('scope', 'col')
+
+  // wrap all tables for overflow scrolling
+  $("table.table").not('.highlighttable').not('.blogroll').wrap("<div class='table_wrap'></div>");
+
+  // add anchor URLS for header elements in markdown pages
+  $(".markdown_insert h2,h3,h4").each(function (index) {
+    $(this).append("<a class='anchor' href='#" + this.id + "'><sup>#</sup></a>")
+  });
+</script>
+
+
+<script>
+  // More elegantly link to internal IDs. In practice these links put you BELOW the header
+  // element, but I want to include that element in the first view.
+
+  // The function actually applying the offset
+  function offsetAnchor() {
+    if (location.hash.length !== 0) {
+      window.scrollTo(window.scrollX, window.scrollY - 70);
+    }
+  }
+
+  // Captures click events of all <a> elements with href starting with #
+  $(document).on('click', 'a[href^="#"]', function (event) {
+    // Click events are captured before hashchanges. Timeout
+    // causes offsetAnchor to be called after the page jump.
+    window.setTimeout(function () {
+      offsetAnchor();
+    }, 0);
+  });
+
+  // Set the offset when entering page with hash present in the url
+  window.setTimeout(offsetAnchor, 0);
+</script>
+
+</html>

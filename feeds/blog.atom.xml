@@ -1,5 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Nolan Conaway's Blog - blog</title><link href="https://nolanbconaway.github.io/" rel="alternate"></link><link href="https://nolanbconaway.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://nolanbconaway.github.io/</id><updated>2020-09-13T00:00:00-04:00</updated><entry><title>In which I demonstrate that they say "Oh My God" a lot in the show "Friends"</title><link href="https://nolanbconaway.github.io/blog/2020/friends-omg.html" rel="alternate"></link><published>2020-09-13T00:00:00-04:00</published><updated>2020-09-13T00:00:00-04:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2020-09-13:/blog/2020/friends-omg.html</id><summary type="html">&lt;p&gt;We were rewatching some old Friends episodes when I took notice that the phrase &lt;em&gt;"oh my god"&lt;/em&gt; comes up a lot in that show. I am a &lt;em&gt;professional data scientist&lt;/em&gt; 📈 📊 , so I set to quantify exactly just how much more often they say "oh my god" in Friends compared to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We were rewatching some old Friends episodes when I took notice that the phrase &lt;em&gt;"oh my god"&lt;/em&gt; comes up a lot in that show. I am a &lt;em&gt;professional data scientist&lt;/em&gt; 📈 📊 , so I set to quantify exactly just how much more often they say "oh my god" in Friends compared to other shows.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Nolan Conaway's Blog - blog</title><link href="https://nolanbconaway.github.io/" rel="alternate"></link><link href="https://nolanbconaway.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://nolanbconaway.github.io/</id><updated>2021-01-01T00:00:00-05:00</updated><entry><title>Binoculars, a python package for Binomial confidence intervals.</title><link href="https://nolanbconaway.github.io/blog/2021/binoculars.html" rel="alternate"></link><published>2021-01-01T00:00:00-05:00</published><updated>2021-01-01T00:00:00-05:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2021-01-01:/blog/2021/binoculars.html</id><summary type="html">&lt;p&gt;I recently published a package (&lt;a href="https://pypi.org/project/binoculars/"&gt;📦 click&lt;/a&gt;) called "binoculars", and all it does is calculate confidence intervals for binomial proportions. You can &lt;code&gt;pip install binoculars&lt;/code&gt; or contribute via &lt;a href="https://github.com/nolanbconaway/binoculars"&gt;GitHub&lt;/a&gt;, etc. &lt;/p&gt;
+&lt;p&gt;Usage is pretty simple:&lt;/p&gt;
+&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;binoculars&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;binomial_confidence&lt;/span&gt;
+
+&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;
+
+&lt;span class="n"&gt;binomial_confidence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'jeffrey'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# (0.1307892803998113, 0 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I recently published a package (&lt;a href="https://pypi.org/project/binoculars/"&gt;📦 click&lt;/a&gt;) called "binoculars", and all it does is calculate confidence intervals for binomial proportions. You can &lt;code&gt;pip install binoculars&lt;/code&gt; or contribute via &lt;a href="https://github.com/nolanbconaway/binoculars"&gt;GitHub&lt;/a&gt;, etc. &lt;/p&gt;
+&lt;p&gt;Usage is pretty simple:&lt;/p&gt;
+&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;binoculars&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;binomial_confidence&lt;/span&gt;
+
+&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;
+
+&lt;span class="n"&gt;binomial_confidence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'jeffrey'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# (0.1307892803998113, 0.28628125447599173)&lt;/span&gt;
+&lt;span class="n"&gt;binomial_confidence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'normal'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# (0.12160000000000001, 0.2784)&lt;/span&gt;
+&lt;span class="n"&gt;binomial_confidence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'wilson'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# (0.1333659225590988, 0.28883096192650237)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Et-cetra.&lt;/p&gt;
+&lt;p&gt;❓❓❓ But &lt;em&gt;why the heck did I write a whole package to calculate confidence intervals for binomial proportions?&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="reason-1-binomial-certainty-comes-up-constantly"&gt;Reason 1: Binomial certainty comes up constantly.&lt;/h2&gt;
+&lt;p&gt;Lots of statistics problems come around to the issue of certainty in the estimation of a binomial proportion. We all have data in which there are some \(N\) observations, out of which some \(k\) successfully do something, and so you want to understand the success rate \(\hat{p}= k \div N\). In the simplest case, you have some reference \(p\) value and you want to know if your \(\hat{p}\) is very different from that. Let's be concrete with some examples:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You've got an ecommerce site and you want to determine if the conversion rate, \(\text{purchases} \div \text{visits}\), this month is different from last year.&lt;/li&gt;
+&lt;li&gt;You want to know if the employment rate of a subpopulation, \(\text{employed} \div \text{people}\), is different from the national average.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This comes up entirely too often in my work and it probably does in yours. It &lt;em&gt;ought to be&lt;/em&gt; super easy to calculate a confidence interval on \(\text{Binomial}(p, N )\), where \(p\) is set to your reference proportion and \(N\) is the number of observations in your sample. Then you check if your \(\hat{p}\) is within the confidence interval and report those numbers. But it is &lt;em&gt;not&lt;/em&gt; that.&lt;/p&gt;
+&lt;h2 id="reason-2-lots-of-people-get-this-wrong"&gt;Reason 2: Lots of people get this wrong.&lt;/h2&gt;
+&lt;p&gt;A casual google search for "binomial confidence interval" will invariably lead you to this &lt;a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval"&gt;&lt;em&gt;outstanding wikipedia page&lt;/em&gt;&lt;/a&gt;. I have returned to this page more times than I can count.&lt;/p&gt;
+&lt;p&gt;Most people end up implementing the &lt;strong&gt;"Normal Approximation"&lt;/strong&gt; which is super easy and super terrible.&lt;/p&gt;
+&lt;p&gt;$$
+p \pm z \sqrt{\frac{p (1 - p)}{N}}
+$$&lt;/p&gt;
+&lt;p&gt;That math is not a lot, so you can do one-liners in python and SQL. Also, it is &lt;em&gt;symmetrical&lt;/em&gt;, which means you write clean code like:&lt;/p&gt;
+&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ci&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.96&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;ci&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;ci&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But the &lt;em&gt;symmetry&lt;/em&gt; is the problem! By way of demonstrating the terribleness here, I calculated (&lt;a href="https://deepnote.com/project/e17fa473-51c6-45aa-8de0-980be7d2dc5f"&gt;📓 click&lt;/a&gt;) the lower bound of 95% confidence with the Normal approximation as a function of \(N\) with a static \(\hat{p}\) of 0.01, 0.05, and 0.1:&lt;/p&gt;
+&lt;p&gt;&lt;object data="https://nolanbconaway.github.io/blog/2021/Normal.svg" type="image/svg+xml"&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;I took the liberty of annotating exactly where it is terrible. You can see that in &lt;em&gt;many real world cases&lt;/em&gt; the Normal approximation produces a lower bound &amp;lt; 0. We'd also see upper bounds &amp;gt; 1 if we had looked at \(\hat{p} = 0.99, 0.95, 0.9\), etc, because of the &lt;em&gt;symmetry&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;That's troubling not only because it should be impossible, but also because it suggests an &lt;strong&gt;underestimation&lt;/strong&gt; of the uncertainty at the upper bound. Using the normal approximation in these cases might lead you to a fully incorrect conclusion 😬. &lt;/p&gt;
+&lt;p&gt;I don't know about y'all, but I commonly deal with Binomials at \(N&amp;lt;100\) and \(\hat{p}&amp;lt;0.1\), so this is super concerning for me.&lt;/p&gt;
+&lt;h2 id="back-to-binoculars"&gt;Back to Binoculars...&lt;/h2&gt;
+&lt;p&gt;We have a situation in which the easiest method for computing Binomial uncertainty is both the most popular and is patently &lt;em&gt;wrong&lt;/em&gt; in many common cases. It &lt;em&gt;ought to be&lt;/em&gt; just as easy to choose a more accurate method, and with Binoculars, it is!&lt;/p&gt;
+&lt;p&gt;So, what method should &lt;em&gt;you&lt;/em&gt; use?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Do &lt;strong&gt;not&lt;/strong&gt; use the normal approximation if you have any other option.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you are using Python, you have other options! (thanks to Binoculars 😀). I like Jeffrey's interval because I am partial to Bayes but the Wilson interval is also very good.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="in-sql"&gt;In SQL?&lt;/h3&gt;
+&lt;p&gt;Binoculars won't help if you're doing this in SQL. But I often find myself needing a quick confidence interval for a dashboard, etc. If this sounds like you, the Wilson interval is your jam. Jeffrey's interval involves a lot of Beta distribution math which gets &lt;em&gt;narsty&lt;/em&gt;. &lt;/p&gt;
+&lt;p&gt;The Wilson interval isn't exactly &lt;em&gt;pretty&lt;/em&gt;, but you can probably implement it as a user-defined-function on your database without a lot of hassle. &lt;/p&gt;
+&lt;p&gt;If you're using DBT, you can also implement it as a macro!&lt;/p&gt;
+&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;macro&lt;/span&gt; &lt;span class="nv"&gt;wilson_interval&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;tail&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1.96&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'lower'&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt; (&lt;/span&gt;
+&lt;span class="x"&gt;   &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; + &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; / (2 * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;) &lt;/span&gt;
+&lt;span class="x"&gt;   - &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * sqrt((&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * (1 - &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;) + &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; / (4 * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;)) / &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;)&lt;/span&gt;
+&lt;span class="x"&gt;  ) / (1 + &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; / &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;)&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="nv"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'upper'&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt; (&lt;/span&gt;
+&lt;span class="x"&gt;   &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; + &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; / (2 * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;) &lt;/span&gt;
+&lt;span class="x"&gt;   + &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * sqrt((&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * (1 - &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_p&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;) + &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; / (4 * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;)) / &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;)&lt;/span&gt;
+&lt;span class="x"&gt;  ) / (1 + &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; * &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; / &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;col_n&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;)&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;endif&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt;- &lt;span class="k"&gt;endmacro&lt;/span&gt; -&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which gets called like:&lt;/p&gt;
+&lt;div class="highlight codehilitetable"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;with t as ( select 500 as n, 0.2 as p )&lt;/span&gt;
+&lt;span class="x"&gt;select &lt;/span&gt;
+&lt;span class="x"&gt;  t.*,&lt;/span&gt;
+&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;wilson_interval&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'p'&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'n'&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'lower'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; as ci_lower,&lt;/span&gt;
+&lt;span class="x"&gt;  &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;wilson_interval&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'p'&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'n'&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'upper'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt; as ci_upper&lt;/span&gt;
+&lt;span class="x"&gt;from t&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That sort of math is is exactly what you'd &lt;em&gt;want&lt;/em&gt; to hide in a macro, anyway 😉.&lt;/p&gt;
+&lt;h3 id="please-contribute"&gt;🙏 Please contribute!&lt;/h3&gt;
+&lt;p&gt;Binoculars currently focuses on estimating uncertainty given \(\text{Binomial}(\hat{p}, N)\). It's missing several well-defined methods on that &lt;a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval"&gt;awesome wiki page&lt;/a&gt;, and there are a lot of similar questions to be asked! Such as:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Uncertainty about the odds-ratio between two binomial samples?&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$$
+\text{odds} = \frac{k_1}{N_1} \div \frac{k_2}{N_2}
+$$&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Uncertainty about the difference between two binomial samples?&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$$
+\text{diff} = \frac{k_1}{N_1} - \frac{k_2}{N_2}
+$$&lt;/p&gt;
+&lt;p&gt;I've found some &lt;a href="https://www.ncbi.nlm.nih.gov/books/NBK431098/"&gt;Normal Approximation-looking math&lt;/a&gt; for this stuff, and it'd be great to work out a function to make this available generally!&lt;/p&gt;
+&lt;p&gt;Binoculars is open sourced on &lt;a href="https://github.com/nolanbconaway/binoculars"&gt;GitHub&lt;/a&gt;, submit issues with your complaints or PRs with your solutions 😗.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>In which I demonstrate that they say "Oh My God" a lot in the show "Friends"</title><link href="https://nolanbconaway.github.io/blog/2020/friends-omg.html" rel="alternate"></link><published>2020-09-13T00:00:00-04:00</published><updated>2020-09-13T00:00:00-04:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2020-09-13:/blog/2020/friends-omg.html</id><summary type="html">&lt;p&gt;We were rewatching some old Friends episodes when I took notice that the phrase &lt;em&gt;"oh my god"&lt;/em&gt; comes up a lot in that show. I am a &lt;em&gt;professional data scientist&lt;/em&gt; 📈 📊 , so I set to quantify exactly just how much more often they say "oh my god" in Friends compared to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We were rewatching some old Friends episodes when I took notice that the phrase &lt;em&gt;"oh my god"&lt;/em&gt; comes up a lot in that show. I am a &lt;em&gt;professional data scientist&lt;/em&gt; 📈 📊 , so I set to quantify exactly just how much more often they say "oh my god" in Friends compared to other shows.&lt;/p&gt;
 &lt;p&gt;I ended up building a whole website so that it would be easy to ask arbitrary questions about phrase frequency in different TV shows. I &lt;a href="https://friends-omg.herokuapp.com/"&gt;deployed it on heroku&lt;/a&gt; so you can ask these questions too. &lt;/p&gt;
 &lt;p&gt;This post describes the source data I'm using and looks into a few of my own curiosities! Enjoy,  friends 🔎 .&lt;/p&gt;
 &lt;h2 id="source-data"&gt;Source data&lt;/h2&gt;
@@ -12,7 +108,7 @@
 &lt;li&gt;I found a Sex and the City script CSV on &lt;a href="https://www.kaggle.com/snapcrack/every-sex-and-the-city-script"&gt;Kaggle&lt;/a&gt;. It needed some manual cleaning and so now I'm pretty sure that I &lt;a href="http://nolanc.heliohost.org/omg-data/satc.csv"&gt;host&lt;/a&gt; the cleanest Sex and the City database online.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I wrote out &lt;a href="https://github.com/nolanbconaway/friends-omg/tree/master/build"&gt;a python module&lt;/a&gt; to transfer data from each of these sources into a single sqlite database. Each show has its own &lt;a href="https://github.com/nolanbconaway/friends-omg/blob/master/build/ddl.sql"&gt;table&lt;/a&gt;, and its own python script to transform the raw source data into a schema composed of these four columns:&lt;/p&gt;
-&lt;table class="table table-hover table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Column&lt;/th&gt;
@@ -60,7 +156,7 @@
 &lt;h2 id="show-me-the-numbers-already"&gt;Show Me the Numbers Already&lt;/h2&gt;
 &lt;p&gt;You can compute the frequencies of any phrase you'd like using the &lt;a href="https://friends-omg.herokuapp.com/"&gt;app&lt;/a&gt; but I've also taken the liberty of exploring some of my own curiosities!&lt;/p&gt;
 &lt;h3 id="oh-my-god-click"&gt;Oh My God (&lt;a href="https://friends-omg.herokuapp.com/?q=oh+my+god"&gt;click&lt;/a&gt;)&lt;/h3&gt;
-&lt;table class="table table-hover table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Show&lt;/th&gt;
@@ -104,7 +200,7 @@
 &lt;p&gt;&lt;em&gt;Oh My God&lt;/em&gt;.&lt;/p&gt;
 &lt;h3 id="talking-about-new-york-click"&gt;Talking about New York (&lt;a href="https://friends-omg.herokuapp.com/?q=new+york"&gt;click&lt;/a&gt;)&lt;/h3&gt;
 &lt;p&gt;All three shows are set around the same time period in New York City. But characters in Sex and the City talk about New York the most:&lt;/p&gt;
-&lt;table class="table table-hover table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Show&lt;/th&gt;
@@ -150,7 +246,7 @@
 &lt;p&gt;But I think the data can tell a story. At least some of it. This post tells the stories of unusual days in my apartment, from the perspective of temperature measurements.&lt;/p&gt;
 &lt;h2 id="describing-a-days-temperatures"&gt;Describing a day's temperatures&lt;/h2&gt;
 &lt;p&gt;Early on, I wrote out a SQL view that computes summary statistics on each day's temperature readings. It shows me descriptives like:&lt;/p&gt;
-&lt;table class="table table-hover table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;dt&lt;/th&gt;
@@ -271,7 +367,7 @@
 &lt;span class="n"&gt;density&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scipy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;multivariate_normal&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zscores&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mu&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sigma&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then I picked out the days with the lowest densities! Here are those dates:&lt;/p&gt;
-&lt;table class="table table-hover table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;dt&lt;/th&gt;
@@ -401,7 +497,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;An example to make things more concrete. Search platforms like google/bing/yahoo allow you to bid a certain amount to show an ad when someone searches for a given keyword. You only pay the search engine if the ad is clicked on. They usually won't charge you the full price of the bid, but some unknown lower amount that we refer to as the cost-per-click (CPC).&lt;/p&gt;
 &lt;p&gt;Imagine we are hoping to pay a 100 cent ($1 USD) CPC.  We can measure how much we actually paid for each click, but as clicks come in they have variable prices:&lt;/p&gt;
-&lt;table class="table table-hover table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Time&lt;/th&gt;
@@ -466,7 +562,7 @@ $$&lt;/p&gt;
 &lt;p&gt;When \(N=50\), 96.7% of samples from the distribution would have a lower average value (conversely, only 3.3% of samples would have a greater value). We're much less likely to obtain \(\bar{x}=102.6\) by chance, and I might suggest looking into how CPCs are being targeted.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>A python implementation of the Poisson exact test (e-test).</title><link href="https://nolanbconaway.github.io/blog/2019/a-python-implementation-of-the-poisson-exact-test-e-test.html" rel="alternate"></link><published>2019-03-24T00:00:00-04:00</published><updated>2019-03-24T00:00:00-04:00</updated><author><name>Nolan Conaway</name></author><id>tag:nolanbconaway.github.io,2019-03-24:/blog/2019/a-python-implementation-of-the-poisson-exact-test-e-test.html</id><summary type="html">&lt;p&gt;At work we are doing tests on different paid search optimization tools. We wanted to see if a new tool offered improvements over what we had been using. In reality we are comparing the two on all sorts of metrics, but as an example we can focus on comparisons with …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At work we are doing tests on different paid search optimization tools. We wanted to see if a new tool offered improvements over what we had been using. In reality we are comparing the two on all sorts of metrics, but as an example we can focus on comparisons with respect to the cost paid per click, &lt;em&gt;CPC&lt;/em&gt;, measured in USD.&lt;/p&gt;
 &lt;p&gt;Cost per click is an example of a Poisson distributed variable. We started measuring the CPC during some control period using the current tools, then switched to the new tool in a test period.&lt;/p&gt;
 &lt;p&gt;Those data might look something like:&lt;/p&gt;
-&lt;table class="table table-hover table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -1089,7 +1185,7 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;img class="img-fluid" height="275" src="https://nolanbconaway.github.io/blog/2017/divergent-autoassoc-split-solution.png"/&gt;&lt;/p&gt;
 &lt;p&gt;To prevent things from looking like a tangled mess, I've used the two-separate-autoassociators figure. But remember, this is just a single network! I've put the optimal weight values next to each weight.&lt;/p&gt;
 &lt;p&gt;Those weights result in the following outputs:&lt;/p&gt;
-&lt;table class="table table-hover table-sm"&gt;
+&lt;table class="table-hover table-sm table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Class&lt;/th&gt;
