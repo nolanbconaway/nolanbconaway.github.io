@@ -21,7 +21,7 @@ In 2019, July 5 was the warmest day I recorded, with temperatures in the ~88&#84
 
 <object type="image/svg+xml" data="{attach}coldest.svg"></object>
 
-In 2019 our apartment's heat come from old-school radiators, and we had no control over the temperature. The coldest day (Feb 1 2029, for those keeping track) was the coldest day because the heat simply did not come on as much.
+In 2019 our apartment's heat came from old-school radiators, and we had no control over the temperature. The coldest day (Feb 1 2029, for those keeping track) was the coldest day because the heat simply did not come on as much.
 
 We moved out of that apartment though! Now, we control our own heat (+ and pay for it ::smirking_face::). We were lucky enough to be able to spend New Years Eve with family this year, so we shut off our heat while we were gone. That makes Dec 31 the coldest day I recorded. 
 
