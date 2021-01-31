@@ -15,7 +15,7 @@ A year later, in early 2020, I posted a [year-in-review style article](/blog/202
 
 <object type="image/svg+xml" data="{attach}warmest.svg"></object>
 
-In 2019, July 5 was the warmest day I recorded, with temperatures in the ~88&#8457 range. We were out of town that day and had shut off our air conditioning. This year is a similar story, with high temps in early July at about ~88&#8457. Interestingly (? ::thinking_face::), we were _not_ out of town that day, so we must've roasted pretty good in the apartment.
+In 2019, July 5 was the warmest day I recorded, with temperatures in the ~88&#8457 range. We were out of town that day and had shut off our air conditioning. This year is a similar story, with high temps in early July at about ~88&#8457 . Interestingly (? ::thinking_face::), we were _not_ out of town that day, so we must've roasted pretty good in the apartment.
 
 ## ::snow_flake:: the coldest day
 
