@@ -106,7 +106,7 @@ $$</p>
 <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">ci</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="n">ci</span>
 </code></pre></div>
 <p>But the <em>symmetry</em> is the problem! By way of demonstrating the terribleness here, I calculated (<a href="https://deepnote.com/project/e17fa473-51c6-45aa-8de0-980be7d2dc5f">📓 click</a>) the lower bound of 95% confidence with the Normal approximation as a function of \(N\) with a static \(\hat{p}\) of 0.01, 0.05, and 0.1:</p>
-<p><object data="https://nolanbconaway.github.io/blog/2021/Normal.svg" type="image/svg+xml"></object></p>
+<object data="https://nolanbconaway.github.io/blog/2021/Normal.svg" type="image/svg+xml"></object>
 <p>I took the liberty of annotating exactly where it is terrible. You can see that in <em>many real world cases</em> the Normal approximation produces a lower bound &lt; 0. We'd also see upper bounds &gt; 1 if we had looked at \(\hat{p} = 0.99, 0.95, 0.9\), etc, because of the <em>symmetry</em>.</p>
 <p>That's troubling not only because it should be impossible, but also because it suggests an <strong>underestimation</strong> of the uncertainty at the upper bound. Using the normal approximation in these cases might lead you to a fully incorrect conclusion 😬. </p>
 <p>I don't know about y'all, but I commonly deal with Binomials at \(N&lt;100\) and \(\hat{p}&lt;0.1\), so this is super concerning for me.</p>

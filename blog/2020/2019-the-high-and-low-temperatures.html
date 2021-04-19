@@ -156,13 +156,13 @@
 <p>Most of those columns have sensible names. <code>avg_minute_delta</code> describes the average difference in temperature per minute across adjacent readings. <code>day_delta</code> is the difference between the first and last reading in the day.</p>
 <p>I looked into these summary stats for days which stand out, days like:</p>
 <h2 id="the-warmest-day">🔥 the warmest day</h2>
-<p><object data="https://nolanbconaway.github.io/blog/2020/warmest.svg" type="image/svg+xml"></object></p>
+<object data="https://nolanbconaway.github.io/blog/2020/warmest.svg" type="image/svg+xml"></object>
 <p>The day with the highest average temperature was <a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-07-05">July 5</a>. We were in Baltimore to celebrate July 4 with my family, so we closed up the windows and shut off the AC and the apartment absolutely <em>roasted</em>.</p>
 <h2 id="the-coldest-day">❄ the coldest day</h2>
-<p><object data="https://nolanbconaway.github.io/blog/2020/coldest.svg" type="image/svg+xml"></object></p>
+<object data="https://nolanbconaway.github.io/blog/2020/coldest.svg" type="image/svg+xml"></object>
 <p>Per NYC regulation, landlords are required to maintain a temperature of 68℉ during the day in the winter, but on <a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-02-01">Feb 1</a> the temperature hung below 66℉ all day long. </p>
 <h2 id="the-most-variable-day">The most variable day</h2>
-<p><object data="https://nolanbconaway.github.io/blog/2020/most_stddev.svg" type="image/svg+xml"></object></p>
+<object data="https://nolanbconaway.github.io/blog/2020/most_stddev.svg" type="image/svg+xml"></object>
 <p>On December 16 we were burgled (<strong>everyone was ok!</strong>). The burglar entered through the fire escape window, which is near where the Raspberry Pi thermometer is tucked away. That huge dip in the temperature is exactly the time the burglar entered the apartment. The detective that caught our case thought this was <em>awesome</em>!</p>
 <h2 id="anomaly-detection">Anomaly Detection</h2>
 <p>We can also use statistics to identify days with unusual properties. I queried my database with Python like:</p>
@@ -275,12 +275,12 @@
 </tbody>
 </table>
 <p>The first anomaly is an obvious one: the most variable day of the year which I wrote about above. See below for plots of the other four:</p>
-<p><object data="https://nolanbconaway.github.io/blog/2020/anomaly-2019-09-12.svg" type="image/svg+xml"></object>
+<object data="https://nolanbconaway.github.io/blog/2020/anomaly-2019-09-12.svg" type="image/svg+xml"></object>
 <object data="https://nolanbconaway.github.io/blog/2020/anomaly-2019-09-19.svg" type="image/svg+xml"></object>
 <object data="https://nolanbconaway.github.io/blog/2020/anomaly-2019-09-11.svg" type="image/svg+xml"></object>
-<object data="https://nolanbconaway.github.io/blog/2020/anomaly-2019-10-01.svg" type="image/svg+xml"></object></p>
+<object data="https://nolanbconaway.github.io/blog/2020/anomaly-2019-10-01.svg" type="image/svg+xml"></object>
 <p>And for good measure, <a href="https://temp-in-nolans-apartment.herokuapp.com/date/2019-03-22">here</a> is the least anomalous date according to my very naive model.</p>
-<p><object data="https://nolanbconaway.github.io/blog/2020/nonanomaly.svg" type="image/svg+xml"></object></p>
+<object data="https://nolanbconaway.github.io/blog/2020/nonanomaly.svg" type="image/svg+xml"></object>
 </div>
     </div>
 
