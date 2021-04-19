@@ -76,7 +76,7 @@ $ touch $HOME/check-ssh-address
 $ chmod +x $HOME/check-ssh-address
 ```
 
-Then add this line to your `~/.ssh.rc`:
+Then add this line to your `~/.ssh/rc`:
 
 ```sh
 $HOME/check-ssh-address
