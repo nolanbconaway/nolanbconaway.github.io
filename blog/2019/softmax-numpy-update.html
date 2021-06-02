@@ -85,7 +85,7 @@
 </ul>
 <p>Originally, the proposed function looked very much like the one I had posted, but then <a href="https://github.com/pv">a very smart person</a> realized that you could use existing tooling around <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html#scipy.special.logsumexp">scipy.special.logsumexp</a> to make things much cleaner.</p>
 <p>So now the function is <a href="https://github.com/scipy/scipy/blob/master/scipy/special/_logsumexp.py#L215">a freaking one-liner</a>.</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
      <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">logsumexp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </code></pre></div>
 <p>I 100% prefer importing a function from scipy over pasting a hand-written one. Especially given the beauty of that puppy. But the two functions are not totally swappable, there are a couple important changes in behavior:</p>
@@ -96,7 +96,7 @@
 <h2 id="a-quick-performance-comparison">A quick performance comparison</h2>
 <p>I figured scipy had some magic stuff going on with <code>logsumexp</code>, and their function would be both more beautiful <em>and</em> performant than mine.</p>
 <p>But I ran a quick handful of tests just for kicks. First I wrote up a decorator to print function exec time to the console and wrapped my softmax and scipy softmax in it.</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.special</span>
@@ -139,7 +139,7 @@
     <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
 <p>I ran each function on 2D arrays of varying sizes and checked for differences in the results.</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="mi">10000</span><span class="p">,),</span>
     <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
@@ -165,7 +165,7 @@
 <p><a href="https://nolanbconaway.github.io/blog/2019/test.py">Here is the full script</a>, in case you want to toy around with it.</p>
 <h3 id="results">Results</h3>
 <p>My function was ... faster?</p>
-<div class="codehilitetable highlight"><pre><span></span><code>Running: (10000,)
+<div class="highlight codehilitetable"><pre><span></span><code>Running: (10000,)
 softmax_nolan took: 0.0004s
 softmax_scipy took: 0.0162s
 
