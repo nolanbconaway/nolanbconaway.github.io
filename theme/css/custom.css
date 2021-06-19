@@ -15,6 +15,14 @@ h2, h3, h4 {
     padding: 1em;
 }
 
+.content iframe {
+    max-width: 90%;
+    margin: auto;
+    display: block;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
 .content object {
     max-width: 90%;
     margin: auto;
