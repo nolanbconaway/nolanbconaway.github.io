@@ -8,6 +8,7 @@
 
   <!-- describe the site -->
   <meta name="description" content="Nolan Conaway's Blog">
+<meta name="keywords" content="thermometer">
   <meta name="author" content="Nolan Conaway">
 
   <!-- viewport -->
@@ -71,65 +72,29 @@
     <hr>
 
     <div class="content">
-
-<div class='markdown_insert'>
-    <h2 id="web-applications">Web Applications</h2>
-<p>I have a habit of creating web applications to provide a friendly interface to some of my other projects. The number of these apps has grown reliably over the last handful of years, you can find a list of them below.</p>
-<table class="table-sm table-hover table">
-<thead>
-<tr>
-<th>Application</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://friends-omg.herokuapp.com/">Friends Oh My God</a></td>
-<td>An extremely petty app in which I attempt to prove that they say "oh my god" a lot in the show "Friends".</td>
-</tr>
-<tr>
-<td><a href="https://sqlfluff-online.herokuapp.com/">SQLFluff Online Demo</a></td>
-<td>An online demonstration of the SQLFluff linter and formatter. Paste some SQL in to see what fluff thinks of it.</td>
-</tr>
-<tr>
-<td><a href="https://nolans-recommender.herokuapp.com/">Music Recommender</a></td>
-<td>An Apriori-algorithm based music recommender. Search for an album you like to find recommendations.</td>
-</tr>
-<tr>
-<td><a href="https://temp-in-nolans-apartment.herokuapp.com/">Temperature in My Apartment</a></td>
-<td>View the current temperature of my apartment, collected once every minute on a raspberry pi.</td>
-</tr>
-<tr>
-<td><a href="https://nolans-network-speed.herokuapp.com/">My Network Speed</a></td>
-<td>View the speedtest.net results for my home network, collected every 15 minutes on a raspberry pi.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="old-apps">Old Apps</h3>
-<p>These are some older applications that I am no longer collecting data to support.</p>
-<table class="table-sm table-hover table">
-<thead>
-<tr>
-<th>Application</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://how-was-the-q.herokuapp.com/">How was the Q?</a></td>
-<td>View subjective Q-Train quality ratings, submitted by me in a Slack form every day after I arrive at work. I no longer take the Q so this project is dead.</td>
-</tr>
-<tr>
-<td><a href="https://dogwalker-checker.herokuapp.com/">Dogwalker Checker</a></td>
-<td>Check up on when my dogwalker came. We switched services so this app is no longer needed.</td>
-</tr>
-</tbody>
-</table>
-</div>
+<h1>2021: The high and low temperatures</h1>
+<div class="text-right">January 2022</div>
 <hr>
-Last updated: Sun 30 August 2020
-
-     </div>
+<div class='markdown_insert'>
+    <p>Three years ago I hooked up a thermometer to a Raspberry Pi, and I set up a cron job to save the temperature in my postgres database every minute. Since then, I've posted year-in-review style articles once annually (<a href="/blog/2020/2019-the-high-and-low-temperatures">2019</a>, <a href="/blog/2021/2020-the-high-and-low-temperatures">2020</a>) describing the data I had obtained from running the cron job for a full calendar year. </p>
+<p>This is another one of those posts!</p>
+<p>(FYI- You can still check out a real time view of the data via <a href="https://temp-in-nolans-apartment.herokuapp.com/">my heroku webapp</a>.)</p>
+<h2 id="the-warmest-day">🔥 the warmest day</h2>
+<object data="https://nolanbconaway.github.io/blog/2022/warmest.svg" type="image/svg+xml"></object>
+<p>Usually I record the warmest daily temperatures in early July, when summer is in full swing and we've shut off the AC over the July 4 weekend. This year we stuck around NYC for July 4, and instead are looking at June 7 for the warmest day  💁.</p>
+<h2 id="the-coldest-day">❄ the coldest day</h2>
+<object data="https://nolanbconaway.github.io/blog/2022/coldest.svg" type="image/svg+xml"></object>
+<p>2020's coldest day in the apartment was December 31. Like with the warmest day, we had left town for the holiday and shut off the heat. Interestingly (??), the coldest day in 2021 was <em>the very next day</em>: January 1, 2021.</p>
+<h2 id="the-most-variable-day">📈 The most variable day</h2>
+<object data="https://nolanbconaway.github.io/blog/2022/variable.svg" type="image/svg+xml"></object>
+<p>Our apartment is southwestern facing, and has floor-to-ceiling windows. We get <em>a lot</em> of sunlight. As a result, I find that the days with the most variance in temperature are sunny days in Spring/Autumn, when temperatures start out cold but the sun quickly heats up the apartment.</p>
+<p>March 7, the most variable day of 2021, is one of those such cases: the day started out at a chilly 57℉ but rose to a toasty 81℉ in the span of five hours!</p>
+<h2 id="all-together">All together!</h2>
+<p>I found it interesting to plot these days on the same axis so that the changes in temperature over time can be appreciated. Take a look!</p>
+<object data="https://nolanbconaway.github.io/blog/2022/everybody.svg" type="image/svg+xml"></object>
+<p>👋 cya in 2023!</p>
+</div>
+    </div>
 
   </div>
 </body>

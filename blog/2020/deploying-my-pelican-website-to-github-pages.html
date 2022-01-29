@@ -78,40 +78,40 @@
 <div class='markdown_insert'>
     <p>🎉 If you're reading this, you're looking at my new website! 🎉</p>
 <p>I ditched Jekyll because I didn't want to have to maintain a ruby installation on my machine. My new site runs on Pelican and I hacked together a deployment flow to Github pages. Here's that hack:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Main Workflow</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Main Workflow</span><span class="w"></span>
 
-<span class="nt">on</span><span class="p">:</span>
-  <span class="nt">push</span><span class="p">:</span>
-    <span class="nt">branches</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="nt">on</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span><span class="w"></span>
 
-<span class="nt">jobs</span><span class="p">:</span>
-  <span class="nt">build-and-deploy</span><span class="p">:</span>
-    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="nt">jobs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build-and-deploy</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w"></span>
 
-    <span class="nt">steps</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v1</span>
-      <span class="p p-Indicator">-</span> <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v1</span>
-        <span class="nt">with</span><span class="p">:</span>
-          <span class="nt">python-version</span><span class="p">:</span> <span class="s">"3.7"</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v1</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v1</span><span class="w"></span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">"3.7"</span><span class="w"></span>
 
-      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install Dependencies</span>
-        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-          <span class="no">python -m pip install --upgrade pip</span>
-          <span class="no">pip install -r requirements.txt</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install Dependencies</span><span class="w"></span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">          </span><span class="no">python -m pip install --upgrade pip</span><span class="w"></span>
+<span class="w">          </span><span class="no">pip install -r requirements.txt</span><span class="w"></span>
 
-      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Build Production Site</span>
-        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-          <span class="no">make publish</span>
-          <span class="no">cp readme.md output/readme.md</span>
-          <span class="no">touch output/.nojekyll</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build Production Site</span><span class="w"></span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">          </span><span class="no">make publish</span><span class="w"></span>
+<span class="w">          </span><span class="no">cp readme.md output/readme.md</span><span class="w"></span>
+<span class="w">          </span><span class="no">touch output/.nojekyll</span><span class="w"></span>
 
-      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy To Master Branch</span>
-        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">peaceiris/actions-gh-pages@v3</span>
-        <span class="nt">with</span><span class="p">:</span>
-          <span class="nt">publish_branch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
-          <span class="nt">publish_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./output</span>
-          <span class="nt">personal_token</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.PERSONAL_TOKEN }}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy To Master Branch</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">peaceiris/actions-gh-pages@v3</span><span class="w"></span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">publish_branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span><span class="w"></span>
+<span class="w">          </span><span class="nt">publish_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output</span><span class="w"></span>
+<span class="w">          </span><span class="nt">personal_token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PERSONAL_TOKEN }}</span><span class="w"></span>
 </code></pre></div>
 <h3 id="translation">Translation...</h3>
 <p>On push to the <code>dev</code> branch, Github will set up a python 3.7 environment with my requirements.txt. It'll build the static site into an <code>output</code> directory using <code>make publish</code>. I added a <code>.nojekyll</code> file so that Github knows it's not working with a Jekyll page.</p>
