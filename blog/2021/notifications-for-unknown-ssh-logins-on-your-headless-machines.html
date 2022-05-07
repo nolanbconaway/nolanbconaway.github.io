@@ -82,7 +82,7 @@
 <p>I add a shell script to the home directory of each server called <code>check-ssh-address</code>. The script uses a text file to remember all the historical addresses that have been used to log in via SSH.</p>
 <p>If the current session is an SSH session, the script checks the IP address of the client against the known IP addresses. If the client is new, it sends an email and appends a new record to the text file. If the client is known, the script exits early.</p>
 <p>Here's what that looks like:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># set these</span>
 <span class="nv">EMAIL_ADDR</span><span class="o">=</span><span class="s1">''</span>
@@ -130,14 +130,14 @@ curl <span class="se">\</span>
     -T &lt;<span class="o">(</span><span class="nb">echo</span> -e <span class="s2">"</span><span class="nv">$EMAIL_TEXT</span><span class="s2">"</span><span class="o">)</span>
 </code></pre></div>
 <p>The last trick is to get that check to run each time there is an SSH login. You could add a call to <code>.bash_profile</code> or whatever, but I think it makes sense to put this in <code>~/.ssh/rc</code>.</p>
-<div class="codehilitetable highlight"><pre><span></span><code>$ touch <span class="nv">$HOME</span>/check-ssh-address
+<div class="highlight codehilitetable"><pre><span></span><code>$ touch <span class="nv">$HOME</span>/check-ssh-address
 <span class="c1"># ...</span>
 <span class="c1"># Paste that file in, edit your email and APP PASSWORD (not your real password).</span>
 <span class="c1"># ...</span>
 $ chmod +x <span class="nv">$HOME</span>/check-ssh-address
 </code></pre></div>
 <p>Then add this line to your <code>~/.ssh/rc</code>:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="nv">$HOME</span>/check-ssh-address
+<div class="highlight codehilitetable"><pre><span></span><code><span class="nv">$HOME</span>/check-ssh-address
 </code></pre></div>
 <p>To this date I have never been informed of a new login that was <em>not</em> me, and here's hoping that I never do! 🙏.</p>
 </div>
