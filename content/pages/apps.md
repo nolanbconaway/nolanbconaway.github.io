@@ -9,7 +9,7 @@ I have a habit of creating web applications to provide a friendly interface to s
 | Application                                                                    | Description                                                                                                     |
 | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | [Friends Oh My God](https://friends-omg.herokuapp.com/)                        | An extremely petty app in which I attempt to prove that they say "oh my god" a lot in the show "Friends".       |
-| [SQLFluff Online Demo](https://sqlfluff-online.herokuapp.com/)                 | An online demonstration of the SQLFluff linter and formatter. Paste some SQL in to see what fluff thinks of it. |
+| [SQLFluff Online Demo](https://online.sqlfluff.com/)                           | An online demonstration of the SQLFluff linter and formatter. Paste some SQL in to see what fluff thinks of it. |
 | [Music Recommender](https://nolans-recommender.herokuapp.com/)                 | An Apriori-algorithm based music recommender. Search for an album you like to find recommendations.             |
 | [Temperature in My Apartment](https://temp-in-nolans-apartment.herokuapp.com/) | View the current temperature of my apartment, collected once every minute on a raspberry pi.                    |
 | [My Network Speed](https://nolans-network-speed.herokuapp.com/)                | View the speedtest.net results for my home network, collected every 15 minutes on a raspberry pi.               |

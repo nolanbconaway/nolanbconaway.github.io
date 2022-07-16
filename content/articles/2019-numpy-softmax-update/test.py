@@ -6,13 +6,15 @@ import scipy.special
 
 def timeit(f):
     """Decorator to print function exec time."""
+
     @wraps(f)
     def wrap(*args, **kw):
         ts = time.time()
         result = f(*args, **kw)
         te = time.time()
-        print(f'{f.__name__} took: {te-ts:2.4f}s')
+        print(f"{f.__name__} took: {te-ts:2.4f}s")
         return result
+
     return wrap
 
 
@@ -55,7 +57,7 @@ sizes = [
 for size in sizes:
     arr = np.random.normal(size=size)
 
-    print(f'Running: {size}')
+    print(f"Running: {size}")
     result_nolan = softmax_nolan(arr)
     result_scipy = softmax_scipy(arr)
     print()

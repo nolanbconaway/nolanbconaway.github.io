@@ -39,5 +39,9 @@ BOOTSTRAPIFY = {
 
 SITEMAP = {
     "format": "xml",
-    "priorities": {"articles": 1.0, "pages": 0.5, "indexes": 0.0,},
+    "priorities": {
+        "articles": 1.0,
+        "pages": 0.5,
+        "indexes": 0.0,
+    },
 }
