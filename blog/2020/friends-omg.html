@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Nolan Conaway's Blog</title>
+  <meta charset="utf-8" />
+
+  <!-- describe the site -->
+  <meta name="description" content="Nolan Conaway's Blog">
+<meta name="keywords" content="python, nlp, sqlite, omg">
+  <meta name="author" content="Nolan Conaway">
+
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/theme/images/favicon.ico">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80719882-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-80719882-1');
+  </script>
+
+  <!-- mathjax -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+  <!-- bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- custom -->
+  <link rel="stylesheet" href="/theme/css/pygment.css">
+  <link rel="stylesheet" href="/theme/css/custom.css">
+</head>
+
+<body id="index" class="home">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="/pdfs">PDFs</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="/apps">Apps</a></li>
+        </ul>
+        <a class="navbar-brand" href="https://github.com/nolanbconaway">
+          <img src="/theme/images/GitHub-Mark-Light-64px.png" width="30" height="30" alt="Github">
+        </a>
+      </div>
+    </nav>
+
+    <hr>
+
+    <div class="content">
+<h1>In which I demonstrate that they say "Oh My God" a lot in the show "Friends"</h1>
+<div class="text-right">September 2020</div>
+<hr>
+<div class='markdown_insert'>
+    <p>We were rewatching some old Friends episodes when I took notice that the phrase <em>"oh my god"</em> comes up a lot in that show. I am a <em>professional data scientist</em> 📈 📊 , so I set to quantify exactly just how much more often they say "oh my god" in Friends compared to other shows.</p>
+<p>I ended up building a whole website so that it would be easy to ask arbitrary questions about phrase frequency in different TV shows. I <a href="https://friends-omg.herokuapp.com/">deployed it on heroku</a> so you can ask these questions too. </p>
+<p>This post describes the source data I'm using and looks into a few of my own curiosities! Enjoy,  friends 🔎 .</p>
+<h2 id="source-data">Source data</h2>
+<p>Once you have well-structured data, answering the question "How much do they say phrase <em>X</em> in each show?" is fairly easy. In the simplest case, you can count the number of lines containing a string (thats what I did). </p>
+<p>But as usual, obtaining said well-structured data is not easy.</p>
+<p>Luckily, other smart people are asking similar questions of TV show script data, so it wasn't a nightmare to cobble together a script database.</p>
+<ul>
+<li><a href="https://quotennial.github.io/friends-engineering/">Yusuf Sohoye</a> had already set up some slick regex to parse through every Friends script.</li>
+<li><a href="https://github.com/colinpollock/seinfeld-scripts">Colin Pollock</a> had a ready-to-go sqlite database with every Seinfeld script.</li>
+<li>I found a Sex and the City script CSV on <a href="https://www.kaggle.com/snapcrack/every-sex-and-the-city-script">Kaggle</a>. It needed some manual cleaning and so now I'm pretty sure that I <a href="http://nolanc.heliohost.org/omg-data/satc.csv">host</a> the cleanest Sex and the City database online.</li>
+</ul>
+<p>I wrote out <a href="https://github.com/nolanbconaway/friends-omg/tree/master/build">a python module</a> to transfer data from each of these sources into a single sqlite database. Each show has its own <a href="https://github.com/nolanbconaway/friends-omg/blob/master/build/ddl.sql">table</a>, and its own python script to transform the raw source data into a schema composed of these four columns:</p>
+<table class="table-hover table-sm table">
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>episode_id</code></td>
+<td><code>varchar</code></td>
+<td><code>"0105"</code></td>
+</tr>
+<tr>
+<td><code>character_name</code></td>
+<td><code>varchar</code></td>
+<td><code>"monica"</code></td>
+</tr>
+<tr>
+<td><code>episode_line_number</code></td>
+<td><code>integer</code></td>
+<td><code>17</code></td>
+</tr>
+<tr>
+<td><code>line_text</code></td>
+<td><code>varchar</code></td>
+<td><code>"Oh my god!"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Once those data are in place, it's easy to do a count of lines containing any phrase:</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="k">with</span> <span class="n">t</span> <span class="k">as</span> <span class="p">(</span>
+  <span class="k">select</span> 
+    <span class="k">count</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="k">lower</span><span class="p">(</span><span class="n">line_text</span><span class="p">)</span> <span class="k">like</span> <span class="k">lower</span><span class="p">(</span><span class="s1">'%{phrase}%'</span><span class="p">)</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">k</span><span class="p">,</span>
+    <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">n</span>
+  <span class="k">from</span> <span class="ss">"{show}"</span>
+<span class="p">)</span>
+
+<span class="k">select</span> <span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="k">as</span> <span class="n">p</span>
+<span class="k">from</span> <span class="n">t</span>
+</code></pre></div>
+<p>You can run that query once per show to get all the counts you want!</p>
+<p>This approach doesn't really work with smaller phrases (e.g., if you want to count lines containing "dog", you'll also get lines containing "hotdog"). It also fails to account for how TV scripts use punctuation to express things differently (e.g., "Oh... My... God..." is not "Oh My God"). But whatever this is fast and easy.</p>
+<p>You can download the full (gzipped) SQLite3 database <a href="http://nolanc.heliohost.org/omg-data/data.db.gz">here</a> (it's not very large) 😜 .</p>
+<h2 id="show-me-the-numbers-already">Show Me the Numbers Already</h2>
+<p>You can compute the frequencies of any phrase you'd like using the <a href="https://friends-omg.herokuapp.com/">app</a> but I've also taken the liberty of exploring some of my own curiosities!</p>
+<h3 id="oh-my-god-click">Oh My God (<a href="https://friends-omg.herokuapp.com/?q=oh+my+god">click</a>)</h3>
+<table class="table-hover table-sm table">
+<thead>
+<tr>
+<th>Show</th>
+<th>Total Lines</th>
+<th>Lines including "oh my god"</th>
+<th>Probability of "oh my god"</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Friends</td>
+<td>61161</td>
+<td>920</td>
+<td>1.504%</td>
+</tr>
+<tr>
+<td>Sex And The City</td>
+<td>39687</td>
+<td>43</td>
+<td>0.108%</td>
+</tr>
+<tr>
+<td>Seinfeld</td>
+<td>52865</td>
+<td>112</td>
+<td>0.212%</td>
+</tr>
+</tbody>
+</table>
+<p>Think about this: <em>More than 1 in 100 lines of Friends includes the phrase "oh my god"</em>. Less than <strong>0.25%</strong> of lines in Seinfeld and Sex and the City contain the same phrase.  So they're at least <strong>6x</strong> more likely to say Oh My God in Friends.</p>
+<p><a href="https://www.youtube.com/watch?v=qSmp1ZSvelY">Janice</a> isn't even the top offender:</p>
+<ul>
+<li>Rachel: 221 lines</li>
+<li>Monica: 204 lines</li>
+<li>Phoebe: 164 lines</li>
+<li>Ross: 108 lines</li>
+<li>Chandler: 71 lines</li>
+<li>Joey: 63 lines</li>
+</ul>
+<p>Together, the Friends account for 723/920 occurrences, which is 1.2% of all lines in the show. </p>
+<p><em>Oh My God</em>.</p>
+<h3 id="talking-about-new-york-click">Talking about New York (<a href="https://friends-omg.herokuapp.com/?q=new+york">click</a>)</h3>
+<p>All three shows are set around the same time period in New York City. But characters in Sex and the City talk about New York the most:</p>
+<table class="table-hover table-sm table">
+<thead>
+<tr>
+<th>Show</th>
+<th>Total Lines</th>
+<th>Lines including "new york"</th>
+<th>Probability of "new york"</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sex And The City</td>
+<td>39687</td>
+<td>337</td>
+<td>0.849%</td>
+</tr>
+<tr>
+<td>Seinfeld</td>
+<td>52865</td>
+<td>83</td>
+<td>0.157%</td>
+</tr>
+<tr>
+<td>Friends</td>
+<td>61161</td>
+<td>68</td>
+<td>0.111%</td>
+</tr>
+</tbody>
+</table>
+<p>The majority of occurrences in Sex and the City are via Carrie, who says the phrase in 220 of 14107 lines. That's <strong>1.56%</strong> of her lines, which is more often than they say "oh my god" in Friends! </p>
+<h3 id="talking-about-food">Talking about Food</h3>
+<p>I checked on the line rates for different kinds of food and drink. Below is a bar chart of the probability that any line will contain the name of the food/drink:</p>
+<p><object data="https://nolanbconaway.github.io/blog/2020/food.svg" type="image/svg+xml"></object></p>
+<p>Not a lot to observe as far as I can tell, but it is a little surprising that Seinfeld talks about "coffee" more than Friends given that so much of Friends takes place in the coffee shop 🤔 .</p>
+<h2 id="more-info">More Info</h2>
+<h3 id="what-about-some-other-tv-show-nolan">"What about [some other TV show], Nolan?"</h3>
+<p><strong>Please, <em>please</em> point me to the data for the show you'd like added!</strong> </p>
+<p>The data needs to be at the line granularity, so that the <code>episode_id, character_name, episode_line_number, line_text</code> schema can be fulfilled. So long as the data can fit into that schema, there's no reason not to add it!</p>
+<h3 id="the-normal-approximation-is-for-proportions-close-to-0">The Normal Approximation is 🙁 for proportions close to 0!</h3>
+<p><strong>Please, <em>please</em> submit a PR implementing the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Wilson_score_interval">wilson interval</a>!</strong> </p>
+<p>Or literally ask me once and I'll do it. I am a <em>professional data scientist</em> 📈 📊 📈 📊 .</p>
+</div>
+    </div>
+
+  </div>
+</body>
+
+<script>
+  // apply bootstrap table classes/scopes
+  $('table.table>thead>tr>th').attr('scope', 'col')
+
+  // wrap all tables for overflow scrolling
+  $("table.table").not('.highlighttable').not('.blogroll').wrap("<div class='table_wrap'></div>");
+
+  // add anchor URLS for header elements in markdown pages
+  $(".markdown_insert h2,h3,h4").each(function (index) {
+    $(this).append("<a class='anchor' href='#" + this.id + "'><sup>#</sup></a>")
+  });
+</script>
+
+
+<script>
+  // More elegantly link to internal IDs. In practice these links put you BELOW the header
+  // element, but I want to include that element in the first view.
+
+  // The function actually applying the offset
+  function offsetAnchor() {
+    if (location.hash.length !== 0) {
+      window.scrollTo(window.scrollX, window.scrollY - 70);
+    }
+  }
+
+  // Captures click events of all <a> elements with href starting with #
+  $(document).on('click', 'a[href^="#"]', function (event) {
+    // Click events are captured before hashchanges. Timeout
+    // causes offsetAnchor to be called after the page jump.
+    window.setTimeout(function () {
+      offsetAnchor();
+    }, 0);
+  });
+
+  // Set the offset when entering page with hash present in the url
+  window.setTimeout(offsetAnchor, 0);
+</script>
+
+</html>

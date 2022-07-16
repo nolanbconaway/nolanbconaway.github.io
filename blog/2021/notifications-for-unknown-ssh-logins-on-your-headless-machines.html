@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Nolan Conaway's Blog</title>
+  <meta charset="utf-8" />
+
+  <!-- describe the site -->
+  <meta name="description" content="Nolan Conaway's Blog">
+<meta name="keywords" content="ssh, security, raspberry pi, headless">
+  <meta name="author" content="Nolan Conaway">
+
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/theme/images/favicon.ico">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80719882-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-80719882-1');
+  </script>
+
+  <!-- mathjax -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+  <!-- bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- custom -->
+  <link rel="stylesheet" href="/theme/css/pygment.css">
+  <link rel="stylesheet" href="/theme/css/custom.css">
+</head>
+
+<body id="index" class="home">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="/pdfs">PDFs</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="/apps">Apps</a></li>
+        </ul>
+        <a class="navbar-brand" href="https://github.com/nolanbconaway">
+          <img src="/theme/images/GitHub-Mark-Light-64px.png" width="30" height="30" alt="Github">
+        </a>
+      </div>
+    </nav>
+
+    <hr>
+
+    <div class="content">
+<h1>Notifications for unknown SSH logins on your headless machines.</h1>
+<div class="text-right">April 2021</div>
+<hr>
+<div class='markdown_insert'>
+    <p>I have four Linux servers (raspberry pi or otherwise) scattered around my apartment, and the thought of someone breaking into them can be pretty unsettling 😅. Besides all the usual steps one takes to secure machines like this (firewalls, disabling password authentication, port obfuscation, etc) I thought of one last precaution to help myself sleep better at night: <strong>send an email notification whenever there's an SSH login from an unknown IP address</strong>.</p>
+<p>My various servers should only be logged into by me on my personal computer, or by each other in a cronjob situation. I've assigned each of these a static IP address using my router, so there's a very finite number of addresses that should be used to SSH into each.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>I add a shell script to the home directory of each server called <code>check-ssh-address</code>. The script uses a text file to remember all the historical addresses that have been used to log in via SSH.</p>
+<p>If the current session is an SSH session, the script checks the IP address of the client against the known IP addresses. If the client is new, it sends an email and appends a new record to the text file. If the client is known, the script exits early.</p>
+<p>Here's what that looks like:</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># set these</span>
+<span class="nv">EMAIL_ADDR</span><span class="o">=</span><span class="s1">''</span>
+<span class="nv">EMAIL_PASS</span><span class="o">=</span><span class="s1">''</span> <span class="c1"># you need an app password. NOT your gmail password.</span>
+<span class="nv">KNOWN_ADDRESSES_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.ssh/known_addresses"</span>
+
+<span class="c1"># exit if not ssh</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">"</span><span class="nv">$SSH_CONNECTION</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">exit</span> <span class="m">0</span><span class="p">;</span> <span class="k">fi</span>
+
+<span class="c1"># get IP address</span>
+<span class="nv">IP_ADDRESS</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$SSH_CONNECTION</span> <span class="p">|</span> cut -d <span class="s2">" "</span> -f <span class="m">1</span><span class="sb">`</span>
+
+<span class="c1"># make sure file exists, then read it</span>
+<span class="o">[</span> ! -f <span class="nv">$KNOWN_ADDRESSES_FILE</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> touch <span class="nv">$KNOWN_ADDRESSES_FILE</span>
+<span class="nv">KNOWN_IPS</span><span class="o">=</span><span class="k">$(</span>cat <span class="nv">$KNOWN_ADDRESSES_FILE</span><span class="k">)</span>
+
+<span class="c1"># check if the user IP is known</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">"</span><span class="nv">$KNOWN_IPS</span><span class="s2">"</span> <span class="o">==</span> *<span class="s2">"</span><span class="nv">$IP_ADDRESS</span><span class="s2">"</span>* <span class="o">]]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">exit</span> <span class="m">0</span><span class="p">;</span> <span class="k">fi</span>
+
+<span class="c1"># add IP to known addresses</span>
+<span class="nb">echo</span> <span class="nv">$IP_ADDRESS</span> &gt;&gt; <span class="nv">$KNOWN_ADDRESSES_FILE</span>
+
+<span class="c1"># send an email</span>
+<span class="nv">EMAIL_TEXT</span><span class="o">=</span><span class="s2">"\</span>
+<span class="s2">From: </span><span class="nv">$EMAIL_ADDR</span><span class="s2"></span>
+<span class="s2">To: </span><span class="nv">$EMAIL_ADDR</span><span class="s2"></span>
+<span class="s2">Subject: SSH Session with unknown IP Address</span>
+
+<span class="s2">A new IP address was used to log into </span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">!</span>
+
+<span class="s2">User: </span><span class="k">$(</span>whoami<span class="k">)</span><span class="s2"></span>
+<span class="s2">Date: </span><span class="k">$(</span>date<span class="k">)</span><span class="s2"></span>
+<span class="s2">Address: </span><span class="nv">$IP_ADDRESS</span><span class="s2"></span>
+
+<span class="s2">If it is you, that is great! Otherwise LOCK DOWN THAT MACHINE.</span>
+<span class="s2">"</span>
+
+curl <span class="se">\</span>
+    --url <span class="s2">"smtps://smtp.gmail.com:465"</span><span class="se">\</span>
+    --silent --show-error<span class="se">\</span>
+    --ssl-reqd <span class="se">\</span>
+    --mail-from <span class="s2">"</span><span class="nv">$EMAIL_ADDR</span><span class="s2">"</span> <span class="se">\</span>
+    --mail-rcpt <span class="s2">"</span><span class="nv">$EMAIL_ADDR</span><span class="s2">"</span> <span class="se">\</span>
+    --user <span class="s2">"</span><span class="nv">$EMAIL_ADDR</span><span class="s2">:</span><span class="nv">$EMAIL_PASS</span><span class="s2">"</span> <span class="se">\</span>
+    -T &lt;<span class="o">(</span><span class="nb">echo</span> -e <span class="s2">"</span><span class="nv">$EMAIL_TEXT</span><span class="s2">"</span><span class="o">)</span>
+</code></pre></div>
+<p>The last trick is to get that check to run each time there is an SSH login. You could add a call to <code>.bash_profile</code> or whatever, but I think it makes sense to put this in <code>~/.ssh/rc</code>.</p>
+<div class="codehilitetable highlight"><pre><span></span><code>$ touch <span class="nv">$HOME</span>/check-ssh-address
+<span class="c1"># ...</span>
+<span class="c1"># Paste that file in, edit your email and APP PASSWORD (not your real password).</span>
+<span class="c1"># ...</span>
+$ chmod +x <span class="nv">$HOME</span>/check-ssh-address
+</code></pre></div>
+<p>Then add this line to your <code>~/.ssh/rc</code>:</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nv">$HOME</span>/check-ssh-address
+</code></pre></div>
+<p>To this date I have never been informed of a new login that was <em>not</em> me, and here's hoping that I never do! 🙏.</p>
+</div>
+    </div>
+
+  </div>
+</body>
+
+<script>
+  // apply bootstrap table classes/scopes
+  $('table.table>thead>tr>th').attr('scope', 'col')
+
+  // wrap all tables for overflow scrolling
+  $("table.table").not('.highlighttable').not('.blogroll').wrap("<div class='table_wrap'></div>");
+
+  // add anchor URLS for header elements in markdown pages
+  $(".markdown_insert h2,h3,h4").each(function (index) {
+    $(this).append("<a class='anchor' href='#" + this.id + "'><sup>#</sup></a>")
+  });
+</script>
+
+
+<script>
+  // More elegantly link to internal IDs. In practice these links put you BELOW the header
+  // element, but I want to include that element in the first view.
+
+  // The function actually applying the offset
+  function offsetAnchor() {
+    if (location.hash.length !== 0) {
+      window.scrollTo(window.scrollX, window.scrollY - 70);
+    }
+  }
+
+  // Captures click events of all <a> elements with href starting with #
+  $(document).on('click', 'a[href^="#"]', function (event) {
+    // Click events are captured before hashchanges. Timeout
+    // causes offsetAnchor to be called after the page jump.
+    window.setTimeout(function () {
+      offsetAnchor();
+    }, 0);
+  });
+
+  // Set the offset when entering page with hash present in the url
+  window.setTimeout(offsetAnchor, 0);
+</script>
+
+</html>
