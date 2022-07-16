@@ -15,7 +15,7 @@ ARTICLE_SAVE_AS = "blog/{date:%Y}/{slug}.html"
 ARTICLE_URL = "blog/{date:%Y}/{slug}.html"
 PAGE_SAVE_AS = "{slug}.html"
 PAGE_URL = "{slug}.html"
-STATIC_PATHS = ["pdfs"]
+STATIC_PATHS = []
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = ["bootstrapify", "sitemap"]
 
