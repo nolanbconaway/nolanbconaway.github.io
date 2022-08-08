@@ -1,5 +1,5 @@
 Title: About
-Date: 2020-01-20
+Date: 2022-08-08
 
 I live in New York City and work as a data scientist. I spend too much of my free time configuring Raspberry Pis.
 

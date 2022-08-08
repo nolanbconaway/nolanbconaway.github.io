@@ -1,5 +1,5 @@
 Title: Web Applications
-Date: 2020-08-30
+Date: 2022-07-15
 slug: apps
 
 ## Web Applications

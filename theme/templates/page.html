@@ -12,13 +12,4 @@
 <hr>
 Last updated: {{page.date.strftime(page.date_format)}}
 
-{# apply badge class to PDF links in the table. #}
-{% if page.title == 'PDFs' %}
-<script>
-    $('td>a').addClass('badge badge-pill badge-dark')
-    $('table').addClass('publications')
-    $("thead").remove()
-    $("td:has(a)").addClass('badge_cell')
-</script>
-
-<scr {% endif %} {% endblock content %}
+{% endblock content %}
