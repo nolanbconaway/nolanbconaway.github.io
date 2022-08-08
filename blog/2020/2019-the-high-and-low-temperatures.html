@@ -81,7 +81,7 @@
 <p>But I think the data can tell a story. At least some of it. This post tells the stories of unusual days in my apartment, from the perspective of temperature measurements.</p>
 <h2 id="describing-a-days-temperatures">Describing a day's temperatures</h2>
 <p>Early on, I wrote out a SQL view that computes summary statistics on each day's temperature readings. It shows me descriptives like:</p>
-<table class="table table-hover table-sm">
+<table class="table-sm table table-hover">
 <thead>
 <tr>
 <th>dt</th>
@@ -202,7 +202,7 @@
 <span class="n">density</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">zscores</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 </code></pre></div>
 <p>Then I picked out the days with the lowest densities! Here are those dates:</p>
-<table class="table table-hover table-sm">
+<table class="table-sm table table-hover">
 <thead>
 <tr>
 <th>dt</th>
