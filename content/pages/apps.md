@@ -12,7 +12,7 @@ I have a habit of creating web applications to provide a friendly interface to s
 | [SQLFluff Online Demo](https://online.sqlfluff.com/)                     | An online demonstration of the SQLFluff linter and formatter. Paste some SQL in to see what fluff thinks of it. |
 | [Music Recommender](https://nolans-recommender.herokuapp.com/)           | An Apriori-algorithm based music recommender. Search for an album you like to find recommendations.             |
 | [Temperature in My Apartment](https://temp-in-nolans-apartment.fly.dev/) | View the current temperature of my apartment, collected once every minute on a raspberry pi.                    |
-| [My Network Speed](https://nolans-network-speed.herokuapp.com/)          | View the speedtest.net results for my home network, collected every 15 minutes on a raspberry pi.               |
+| [My Network Speed](https://nolans-network-speed.fly.dev/)                | View the speedtest.net results for my home network, collected every 15 minutes on a raspberry pi.               |
 
 ### Old Apps
 
