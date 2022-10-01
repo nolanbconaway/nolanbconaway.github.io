@@ -24,7 +24,7 @@ I realized that, as a data scientist, the number of projects on which I work are
 
 ## Station registry
 
-I added a small python script to `~/.local/bin` on my `PATH` called `get-station-path`. This script contains a mapping of paths to locations where I commonly work:
+I added a python script to `~/.local/bin` on my `PATH` called `get-station-path`. This script contains a mapping of paths to locations where I commonly work:
 
 ```py
 #! /usr/bin/python3
@@ -125,4 +125,4 @@ I put that `workon` in my `.zshrc` (or functions file or whatever), and usage is
 
 Even easier, I can arrow-up locate the `workon` command if I don't want to type it out (or don't recall my project name).
 
-It only saves a handful of keypresses, but the mental burden of remembering where things are absolutely vanishes. Now I can focus ore on the work being done, and less on how to get started.
+It only saves a handful of keypresses, but the mental burden of remembering where things are absolutely vanishes. Now I can focus more on the work being done, and less on how to get started.
