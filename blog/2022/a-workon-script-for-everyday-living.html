@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Nolan Conaway's Blog</title>
+  <meta charset="utf-8" />
+
+  <!-- describe the site -->
+  <meta name="description" content="Nolan Conaway's Blog">
+<meta name="keywords" content="utility, scripting">
+  <meta name="author" content="Nolan Conaway">
+
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/theme/images/favicon.ico">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80719882-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-80719882-1');
+  </script>
+
+  <!-- mathjax -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+  <!-- bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- custom -->
+  <link rel="stylesheet" href="/theme/css/pygment.css">
+  <link rel="stylesheet" href="/theme/css/custom.css">
+</head>
+
+<body id="index" class="home">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="/pdfs">PDFs</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="/apps">Apps</a></li>
+        </ul>
+        <a class="navbar-brand" href="https://github.com/nolanbconaway">
+          <img src="/theme/images/GitHub-Mark-Light-64px.png" width="30" height="30" alt="Github">
+        </a>
+      </div>
+    </nav>
+
+    <hr>
+
+    <div class="content">
+<h1>A workon script for everyday living</h1>
+<div class="text-right">October 2022</div>
+<hr>
+<div class='markdown_insert'>
+    <p>A regrettable scenario I commonly find myself in:</p>
+<blockquote class="blockquote">
+<p>I'm doing research in my jupyter environment when I realize some of the data I need are not are not available in the datalake. So I hop into the dbt project and edit a couple data models, when I realize much of the source data haven't been backfilled from s3. So I hop over to the etl environment and start writing a adhoc run to backfill, when....</p>
+</blockquote>
+<p>And so on.</p>
+<p>Each of these hops involves getting a terminal to the right workspace and opening my editor (vscode) to the project root. For years my workflow had been:</p>
+<ol>
+<li>Realize I need to change contexts</li>
+<li><em>arrow up</em> history print until I find the correct <code>cd</code> command (or type in the path as a last resort).</li>
+<li><code>code .</code></li>
+<li>Start work.</li>
+</ol>
+<p>I realized that, as a data scientist, the number of projects on which I work are very countable and do not commonly expand. I could automate the above workflow if I only <em>registered</em> the projects and wrapped that workflow in a shell script. Once that is done, you can imagine <a href="https://www.alfredapp.com/"><code>alfred</code></a> or <a href="https://ulauncher.io/"><code>ulauncher</code></a> completions for lunching a workspace.</p>
+<h2 id="station-registry">Station registry</h2>
+<p>I added a small python script to <code>~/.local/bin</code> on my <code>PATH</code> called <code>get-station-path</code>. This script contains a mapping of paths to locations where I commonly work:</p>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="ch">#! /usr/bin/python3</span>
+<span class="c1"># $HOME/.local/bin/get-station-path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">HOME</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">REPOS</span> <span class="o">=</span> <span class="n">HOME</span> <span class="o">/</span> <span class="s2">"Documents/repos"</span>
+<span class="n">APPS</span> <span class="o">=</span> <span class="n">HOME</span> <span class="o">/</span> <span class="s2">"Documents/apps"</span>
+
+<span class="n">STATIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"scripts"</span><span class="p">:</span> <span class="n">HOME</span> <span class="o">/</span> <span class="s2">"Documents/scripts"</span><span class="p">,</span>
+    <span class="s2">"dotfiles"</span><span class="p">:</span> <span class="n">HOME</span> <span class="o">/</span> <span class="s2">".dotfiles"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">REPOS</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATIONS</span> <span class="ow">and</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATIONS</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">STATIONS</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">APPS</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATIONS</span> <span class="ow">and</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATIONS</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">STATIONS</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+
+
+<span class="k">def</span> <span class="nf">print_stations</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">STATIONS</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"station"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">"?"</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"-l"</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">"list_"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"List stations"</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">list_</span><span class="p">:</span>
+        <span class="n">print_stations</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">station</span> <span class="ow">in</span> <span class="n">STATIONS</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">STATIONS</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">station</span><span class="p">])</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Station </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">station</span><span class="si">}</span><span class="s2"> not found! Try one of:"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="n">print_stations</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p>The idea is to start with stations you want to manually name (dotfiles management, etc), and then programatically append stations from known directories; like where you might <code>git clone</code> everything.</p>
+<p>Calling the script will only print out the location of the workstation requested:</p>
+<div class="highlight codehilitetable"><pre><span></span><code>$ get-station-path dotfiles
+/home/nolan/.dotfiles
+</code></pre></div>
+<h2 id="zsh-function"><code>zsh</code> function</h2>
+<p>We can now obtain the path to a project on the basis of a name, so all that is needed is a quick function to <code>cd</code> and open up <code>vscode</code>:</p>
+<div class="highlight codehilitetable"><pre><span></span><code>workon <span class="o">()</span> <span class="o">{</span>
+    <span class="nv">arg</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="si">${</span><span class="nv">arg</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span> <span class="o">=</span> <span class="s2">"-"</span> <span class="o">]</span>
+    <span class="k">then</span>
+        <span class="nv">$HOME</span>/.local/bin/get-station-path <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="p">;</span>         <span class="c1"># pass if this is like -l</span>
+    <span class="k">else</span>
+        <span class="c1"># get the path</span>
+        <span class="nv">p</span><span class="o">=</span><span class="k">$(</span><span class="nv">$HOME</span>/.local/bin/get-station-path <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="k">)</span>
+        <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$?</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"0"</span> <span class="o">]</span>
+        <span class="k">then</span>
+            <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$p</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> /usr/bin/code .<span class="p">;</span>                 <span class="c1"># cd and open code if success</span>
+        <span class="k">else</span>
+            <span class="nb">echo</span> <span class="nv">$p</span><span class="p">;</span>                                    <span class="c1"># echo the error if fail</span>
+        <span class="k">fi</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>You can imagine editing the text editor, customizing maybe opening a new shell, etc. Personally, I've wrapped my <a href="https://ulauncher.io/"><code>ulauncher</code></a> to open vscode to the right spot in case I wasn't already in my terminal.</p>
+</div>
+    </div>
+
+  </div>
+</body>
+
+<script>
+  // apply bootstrap table classes/scopes
+  $('table.table>thead>tr>th').attr('scope', 'col')
+
+  // wrap all tables for overflow scrolling
+  $("table.table").not('.highlighttable').not('.blogroll').wrap("<div class='table_wrap'></div>");
+
+  // add anchor URLS for header elements in markdown pages
+  $(".markdown_insert h2,h3,h4").each(function (index) {
+    $(this).append("<a class='anchor' href='#" + this.id + "'><sup>#</sup></a>")
+  });
+</script>
+
+
+<script>
+  // More elegantly link to internal IDs. In practice these links put you BELOW the header
+  // element, but I want to include that element in the first view.
+
+  // The function actually applying the offset
+  function offsetAnchor() {
+    if (location.hash.length !== 0) {
+      window.scrollTo(window.scrollX, window.scrollY - 70);
+    }
+  }
+
+  // Captures click events of all <a> elements with href starting with #
+  $(document).on('click', 'a[href^="#"]', function (event) {
+    // Click events are captured before hashchanges. Timeout
+    // causes offsetAnchor to be called after the page jump.
+    window.setTimeout(function () {
+      offsetAnchor();
+    }, 0);
+  });
+
+  // Set the offset when entering page with hash present in the url
+  window.setTimeout(offsetAnchor, 0);
+</script>
+
+</html>
