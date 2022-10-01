@@ -114,3 +114,15 @@ workon () {
 ```
 
 You can imagine editing the text editor, customizing maybe opening a new shell, etc. Personally, I've wrapped my [`ulauncher`](https://ulauncher.io/) to open vscode to the right spot in case I wasn't already in my terminal.
+
+## Usage
+
+```sh
+$ workon <project-name>
+```
+
+I put that `workon` in my `.zshrc` (or functions file or whatever), and usage is frankly liberating. Opening up the project to write this post was as easy as `workon nolanbconaway.github.io`.
+
+Even easier, I can arrow-up locate the `workon` command if I don't want to type it out (or don't recall my project name).
+
+It only saves a handful of keypresses, but the mental burden of remembering where things are absolutely vanishes. Now I can focus ore on the work being done, and less on how to get started.
