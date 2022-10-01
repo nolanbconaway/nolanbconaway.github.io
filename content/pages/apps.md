@@ -8,7 +8,7 @@ I have a habit of creating web applications to provide a friendly interface to s
 
 | Application                                                                   | Description                                                                                                     |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| [Friends Oh My God](https://friends-omg.herokuapp.com/)                       | An extremely petty app in which I attempt to prove that they say "oh my god" a lot in the show "Friends".       |
+| [Friends Oh My God](https://friends-omg.onrender.com/)                        | An extremely petty app in which I attempt to prove that they say "oh my god" a lot in the show "Friends".       |
 | [SQLFluff Online Demo](https://online.sqlfluff.com/)                          | An online demonstration of the SQLFluff linter and formatter. Paste some SQL in to see what fluff thinks of it. |
 | [Music Recommender](https://music-recommender.onrender.com)                   | An Apriori-algorithm based music recommender. Search for an album you like to find recommendations.             |
 | [Temperature in My Apartment](https://temp-in-nolans-apartment.onrender.com/) | View the current temperature of my apartment, collected once every minute on a raspberry pi.                    |
@@ -16,7 +16,7 @@ I have a habit of creating web applications to provide a friendly interface to s
 
 ### Old Apps
 
-These are some older applications that I am no longer collecting data to support. These were once hosted oh Heroku but I took them down following the notice that [free dynos are no longer offered](https://blog.heroku.com/next-chapter).
+These are some older applications that I am no longer collecting data to support. These were once hosted on Heroku but I took them down following the notice that [free dynos are no longer offered](https://blog.heroku.com/next-chapter).
 
 | Application                                                             | Description                                                                                                                                                |
 | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
