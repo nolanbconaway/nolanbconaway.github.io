@@ -91,7 +91,7 @@
 <p>I realized that, as a data scientist, the number of projects on which I work are very countable and do not commonly expand. I could automate the above workflow if I only <em>registered</em> the projects and wrapped that workflow in a shell script. Once that is done, you can imagine <a href="https://www.alfredapp.com/"><code>alfred</code></a> or <a href="https://ulauncher.io/"><code>ulauncher</code></a> completions for launching a workspace.</p>
 <h2 id="station-registry">Station registry</h2>
 <p>I added a small python script to <code>~/.local/bin</code> on my <code>PATH</code> called <code>get-station-path</code>. This script contains a mapping of paths to locations where I commonly work:</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="ch">#! /usr/bin/python3</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="ch">#! /usr/bin/python3</span>
 <span class="c1"># $HOME/.local/bin/get-station-path</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
@@ -145,12 +145,12 @@
 </code></pre></div>
 <p>The idea is to start with stations you want to manually name (dotfiles management, etc), and then programatically append stations from known directories; like where you might <code>git clone</code> everything.</p>
 <p>Calling the script will only print out the location of the workstation requested:</p>
-<div class="highlight codehilitetable"><pre><span></span><code>$ get-station-path dotfiles
+<div class="codehilitetable highlight"><pre><span></span><code>$ get-station-path dotfiles
 /home/nolan/.dotfiles
 </code></pre></div>
 <h2 id="zsh-function"><code>zsh</code> function</h2>
 <p>We can now obtain the path to a project on the basis of a name, so all that is needed is a quick function to <code>cd</code> and open up <code>vscode</code>:</p>
-<div class="highlight codehilitetable"><pre><span></span><code>workon <span class="o">()</span> <span class="o">{</span>
+<div class="codehilitetable highlight"><pre><span></span><code>workon <span class="o">()</span> <span class="o">{</span>
     <span class="nv">arg</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
     <span class="k">if</span> <span class="o">[</span> <span class="si">${</span><span class="nv">arg</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span> <span class="o">=</span> <span class="s2">"-"</span> <span class="o">]</span>
     <span class="k">then</span>
@@ -168,6 +168,12 @@
 <span class="o">}</span>
 </code></pre></div>
 <p>You can imagine editing the text editor, customizing maybe opening a new shell, etc. Personally, I've wrapped my <a href="https://ulauncher.io/"><code>ulauncher</code></a> to open vscode to the right spot in case I wasn't already in my terminal.</p>
+<h2 id="usage">Usage</h2>
+<div class="codehilitetable highlight"><pre><span></span><code>$ workon &lt;project-name&gt;
+</code></pre></div>
+<p>I put that <code>workon</code> in my <code>.zshrc</code> (or functions file or whatever), and usage is frankly liberating. Opening up the project to write this post was as easy as <code>workon nolanbconaway.github.io</code>.</p>
+<p>Even easier, I can arrow-up locate the <code>workon</code> command if I don't want to type it out (or don't recall my project name).</p>
+<p>It only saves a handful of keypresses, but the mental burden of remembering where things are absolutely vanishes. Now I can focus ore on the work being done, and less on how to get started.</p>
 </div>
     </div>
 
