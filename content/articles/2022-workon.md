@@ -8,7 +8,7 @@ keywords: utility, scripting
 
 A regrettable scenario I commonly find myself in:
 
-> I'm doing research in my jupyter environment when I realize some of the data I need are not are not available in the datalake. So I hop into the dbt project and edit a couple data models, when I realize much of the source data haven't been backfilled from s3. So I hop over to the etl environment and start writing a adhoc run to backfill, when....
+> I'm doing research in my jupyter environment when I realize some of the data I need are not available in the datalake. So I hop into the dbt project and edit a couple data models, when I realize much of the source data haven't been backfilled from s3. So I hop over to the etl environment and start writing a adhoc run to backfill, when....
 
 
 And so on.
