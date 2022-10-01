@@ -20,7 +20,7 @@ Each of these hops involves getting a terminal to the right workspace and openin
 3. `code .`
 4. Start work.
 
-I realized that, as a data scientist, the number of projects on which I work are very countable and do not commonly expand. I could automate the above workflow if I only _registered_ the projects and wrapped that workflow in a shell script. Once that is done, you can imagine [`alfred`](https://www.alfredapp.com/) or [`ulauncher`](https://ulauncher.io/) completions for lunching a workspace.
+I realized that, as a data scientist, the number of projects on which I work are very countable and do not commonly expand. I could automate the above workflow if I only _registered_ the projects and wrapped that workflow in a shell script. Once that is done, you can imagine [`alfred`](https://www.alfredapp.com/) or [`ulauncher`](https://ulauncher.io/) completions for launching a workspace.
 
 ## Station registry
 
