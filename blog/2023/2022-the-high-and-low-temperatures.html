@@ -8,7 +8,7 @@
 
   <!-- describe the site -->
   <meta name="description" content="Nolan Conaway's Blog">
-<meta name="keywords" content="timelapse,raspberry pi">
+<meta name="keywords" content="thermometer">
   <meta name="author" content="Nolan Conaway">
 
   <!-- viewport -->
@@ -73,33 +73,27 @@
     <hr>
 
     <div class="content">
-<h1>Watching spring arrive from my home office.</h1>
-<div class="text-right">June 2021</div>
+<h1>2022: The high and low temperatures</h1>
+<div class="text-right">January 2023</div>
 <hr>
 <div class='markdown_insert'>
-    <p>During the winter of 2020, I hooked up a camera to a Raspberry Pi and started writing <a href="https://github.com/nolanbconaway/rpi-camera">python modules</a> to do time lapse photography. Early on, I made some films of <a href="https://www.youtube.com/watch?v=8ykslLDXHdA">winter storms</a> coming in over the course of 4-12 hour periods.</p>
-<p>At the start of spring, I set up for a longer time lapse; I wanted to film the start of spring as seen from the window of my home office. There's a lot of greenery outside so I was hoping to quantify the proportion of the color space occupied by green over time.</p>
-<p>Here's what I got:</p>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="405" src="https://www.youtube.com/embed/TQsMR8QJxsw" title="YouTube video player" width="720"></iframe>
-<p>It can be a little difficult to see the greenery come in, so I made another version which clips to the focal regions:</p>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="405" src="https://www.youtube.com/embed/S1OscbAJsFM" title="YouTube video player" width="720"></iframe>
-<p>It can't hurt to look at a little before/after action. These two photos were taken at Noon.</p>
-<table class="table table-sm table-hover" style="">
-<tr>
-<th>April 7</th><th>April 25</th>
-</tr>
-<tr>
-<td><img class="img-fluid" src="https://nolanbconaway.github.io/blog/2021/2021-04-07.jpg"/></td>
-<td><img class="img-fluid" src="https://nolanbconaway.github.io/blog/2021/2021-04-25.jpg"/></td>
-</tr>
-</table>
-<p>Even here we're still only using Human vision to see how much green there is. I used opencv to do a really dumb calculation: the proportion of the RBG color volume that lies in the G channel each day:</p>
-<p><object data="https://nolanbconaway.github.io/blog/2021/timeline.svg" type="image/svg+xml"></object></p>
-<blockquote class="blockquote">
-<p>NOTE: I do not know very much about computer vision; don't @ me.</p>
-</blockquote>
-<p>The green channel gains dominance over time but it's not crazy evident. Probably what I am seeing as "green" is actually a mixture of lots of colors in the RGB space. </p>
-<p>In any case, if time lapse content is your jam, be on the lookout for another film of my tomatoes coming in!</p>
+    <p>Four years ago I hooked up a thermometer to a Raspberry Pi, and I set up a cron job to save the temperature in my postgres database every minute. Since then, I've posted year-in-review style articles once annually (<a href="/blog/2020/2019-the-high-and-low-temperatures">2019</a>, <a href="/blog/2021/2020-the-high-and-low-temperatures">2020</a>, <a href="/blog/2022/2021-the-high-and-low-temperatures">2021</a>) describing the data I had obtained from running the cron job for a full calendar year. </p>
+<p>This is another one of those posts!</p>
+<p>(FYI- You can still check out a real time view of the data via <a href="https://temp-in-nolans-apartment.herokuapp.com/">my heroku webapp</a>.)</p>
+<h2 id="the-warmest-day">🔥 the warmest day</h2>
+<p><object data="https://nolanbconaway.github.io/blog/2023/warmest.svg" type="image/svg+xml"></object></p>
+<p>Usually I record the warmest daily temperatures during whatever week we shut off the AC and leave town for a vacation. This year we left in August and let the apartment roast.</p>
+<h2 id="the-coldest-day">❄ the coldest day</h2>
+<p><object data="https://nolanbconaway.github.io/blog/2023/coldest.svg" type="image/svg+xml"></object></p>
+<p>Late December was <em>cold</em>; anyone in NYC can attest to this. Again, we left town and shut off the heat, so temperatures dropped lower than I've ever seen them in the apartment (&lt;50℉!).</p>
+<p>I think it's wild that even on this day, with an outside high temp of 27℉, the sunlight supported 62℉ indoor temperatures at one point in the afternoon.</p>
+<h2 id="the-most-variable-day">📈 The most variable day</h2>
+<p><object data="https://nolanbconaway.github.io/blog/2023/variable.svg" type="image/svg+xml"></object></p>
+<p>The most variable day was an another Fall day with heavy sunlight coming in; quickly warming the apartment from 63℉ to 82℉ in the space of a few hours.</p>
+<h2 id="all-together">All together!</h2>
+<p>I found it interesting to plot these days on the same axis so that the changes in temperature over time can be appreciated. Take a look!</p>
+<p><object data="https://nolanbconaway.github.io/blog/2023/everybody.svg" type="image/svg+xml"></object></p>
+<p>👋 cya in 2024!</p>
 </div>
     </div>
 

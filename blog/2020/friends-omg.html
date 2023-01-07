@@ -90,7 +90,7 @@
 <li>I found a Sex and the City script CSV on <a href="https://www.kaggle.com/snapcrack/every-sex-and-the-city-script">Kaggle</a>. It needed some manual cleaning and so now I'm pretty sure that I <a href="http://nolanc.heliohost.org/omg-data/satc.csv">host</a> the cleanest Sex and the City database online.</li>
 </ul>
 <p>I wrote out <a href="https://github.com/nolanbconaway/friends-omg/tree/master/build">a python module</a> to transfer data from each of these sources into a single sqlite database. Each show has its own <a href="https://github.com/nolanbconaway/friends-omg/blob/master/build/ddl.sql">table</a>, and its own python script to transform the raw source data into a schema composed of these four columns:</p>
-<table class="table-hover table-sm table">
+<table class="table table-sm table-hover">
 <thead>
 <tr>
 <th>Column</th>
@@ -122,7 +122,7 @@
 </tbody>
 </table>
 <p>Once those data are in place, it's easy to do a count of lines containing any phrase:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="k">with</span> <span class="n">t</span> <span class="k">as</span> <span class="p">(</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="k">with</span> <span class="n">t</span> <span class="k">as</span> <span class="p">(</span>
   <span class="k">select</span> 
     <span class="k">count</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="k">lower</span><span class="p">(</span><span class="n">line_text</span><span class="p">)</span> <span class="k">like</span> <span class="k">lower</span><span class="p">(</span><span class="s1">'%{phrase}%'</span><span class="p">)</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">k</span><span class="p">,</span>
     <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">n</span>
@@ -138,7 +138,7 @@
 <h2 id="show-me-the-numbers-already">Show Me the Numbers Already</h2>
 <p>You can compute the frequencies of any phrase you'd like using the <a href="https://friends-omg.herokuapp.com/">app</a> but I've also taken the liberty of exploring some of my own curiosities!</p>
 <h3 id="oh-my-god-click">Oh My God (<a href="https://friends-omg.herokuapp.com/?q=oh+my+god">click</a>)</h3>
-<table class="table-hover table-sm table">
+<table class="table table-sm table-hover">
 <thead>
 <tr>
 <th>Show</th>
@@ -182,7 +182,7 @@
 <p><em>Oh My God</em>.</p>
 <h3 id="talking-about-new-york-click">Talking about New York (<a href="https://friends-omg.herokuapp.com/?q=new+york">click</a>)</h3>
 <p>All three shows are set around the same time period in New York City. But characters in Sex and the City talk about New York the most:</p>
-<table class="table-hover table-sm table">
+<table class="table table-sm table-hover">
 <thead>
 <tr>
 <th>Show</th>
