@@ -15,7 +15,7 @@ I've even seen situations in which the convention was to _paste local terminal o
 
 There has to be a better way!
 
-<iframe src="https://giphy.com/embed/5yaCPstUOV9Kw" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/obama-thanks-5yaCPstUOV9Kw">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/5yaCPstUOV9Kw" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 This post contains an overview of the solution I've been circling for a few years now.
 
