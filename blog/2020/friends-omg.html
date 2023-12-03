@@ -122,7 +122,7 @@
 </tbody>
 </table>
 <p>Once those data are in place, it's easy to do a count of lines containing any phrase:</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="k">with</span> <span class="n">t</span> <span class="k">as</span> <span class="p">(</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="k">with</span> <span class="n">t</span> <span class="k">as</span> <span class="p">(</span>
   <span class="k">select</span> 
     <span class="k">count</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="k">lower</span><span class="p">(</span><span class="n">line_text</span><span class="p">)</span> <span class="k">like</span> <span class="k">lower</span><span class="p">(</span><span class="s1">'%{phrase}%'</span><span class="p">)</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">k</span><span class="p">,</span>
     <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">n</span>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Nolan Conaway's Blog</title>
+  <meta charset="utf-8" />
+
+  <!-- describe the site -->
+  <meta name="description" content="Nolan Conaway's Blog">
+<meta name="keywords" content="dbt, database, ci">
+  <meta name="author" content="Nolan Conaway">
+
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/theme/images/favicon.ico">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTP2SVS168"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-RTP2SVS168');
+  </script>
+  <!-- mathjax -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+  <!-- bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- custom -->
+  <link rel="stylesheet" href="/theme/css/pygment.css">
+  <link rel="stylesheet" href="/theme/css/custom.css">
+
+</head>
+
+<body id="index" class="home">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Nolan Conaway</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="/pdfs">PDFs</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="/apps">Apps</a></li>
+        </ul>
+        <a class="navbar-brand" href="https://github.com/nolanbconaway">
+          <img src="/theme/images/GitHub-Mark-Light-64px.png" width="30" height="30" alt="Github">
+        </a>
+      </div>
+    </nav>
+
+    <hr>
+
+    <div class="content">
+<h1>My dbt continuous integration setup</h1>
+<div class="text-right">November 2023</div>
+<hr>
+<div class='markdown_insert'>
+    <p>I love what <a href="https://www.getdbt.com/">dbt</a> has done for the host of data professions from which I earn a living. I don't know how people were managing databases before dbt, because in that era I was merely a <em>consumer</em> of data. Learning dbt was key to my transition to a maintainer of tables; someone an organization could rely on to produce useful data.</p>
+<p>Reliability is key in this space, after all. Ensuring a data pipeline is well tested is difficult given the number of external services that need to be mocked, but I find that struggle pays off every time.</p>
+<p>For the longest time, dbt models had been a final untested link in my data pipelines. I would write <a href="https://docs.getdbt.com/reference/commands/test">dbt tests</a> which run in airflow DAGs; but ensuring the tests pass <em>prior</em> to merge was always done manually.</p>
+<p>I've even seen situations in which the convention was to <em>paste local terminal output in the PR description</em>. ☠</p>
+<p>There has to be a better way!</p>
+<iframe allowfullscreen="" class="giphy-embed" frameborder="0" height="360" src="https://giphy.com/embed/5yaCPstUOV9Kw" width="480"></iframe>
+<p>This post contains an overview of the solution I've been circling for a few years now.</p>
+<h2 id="why-running-dbt-in-ci-difficult">Why running dbt in CI difficult?</h2>
+<h3 id="schema-management">Schema management</h3>
+<p>In local development dbt uses a host of schemas in a development database (<code>dbt_nolan</code>, <code>dbt_nolan_staging</code>, etc) which are automatically built to populate/test tables. The base prefix for all these tables is set via the <code>schema</code> in the <a href="https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#understanding-target-schemas"><code>profiles.yml</code></a>.</p>
+<p>Running in CI requires dynamically setting the schema prefix based on the PR number, git hash, branch name, etc. This can be done with <a href="https://docs.getdbt.com/reference/dbt-jinja-functions/env_var"><code>envvars</code></a>. The important thing is to pick something that won't collide with any other CI runs or user development.</p>
+<p>Not only does a CI solution need to generate the schema name on the fly, but it should have a system to drop the schemas after the fact so that the dev database doesn't store a bunch of old schemas from historical CI runs.</p>
+<h3 id="testing-changed-models">Testing changed models</h3>
+<p>In my experience its basically unthinkable (for database load, cost, time, etc, reasons) to run an entire dbt project when it reaches even medium sizes. So running only the affected models is important.</p>
+<p>dbt is able to identify local files that have changed compared to a <a href="https://docs.getdbt.com/reference/artifacts/manifest-json">manifest/state file</a>. The state file is typically used to store the <em>main branch state</em> (or whatever the merge target), so that dbt can isolate the current changes.</p>
+<p><em>If such a file should be available</em>, the following dbt invocation can be run to test the changed files and first level dependents of them:</p>
+<div class="codehilitetable highlight"><pre><span></span><code>dbt build --select state:modified+1 --defer --favor-state --state<span class="o">=</span>path/to/state
+</code></pre></div>
+<blockquote class="blockquote">
+<p>Note: The <code>--defer --favor-state</code> arguments are used to ensure that the production versions of unchanged models are used instead of development versions.</p>
+</blockquote>
+<p>This seems perfect, <em>if such a file should be available</em>. Alas, the manifest file is something that needs to be <em>produced</em>. </p>
+<p>Generating the manifest file is as easy as running a <code>dbt compile</code> command; in which case it lands (by default) in <code>target/manifest.json</code>. The manifest for the <em>current production state</em> is what is needed in the CI environment; so most solutions involve periodically building the file and storing it externally, then downloading it on the fly in the CI pipeline.</p>
+<h3 id="summary-of-the-challenge">Summary of the challenge</h3>
+<p>Clearly, a fair amount of orchestrating is required just to run the correct models in the correct place!</p>
+<ol>
+<li>Make a schema name that won't interfere with any other work; export it to the correct envvar to populate it in the dbt profiles.yml.</li>
+<li>Obtain a local a manifest file from the target branch, so that changed models can be detected.</li>
+<li>Regardless of what happens, make sure to drop all the schemas which were created as a part of the CI run.</li>
+</ol>
+<h2 id="a-github-actions-solution">A GitHub actions solution</h2>
+<p><a href="https://www.getdbt.com/product/dbt-cloud">dbt Cloud</a> has a streamlined offering that does all of the above; but an additional provider might not be desirable if your organization is running the other CI elements on GitHub.</p>
+<p>The general architecture of my setup is as follows:</p>
+<ol>
+<li>On push to <code>main</code>, run <code>dbt compile</code> to generate the manifest file. Save that file as a <a href="https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts">actions artifact</a>.</li>
+<li>On each CI run, download the manifest artifact from the <em>latest</em> compile run. I found the <a href="https://cli.github.com/">GitHub cli</a> made this easy.</li>
+<li>Wrap subsequent dbt commands in a script which sets up schemas and tears them down afterwards.</li>
+</ol>
+<h3 id="setting-up-profilesyml">Setting up <code>profiles.yml</code></h3>
+<p>No matter what the solution, the CI runner will need to have access to the data warehouse. Which means passing around authentication secrets.</p>
+<p>In local development, database secrets are usually stored in plaintext in a file like <a href="https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml"><code>~/.dbt/profiles.yml</code></a>. GitHub will need a similar file to to connect to the data warehouse; but this one will need to be special to avoid saving secrets into the repository. The easiest way is to export <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions">GitHub actions secrets</a> to envvars, and pick those up in the yml file.</p>
+<p>Below is an example setup for a snowflake database:</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">default</span><span class="p">:</span>
+  <span class="nt">target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dev</span>
+  <span class="nt">outputs</span><span class="p">:</span>
+    <span class="nt">dev</span><span class="p">:</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">snowflake</span>
+      <span class="nt">account</span><span class="p">:</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">env_var('DBT_ACCOUNT')</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="nt">user</span><span class="p">:</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">env_var('DBT_USER')</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="nt">password</span><span class="p">:</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">env_var('DBT_PASSWORD')</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="nt">role</span><span class="p">:</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">env_var('DBT_ROLE')</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="nt">database</span><span class="p">:</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">env_var('DBT_DATABASE')</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="nt">schema</span><span class="p">:</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">env_var('DBT_SCHEMA')</span><span class="nv"> </span><span class="s">}}"</span>
+      <span class="nt">warehouse</span><span class="p">:</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">env_var('DBT_WAREHOUSE')</span><span class="nv"> </span><span class="s">}}"</span>
+</code></pre></div>
+<p>A file like that will need to be committed to the dbt GitHub repository and the secrets will need to be orchestrated appropriately.</p>
+<h3 id="the-compile-workflow">The compile workflow</h3>
+<p>This step is about saving the production manifest to some external storage so that it can be retrieved later to determine which models have changed.</p>
+<p>Compiling is usually pretty quick and the manifest is only a handful of megabytes, so this should be a quick and cheap workflow.</p>
+<p>An action like below can be used to save the manifest as an actions artifact, but one could imagine saving to cloud object storage, etc. The advantage of using an actions artifact is that, presumably, developers already have access to the GitHub repository and will not need additional authorization to download the files.</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Main Branch DBT State</span>
+
+<span class="nt">on</span><span class="p">:</span>
+  <span class="nt">push</span><span class="p">:</span>
+    <span class="nt">branches</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">steps</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+    <span class="p p-Indicator">-</span> <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v4</span>
+      <span class="nt">with</span><span class="p">:</span>
+        <span class="nt">python-version</span><span class="p">:</span> <span class="s">'3.10'</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Setup dbt</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">pip install -r requirements.txt</span>
+        <span class="no">dbt deps</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Compile</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dbt compile --profiles-dir=/path/to/directory/containing/profilesyml</span>
+      <span class="nt">env</span><span class="p">:</span>
+        <span class="nt">DBT_ACCOUNT</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_ACCOUNT }}</span>
+        <span class="nt">DBT_USER</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_USER }}</span>
+        <span class="nt">DBT_PASSWORD</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_PASSWORD }}</span>
+        <span class="nt">DBT_ROLE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_ROLE }}</span>
+        <span class="nt">DBT_DATABASE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_DATABASE }}</span>
+        <span class="nt">DBT_SCHEMA</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_SCHEMA }}</span>
+        <span class="nt">DBT_WAREHOUSE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_WAREHOUSE }}</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Upload manifest.json to GH Artifacts</span>
+      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v3</span>
+      <span class="nt">with</span><span class="p">:</span>
+        <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dbt_manifest_json</span>
+        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">target/manifest.json</span>
+        <span class="nt">if-no-files-found</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">error</span>
+</code></pre></div>
+<p>In the above, I set up a python environment with dbt installed, then ran a simple <code>compile</code> command to generate file <code>target/manifest.json</code>. That file is uploaded as an artifact so it can be downloaded later.</p>
+<h3 id="pulling-the-latest-manifest">Pulling the latest manifest</h3>
+<p>This step may not be needed depending on how the manifest file is stored. It is required in the case of GitHub artifacts.</p>
+<p>By default, GitHub actions will save artifacts from workflow runs going back 90 days. The manifest from the <em>latest</em> run presumably contains the desired comparison state; so the CI pipeline needs to figure out which version of the <code>dbt_manifest_json</code> artifact is the latest one.</p>
+<p>I found is straightforward enough to do so via the <a href="https://cli.github.com/">GitHub cli</a>; which is easy to install locally and comes preinstalled in most GitHub actions runners. The below approach uses the cli to first list runs, and then grab the manifest from the latest one.</p>
+<p>The following invocation will list the last 500 runs of the "Main Branch DBT State" action:</p>
+<div class="codehilitetable highlight"><pre><span></span><code>gh run list <span class="se">\</span>
+    --limit<span class="o">=</span><span class="m">500</span> <span class="se">\</span>
+    --branch<span class="o">=</span>main <span class="se">\</span>
+    --status<span class="o">=</span>completed <span class="se">\</span>
+    --workflow<span class="o">=</span><span class="s1">'Main Branch DBT State'</span> <span class="se">\</span>
+    --json<span class="o">=</span>databaseId,createdAt
+</code></pre></div>
+<blockquote class="blockquote">
+<p>The <code>--json=databaseId,createdAt</code> flag tells the CLI to return JSON data, and to include the run ID as well as the timestamp of the run. Make sure the workflow and branch setting match the compile action's configuration.</p>
+</blockquote>
+<p>The resultant data look like this:</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="p">[</span>
+    <span class="p">{</span><span class="nt">"createdAt"</span><span class="p">:</span> <span class="s2">"2023-06-02T00:00:00Z"</span><span class="p">,</span> <span class="nt">"databaseId"</span><span class="p">:</span> <span class="mi">123</span><span class="p">}</span>
+    <span class="p">{</span><span class="nt">"createdAt"</span><span class="p">:</span> <span class="s2">"2023-06-01T00:00:00Z"</span><span class="p">,</span> <span class="nt">"databaseId"</span><span class="p">:</span> <span class="mi">122</span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>In my experience, the records have been in reverse chronological order (latest first), but I was <a href="https://github.com/cli/cli/issues/6678#issuecomment-1334156674">unable to find a guarantee</a> about this. So instead I chose to pull a lot of runs (500) and hope that the latest one is in there.</p>
+<p>One can sort through the records in lots of ways. Here's how <a href="https://github.com/jqlang/jq"><code>jq</code></a> could be used:</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nv">runs</span><span class="o">=</span><span class="k">$(</span>
+    gh run list <span class="se">\</span>
+    --limit<span class="o">=</span><span class="m">500</span> <span class="se">\</span>
+    --branch<span class="o">=</span>main <span class="se">\</span>
+    --status<span class="o">=</span>completed <span class="se">\</span>
+    --workflow<span class="o">=</span><span class="s1">'Main Branch DBT State'</span> <span class="se">\</span>
+    --json<span class="o">=</span>databaseId,createdAt
+<span class="k">)</span>
+
+<span class="c1"># get latest run</span>
+<span class="nv">latest</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$runs</span> <span class="p">|</span> jq <span class="s1">'sort_by(.createdAt) | reverse'</span> <span class="p">|</span> jq <span class="s1">'.[0]'</span><span class="k">)</span>
+<span class="nv">run_id</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$latest</span> <span class="p">|</span> jq <span class="s1">'.databaseId'</span><span class="k">)</span>
+<span class="nv">run_created_at</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$latest</span> <span class="p">|</span> jq <span class="s1">'.createdAt'</span><span class="k">)</span>
+<span class="nb">echo</span> <span class="s2">"Latest run id: </span><span class="nv">$run_id</span><span class="s2"> (created at </span><span class="nv">$run_created_at</span><span class="s2">)"</span>
+</code></pre></div>
+<p>Given a <code>databaseId</code>, one can download the artifact like:</p>
+<div class="codehilitetable highlight"><pre><span></span><code>gh run download --name<span class="o">=</span>dbt_manifest_json --dir<span class="o">=</span>manifest/ <span class="nv">$run_id</span>
+</code></pre></div>
+<blockquote class="blockquote">
+<p>The manifest.json will appear at <code>manifest/manifest.json</code> if successful.</p>
+</blockquote>
+<p>A script doing the above should be committed into the dbt GitHub repository (something like <code>download-production-manifest.sh</code>), so that it can be reused in the CI environment as well as local development.</p>
+<h3 id="the-dbt-build-wrapper">The dbt build wrapper</h3>
+<p>The next step is to write a wrapper around <code>dbt build</code> which manages the schemas created by dbt. The idea is to generate random unused schema names for dbt to use temporarily, and then drop anything dbt created after the fact. Eventually, the downloaded state and the custom profiles.yml will be passed to this script as well.</p>
+<p>This script can get a little long, so I'll paste a version below. The general idea is as follows:</p>
+<ol>
+<li>Write a function which <strong>lists schemas with a given prefix</strong> (<code>list_schemas_with_prefix</code>). This will be used to determine if a given proposed schema name has any collisions, and also to list schemas that need to be dropped when everything is finished.</li>
+<li>Use that function in another function which <strong>generates random schema names</strong> (<code>get_schema_prefix</code>) until an unused one is found. This will be used to assign a <code>DBT_SCHEMA</code> envvar to be used by dbt later.</li>
+<li>Use that function in another function which <strong>drops schemas with a given prefix</strong> (<code>drop_schemas_with_prefix</code>). This is used to cleanup after runs.</li>
+<li>Generate a <code>subprocess.check_call</code> command based on user-provided paths to the downloaded manifest and profiles.yml, exporting a generated <code>DBT_SCHEMA</code> envvar.</li>
+<li>Wrap that <code>check_call</code> in a try/except statement, dropping the schemas in the <code>finally</code> clause.</li>
+</ol>
+<p>Here is one way to do it:</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
+<span class="sd">"""Run a DBT in an ephemeral schema.</span>
+
+<span class="sd">Call like:</span>
+
+<span class="sd">    ./dbt-ci.py --select=... --state=/path/to/state --profiles-dir=/path/to/profiles</span>
+
+<span class="sd">Requires the following environment variables:</span>
+
+<span class="sd">    - DBT_USER</span>
+<span class="sd">    - DBT_PASSWORD</span>
+<span class="sd">    - DBT_ACCOUNT</span>
+<span class="sd">    - DBT_ROLE</span>
+<span class="sd">    - DBT_DATABASE</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">snowflake.connector</span> <span class="kn">import</span> <span class="n">connect</span> <span class="k">as</span> <span class="n">snowflake_connect</span>
+
+
+<span class="k">def</span> <span class="nf">snowflake_query</span><span class="p">(</span><span class="n">sql</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="sd">"""Run a raw query against Snowflake, returning a dict for each row."""</span>
+    <span class="k">with</span> <span class="n">snowflake_connect</span><span class="p">(</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DBT_USER"</span><span class="p">],</span>
+        <span class="n">password</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DBT_PASSWORD"</span><span class="p">],</span>
+        <span class="n">account</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DBT_ACCOUNT"</span><span class="p">],</span>
+        <span class="n">role</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DBT_ROLE"</span><span class="p">],</span>
+        <span class="n">database</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DBT_DATABASE"</span><span class="p">],</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
+
+
+<span class="k">def</span> <span class="nf">list_schemas_with_prefix</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="sd">"""Check if a schema prefix collides with existing schemas.</span>
+
+<span class="sd">    Returns True if there are any collisions, False otherwise.</span>
+<span class="sd">    """</span>
+    <span class="n">db_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DBT_DATABASE"</span><span class="p">]</span>
+
+    <span class="c1"># terse limits total data returned. like is case insensitive.</span>
+    <span class="c1"># docs: https://docs.snowflake.com/en/sql-reference/sql/show-schemas#parameters</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"show terse schemas like '</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">%' in database </span><span class="si">{</span><span class="n">db_name</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">return</span> <span class="n">snowflake_query</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_schema_prefix</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Make a random schema prefix that doesn't collide with existing ones."""</span>
+    <span class="n">date_str</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%y%m</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">uuid_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)[:</span><span class="mi">8</span><span class="p">]</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"dbt_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">uuid_str</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Using prefix </span><span class="si">{</span><span class="n">schema</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="nb">any</span><span class="p">(</span><span class="n">list_schemas_with_prefix</span><span class="p">(</span><span class="n">schema</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Detected collision with </span><span class="si">{</span><span class="n">schema</span><span class="si">}</span><span class="s2">, getting new uuid."</span><span class="p">)</span>
+        <span class="n">uuid_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)[:</span><span class="mi">8</span><span class="p">]</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"dbt_</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">uuid_str</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Using prefix </span><span class="si">{</span><span class="n">schema</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">schema</span>
+
+
+<span class="k">def</span> <span class="nf">drop_schemas_with_prefix</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""Drop all schemas with a given prefix."""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dropping all schemas with prefix </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+    <span class="n">schemas</span> <span class="o">=</span> <span class="n">list_schemas_with_prefix</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">schemas</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">schemas</span><span class="p">)</span><span class="si">}</span><span class="s2"> schemas with prefix </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">, dropping them."</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">schema</span> <span class="ow">in</span> <span class="n">schemas</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">schema</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dropping schema </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="n">snowflake_query</span><span class="p">(</span><span class="sa">f</span><span class="s2">"drop schema </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> cascade"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Schema </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> dropped."</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No schemas with prefix </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> found."</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">parse_args</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">:</span>
+    <span class="sd">"""Make a parser and parse arguments."""</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"--select"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"DBT selector."</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--state"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"Path to state."</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"--profiles-dir"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"Path to profiles."</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">command</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"dbt"</span><span class="p">,</span>
+        <span class="s2">"build"</span><span class="p">,</span>
+        <span class="s2">"--defer"</span><span class="p">,</span>
+        <span class="s2">"--favor-state"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">"--state=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">"--profiles-dir=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">profiles_dir</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">"--select=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">select</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">schema_prefix</span> <span class="o">=</span> <span class="n">get_schema_prefix</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Running command: </span><span class="si">{</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="p">{</span><span class="o">**</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">,</span> <span class="s2">"DBT_SCHEMA"</span><span class="p">:</span> <span class="n">schema_prefix</span><span class="p">})</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># teardown no matter what</span>
+        <span class="n">drop_schemas_with_prefix</span><span class="p">(</span><span class="n">schema_prefix</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<blockquote class="blockquote">
+<p>The above version is set up for snowflake, but only imports and a couple functions (<code>snowflake_query</code>, <code>list_schemas_with_prefix</code>, <code>drop_schemas_with_prefix</code>) would need changes to support another warehouse type.</p>
+</blockquote>
+<h3 id="the-ci-workflow">The CI workflow</h3>
+<p>At this point, the following are available:</p>
+<ol>
+<li>A way to authorize GitHub actions to connect to the data warehouse (via actions secrets and a custom profiles.yml).</li>
+<li>A scheduled job to save the production manifest to external storage (the "Main Branch DBT State" action).</li>
+<li>A little script to locate and download the latest manifest file (<code>download-production-manifest.sh</code>).</li>
+<li>A bigger script to wrap dbt commands to use random, ephemeral schemas (<code>dbt-ci.py</code>).</li>
+</ol>
+<p>The final step is to write a workflow to put it all together.</p>
+<p>THe below workflow first sets up a dbt python environment, then downloads the state, then runs the dbt build wrapper (making sure to pass in the correct paths to the state and profiles.</p>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CI</span>
+
+<span class="nt">on</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">push</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">steps</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+    <span class="p p-Indicator">-</span> <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v4</span>
+      <span class="nt">with</span><span class="p">:</span>
+        <span class="nt">python-version</span><span class="p">:</span> <span class="s">'3.10'</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Setup dbt</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">pip install -r requirements.txt</span>
+        <span class="no">dbt deps</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Download Manifest</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./download-production-manifest.sh</span>
+      <span class="nt">env</span><span class="p">:</span>
+        <span class="nt">GH_TOKEN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ github.token }}</span>  <span class="c1"># needed for gh cli in gh actions</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dbt build</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./dbt-ci.py --select=state:modified+1 --state=/path/to/state --profiles-dir=/path/to/profiles</span>
+      <span class="nt">env</span><span class="p">:</span>
+        <span class="nt">DBT_ACCOUNT</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_ACCOUNT }}</span>
+        <span class="nt">DBT_USER</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_USER }}</span>
+        <span class="nt">DBT_PASSWORD</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_PASSWORD }}</span>
+        <span class="nt">DBT_ROLE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_ROLE }}</span>
+        <span class="nt">DBT_DATABASE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_DATABASE }}</span>
+        <span class="nt">DBT_SCHEMA</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_SCHEMA }}</span>
+        <span class="nt">DBT_WAREHOUSE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DBT_WAREHOUSE }}</span>
+</code></pre></div>
+<blockquote class="blockquote">
+<p>I like to use <code>--select=state:modified+1</code> to run all changes files and first-level dependencies, but there are lots of ways to manage this selector.</p>
+</blockquote>
+<p>After all that setup, the final action looks really simple! But it took a lot to get there.</p>
+<h2 id="summary">Summary</h2>
+<p>No matter what the solution, running dbt in a CI environments <em>must</em> involve managing secrets, state files, and teardown of database runs. This will in turn require writing some custom dbt wrappers, or some <em>narsty</em> shell scripts. I could imagine dbt may one day add a "temporary-build" command specifically for CI purposes (in which the schema is created and town down within in the run); which will remove the need for the <code>dbt-ci.py</code> file above.</p>
+<p>This setup mirrors what a lot of other people use (just google "dbt continuous integration"); likely because everyone needs to match up the way that dbt works with running an efficient testing pipeline. I can only hope some analytics engineer somewhere found my walkthrough to be more cogent than the rest.</p>
+</div>
+    </div>
+
+  </div>
+</body>
+
+<script>
+  // apply bootstrap table classes/scopes
+  $('table.table>thead>tr>th').attr('scope', 'col')
+
+  // wrap all tables for overflow scrolling
+  $("table.table").not('.highlighttable').not('.blogroll').wrap("<div class='table_wrap'></div>");
+
+  // add anchor URLS for header elements in markdown pages
+  $(".markdown_insert h2,h3,h4").each(function (index) {
+    $(this).append("<a class='anchor' href='#" + this.id + "'><sup>#</sup></a>")
+  });
+</script>
+
+
+<script>
+  // More elegantly link to internal IDs. In practice these links put you BELOW the header
+  // element, but I want to include that element in the first view.
+
+  // The function actually applying the offset
+  function offsetAnchor() {
+    if (location.hash.length !== 0) {
+      window.scrollTo(window.scrollX, window.scrollY - 70);
+    }
+  }
+
+  // Captures click events of all <a> elements with href starting with #
+  $(document).on('click', 'a[href^="#"]', function (event) {
+    // Click events are captured before hashchanges. Timeout
+    // causes offsetAnchor to be called after the page jump.
+    window.setTimeout(function () {
+      offsetAnchor();
+    }, 0);
+  });
+
+  // Set the offset when entering page with hash present in the url
+  window.setTimeout(offsetAnchor, 0);
+</script>
+
+<a rel="me" href="https://hachyderm.io/@nbc" style="display:none"></a>
+
+</html>

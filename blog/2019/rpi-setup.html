@@ -91,15 +91,15 @@
 <h2 id="boot-it-up">Boot it up</h2>
 <p>With SSH enabled, you should be able to connect to the pi remotely via ethernet the very first time you boot it up. You won't know the machine's IP address ahead of time, but you can get that info a bunch of different ways (I use <a href="https://inetapp.de/en/inetx.html">iNet Network Scanner</a>).</p>
 <p>Once you discover the IP address, ssh in. The default username and password are, of course, <code>pi</code> and <code>raspberry</code>.</p>
-<div class="highlight codehilitetable"><pre><span></span><code>ssh pi@&lt;IP Address&gt;
+<div class="codehilitetable highlight"><pre><span></span><code>ssh pi@&lt;IP Address&gt;
 </code></pre></div>
 <h2 id="step-1-update-upgrade">Step 1: update / upgrade</h2>
 <p>Get this out of the way. Should take a few mins, depending on the speed of your network.</p>
-<div class="highlight codehilitetable"><pre><span></span><code>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade -y
+<div class="codehilitetable highlight"><pre><span></span><code>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade -y
 </code></pre></div>
 <h2 id="step-2-raspi-config">Step 2: raspi-config</h2>
 <p>By default the locale for raspberry pis are set to <code>en_GB.UTF8</code>. I, like many other people, live in NYC. So I need to change the locale (keyboard layout, character set, timezone, etc) for myself. Do this with the built-in GUI tool <code>raspi-config</code>. Run it under sudo:</p>
-<div class="highlight codehilitetable"><pre><span></span><code>sudo raspi-config
+<div class="codehilitetable highlight"><pre><span></span><code>sudo raspi-config
 </code></pre></div>
 <p>You'll get a display that looks like:</p>
 <p><img alt="Raspi Config" class="img-fluid" src="https://nolanbconaway.github.io/blog/2019/main.png"/></p>
@@ -120,14 +120,14 @@
 <p>There are <a href="https://www.google.com/search?q=raspberry+pi+wireless+connection">like a million posts on how to configure a wifi connection</a>. The <a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md">authoritative guide on the subject</a> can be found on raspberrypi.org, and you might just want to do that.</p>
 <p>As for me, I don't know how <em>not</em> to break this stuff. So I just copy over config from another, working, raspberry pi. My config looks like:</p>
 <h3 id="etcnetworkinterfaces"><code>/etc/network/interfaces</code></h3>
-<div class="highlight codehilitetable"><pre><span></span><code>source-directory /etc/network/interfaces.d
+<div class="codehilitetable highlight"><pre><span></span><code>source-directory /etc/network/interfaces.d
 
 auto wlan0
 iface wlan0 inet manual
 wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 </code></pre></div>
 <h3 id="etcwpa_supplicantwpa_supplicantconf"><code>/etc/wpa_supplicant/wpa_supplicant.conf</code></h3>
-<div class="highlight codehilitetable"><pre><span></span><code>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+<div class="codehilitetable highlight"><pre><span></span><code>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=US
 
@@ -150,16 +150,16 @@ network={
 <p>The idea here is that you create a <code>key</code> on the machine you are using to ssh into the pi <em>from</em> (that is, the computer you are in front of). Then you paste that key in a special place on the pi. When you try to log in, ssh will compare the keys and let you in without a password if they match.</p>
 <p>First thing, you'll need to make your key. Keys are unique to the machine you are ssh-ing <em>from</em>, so if you've done this before you don't need to do it again. <a href="https://docs.joyent.com/public-cloud/getting-started/ssh-keys/generating-an-ssh-key-manually/manually-generating-your-ssh-key-in-mac-os-x">Here's a tutorial on how you'd make an ssh key on a mac</a>.</p>
 <p>Your key will probably live in <code>~/.ssh/id_rsa.pub</code> and will look something like:</p>
-<div class="highlight codehilitetable"><pre><span></span><code>ssh-rsa &lt;lots of letters and numbers&gt;<span class="o">==</span> user@host
+<div class="codehilitetable highlight"><pre><span></span><code>ssh-rsa &lt;lots of letters and numbers&gt;<span class="o">==</span> user@host
 </code></pre></div>
 <p>One you have that key copy-pasteable, you can run this command on your raspberry pi:</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="nb">cd</span> <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> nano .ssh/authorized_keys
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nb">cd</span> <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> nano .ssh/authorized_keys
 </code></pre></div>
 <p>Paste the key from your computer in that bad boy, save the file (<code>ctrl-O</code>), then log out and log back in. When you log back in, you shouldn't be asked for your password.</p>
 <h2 id="step-6-change-the-username-and-password">Step 6: Change the username and password.</h2>
 <p>Everybody knows the default login for a raspberry pi (or at least, lots of people). So for security you'll want to change them. Changing the username can be a bit of a hassle since you need to move around the user home, etc, so I only change the username if I plan on opening my firewall to allow outside connections (gotta have that <em>extra</em> security).</p>
 <p>In either case, <em>definitely</em> change the password. You can do that with:</p>
-<div class="highlight codehilitetable"><pre><span></span><code>passwd
+<div class="codehilitetable highlight"><pre><span></span><code>passwd
 </code></pre></div>
 <p>So easy.</p>
 <h2 id="step-7-installations">Step 7: Installations</h2>
@@ -173,11 +173,11 @@ network={
 <p>Now you get to install the stuff you want to use for your projects. Each project requires different tooling, so below I'll list some of the common items I install each time:</p>
 <h3 id="mailutils">mailutils</h3>
 <p>I run a lot of stuff in cron and I want to make sure I get notified if a job fails. If you install mailtutils, cron errors will automatically go to mail and you'll get an indicator if there was a failure when you log in.</p>
-<div class="highlight codehilitetable"><pre><span></span><code>sudo apt-get install mailutils
+<div class="codehilitetable highlight"><pre><span></span><code>sudo apt-get install mailutils
 </code></pre></div>
 <h3 id="zsh-oh-my-zsh">zsh, oh-my-zsh</h3>
 <p>I love zsh. <em>Love it</em>. It's even better when you use <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> as a configuration manager.</p>
-<div class="highlight codehilitetable"><pre><span></span><code>sudo apt-get install zsh<span class="p">;</span>
+<div class="codehilitetable highlight"><pre><span></span><code>sudo apt-get install zsh<span class="p">;</span>
 sh -c <span class="s2">"</span><span class="k">$(</span>wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -<span class="k">)</span><span class="s2">"</span>
 </code></pre></div>
 <p>That's all. Have fun spending the next hour <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes">picking your theme</a>.</p>
@@ -188,16 +188,16 @@ sh -c <span class="s2">"</span><span class="k">$(</span>wget https://raw.githubu
 <p>I use python for basically everything. I prefer to keep the raspberry pi pre-installed python clean, so I opt to install my own python.</p>
 <p>There are a bunch if tutorials on how to build a python distribution on a raspberry pi. <a href="https://gist.github.com/SeppPenner/6a5a30ebc8f79936fa136c524417761d">Here is one</a>. Even if you know what you're doing, it takes freaking forever to <code>configure &amp;&amp; make &amp;&amp; make install</code> the thing. If you do not know what you are doing (I do not know what <em>I</em> am doing), it'll take you that amount of freaking forever to learn something is wrong and that you have to do a different <code>configure &amp;&amp; make &amp;&amp; make install</code>.</p>
 <p>Learn from my mistakes. Use <a href="https://github.com/jjhelmus/berryconda">Berryconda</a>. Berryconda is pre-built conda distribution for raspberry pi. It only takes a few minutes to set up and it "just works". Follow the instructions on the github page to install. It should be something like:</p>
-<div class="highlight codehilitetable"><pre><span></span><code>wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh <span class="o">&amp;&amp;</span> <span class="se">\</span>
+<div class="codehilitetable highlight"><pre><span></span><code>wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh <span class="o">&amp;&amp;</span> <span class="se">\</span>
 chmod +x Berryconda3-2.0.0-Linux-armv7l.sh <span class="o">&amp;&amp;</span> <span class="se">\</span>
 ./Berryconda3-2.0.0-Linux-armv7l.sh
 </code></pre></div>
 <p>That'll walk you through the installation.</p>
 <p>If you installed zsh, you'll want to make sure to put the berryconda binary directory on your path (so that zsh knows what to do when you refer to <code>python</code>). Add a line like this to your <code>~/.zshrc</code>:</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">:</span><span class="nv">$HOME</span><span class="s2">/berryconda3/bin"</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">:</span><span class="nv">$HOME</span><span class="s2">/berryconda3/bin"</span>
 </code></pre></div>
 <p>Where <code>$HOME/berryconda3/bin</code> is wherever you decided to install berryconda. Then, you should confirm that your python3 command refers to the berryconda install:</p>
-<div class="highlight codehilitetable"><pre><span></span><code>which python3
+<div class="codehilitetable highlight"><pre><span></span><code>which python3
 </code></pre></div>
 <p>Should output something like <code>/home/pi/berryconda3/bin/python3</code> not <code>/usr/bin/python3</code>.</p>
 </div>

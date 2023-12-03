@@ -79,7 +79,7 @@
 <div class='markdown_insert'>
     <p>I recently published a package (<a href="https://pypi.org/project/binoculars/">📦 click</a>) called "binoculars", and all it does is calculate confidence intervals for binomial proportions. You can <code>pip install binoculars</code> or contribute via <a href="https://github.com/nolanbconaway/binoculars">GitHub</a>, etc. </p>
 <p>Usage is pretty simple:</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="kn">from</span> <span class="nn">binoculars</span> <span class="kn">import</span> <span class="n">binomial_confidence</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">binoculars</span> <span class="kn">import</span> <span class="n">binomial_confidence</span>
 
 <span class="n">N</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.2</span>
 
@@ -103,7 +103,7 @@
 p \pm z \sqrt{\frac{p (1 - p)}{N}}
 $$</p>
 <p>That math is not a lot, so you can do one-liners in python and SQL. Also, it is <em>symmetrical</em>, which means you write clean code like:</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="n">ci</span> <span class="o">=</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span> <span class="o">/</span> <span class="n">N</span><span class="p">)</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="n">ci</span> <span class="o">=</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span> <span class="o">/</span> <span class="n">N</span><span class="p">)</span>
 <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">ci</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="n">ci</span>
 </code></pre></div>
 <p>But the <em>symmetry</em> is the problem! By way of demonstrating the terribleness here, I calculated (<a href="https://deepnote.com/project/e17fa473-51c6-45aa-8de0-980be7d2dc5f">📓 click</a>) the lower bound of 95% confidence with the Normal approximation as a function of \(N\) with a static \(\hat{p}\) of 0.01, 0.05, and 0.1:</p>
@@ -126,7 +126,7 @@ $$</p>
 <p>Binoculars won't help if you're doing this in SQL. But I often find myself needing a quick confidence interval for a dashboard, etc. If this sounds like you, the Wilson interval is your jam. Jeffrey's interval involves a lot of Beta distribution math which gets <em>narsty</em>. </p>
 <p>The Wilson interval isn't exactly <em>pretty</em>, but you can probably implement it as a user-defined-function on your database without a lot of hassle. </p>
 <p>If you're using DBT, you can also implement it as a macro!</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">wilson_interval</span><span class="o">(</span><span class="nv">col_p</span><span class="o">,</span> <span class="nv">col_n</span><span class="o">,</span> <span class="nv">tail</span><span class="o">,</span> <span class="nv">z</span><span class="o">=</span><span class="m">1.96</span><span class="o">)</span> -<span class="cp">%}</span><span class="x"></span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">wilson_interval</span><span class="o">(</span><span class="nv">col_p</span><span class="o">,</span> <span class="nv">col_n</span><span class="o">,</span> <span class="nv">tail</span><span class="o">,</span> <span class="nv">z</span><span class="o">=</span><span class="m">1.96</span><span class="o">)</span> -<span class="cp">%}</span><span class="x"></span>
 
 <span class="cp">{%</span>- <span class="k">if</span> <span class="nv">tail</span> <span class="o">==</span> <span class="s1">'lower'</span> -<span class="cp">%}</span><span class="x"></span>
 <span class="x"> (</span>
@@ -144,7 +144,7 @@ $$</p>
 <span class="cp">{%</span>- <span class="k">endmacro</span> -<span class="cp">%}</span><span class="x"></span>
 </code></pre></div>
 <p>Which gets called like:</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="x">with t as ( select 500 as n, 0.2 as p )</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="x">with t as ( select 500 as n, 0.2 as p )</span>
 <span class="x">select </span>
 <span class="x">  t.*,</span>
 <span class="x">  </span><span class="cp">{{</span> <span class="nv">wilson_interval</span><span class="o">(</span><span class="s1">'p'</span><span class="o">,</span> <span class="s1">'n'</span><span class="o">,</span> <span class="s1">'lower'</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> as ci_lower,</span>

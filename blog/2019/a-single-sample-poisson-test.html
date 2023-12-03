@@ -125,7 +125,7 @@ $$</p>
 <p>For example, the CDF of \(\mathsf{Poisson}(N \mu)\) would tell us the proportion of values which are greater than or less than \(N\bar{x}\).</p>
 <p>If only a small proportion of values from the CPC distribution \(\mathsf{Poisson}(5 \cdot 100)\) are greater than \(5 \cdot 102.6\), this would indicate that it is unlikely to have obtained \(\bar{x}=102.6\) by chance and thus maybe there's something wrong with the CPC targeting.</p>
 <h3 id="in-python">In Python</h3>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
 <span class="o">&gt;&gt;&gt;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">xbar</span> <span class="o">=</span> <span class="mf">102.6</span>
@@ -136,7 +136,7 @@ $$</p>
 </code></pre></div>
 <p>That shows that 72.9% of \(N=5\) samples from a distribution with \(\mu=100\) would have an average value of less than \(\bar{x}=102.6\). Conversely, 27.1% of samples would have a greater value. So our samples aren't very unlikely given a CPC of 100.</p>
 <p>As you increase the number of samples you'd expect \(\bar{x}=102.6\) to become more and more unlikely.</p>
-<div class="highlight codehilitetable"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">]:</span>
+<div class="codehilitetable highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">]:</span>
 <span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">poisson</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">xbar</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">mu</span><span class="p">))</span>
 <span class="o">...</span>
 <span class="mi">10</span> <span class="mf">0.7994310510662929</span>
