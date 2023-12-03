@@ -5,35 +5,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://nolanbconaway.github.io/</loc>
-<lastmod>2023-12-03T22:55:55-00:00</lastmod>
+<lastmod>2023-12-03T23:00:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
 <loc>https://nolanbconaway.github.io/tags.html</loc>
-<lastmod>2023-12-03T22:55:55-00:00</lastmod>
+<lastmod>2023-12-03T23:00:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
 <loc>https://nolanbconaway.github.io/categories.html</loc>
-<lastmod>2023-12-03T22:55:55-00:00</lastmod>
+<lastmod>2023-12-03T23:00:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
 <loc>https://nolanbconaway.github.io/authors.html</loc>
-<lastmod>2023-12-03T22:55:55-00:00</lastmod>
+<lastmod>2023-12-03T23:00:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
 <loc>https://nolanbconaway.github.io/archives.html</loc>
-<lastmod>2023-12-03T22:55:55-00:00</lastmod>
+<lastmod>2023-12-03T23:00:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
@@ -57,6 +57,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2020-04-29T00:00:00-04:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://nolanbconaway.github.io/blog/2023/im-working-on-a-playlist-generator-for-local-music.html</loc>
+<lastmod>2023-12-03T00:00:00-05:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>1.0</priority>
 </url>
 
 <url>
@@ -320,14 +327,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://nolanbconaway.github.io/category/github.html</loc>
-<lastmod>2022-02-01T00:00:00-04:56</lastmod>
+<lastmod>2023-12-03T00:00:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>
 
 <url>
 <loc>https://nolanbconaway.github.io/author/nolan-conaway.html</loc>
-<lastmod>2023-11-15T00:00:00-04:56</lastmod>
+<lastmod>2023-12-03T00:00:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.0</priority>
 </url>

@@ -8,7 +8,6 @@
 
   <!-- describe the site -->
   <meta name="description" content="Nolan Conaway's Blog">
-<meta name="keywords" content="timelapse,raspberry pi">
   <meta name="author" content="Nolan Conaway">
 
   <!-- viewport -->
@@ -73,33 +72,11 @@
     <hr>
 
     <div class="content">
-<h1>Watching spring arrive from my home office.</h1>
-<div class="text-right">June 2021</div>
+<h1>I'm working on a playlist generator for local music.</h1>
+<div class="text-right">December 2023</div>
 <hr>
 <div class='markdown_insert'>
-    <p>During the winter of 2020, I hooked up a camera to a Raspberry Pi and started writing <a href="https://github.com/nolanbconaway/rpi-camera">python modules</a> to do time lapse photography. Early on, I made some films of <a href="https://www.youtube.com/watch?v=8ykslLDXHdA">winter storms</a> coming in over the course of 4-12 hour periods.</p>
-<p>At the start of spring, I set up for a longer time lapse; I wanted to film the start of spring as seen from the window of my home office. There's a lot of greenery outside so I was hoping to quantify the proportion of the color space occupied by green over time.</p>
-<p>Here's what I got:</p>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="405" src="https://www.youtube.com/embed/TQsMR8QJxsw" title="YouTube video player" width="720"></iframe>
-<p>It can be a little difficult to see the greenery come in, so I made another version which clips to the focal regions:</p>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="405" src="https://www.youtube.com/embed/S1OscbAJsFM" title="YouTube video player" width="720"></iframe>
-<p>It can't hurt to look at a little before/after action. These two photos were taken at Noon.</p>
-<table class="table table-hover table-sm" style="">
-<tr>
-<th>April 7</th><th>April 25</th>
-</tr>
-<tr>
-<td><img class="img-fluid" src="https://nolanbconaway.github.io/blog/2021/2021-04-07.jpg"/></td>
-<td><img class="img-fluid" src="https://nolanbconaway.github.io/blog/2021/2021-04-25.jpg"/></td>
-</tr>
-</table>
-<p>Even here we're still only using Human vision to see how much green there is. I used opencv to do a really dumb calculation: the proportion of the RBG color volume that lies in the G channel each day:</p>
-<p><object data="https://nolanbconaway.github.io/blog/2021/timeline.svg" type="image/svg+xml"></object></p>
-<blockquote class="blockquote">
-<p>NOTE: I do not know very much about computer vision; don't @ me.</p>
-</blockquote>
-<p>The green channel gains dominance over time but it's not crazy evident. Probably what I am seeing as "green" is actually a mixture of lots of colors in the RGB space. </p>
-<p>In any case, if time lapse content is your jam, be on the lookout for another film of my tomatoes coming in!</p>
+    
 </div>
     </div>
 
