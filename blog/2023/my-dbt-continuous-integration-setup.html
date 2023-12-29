@@ -78,22 +78,22 @@
 <hr>
 <div class='markdown_insert'>
     <p>I love what <a href="https://www.getdbt.com/">dbt</a> has done for the host of data professions from which I earn a living. I don't know how people were managing databases before dbt, because in that era I was merely a <em>consumer</em> of data. Learning dbt was key to my transition to a maintainer of tables; someone an organization could rely on to produce useful data.</p>
-<p>Reliability is key in this space, after all. Ensuring a data pipeline is well tested is difficult given the number of external services that need to be mocked, but I find that struggle pays off every time.</p>
-<p>For the longest time, dbt models had been a final untested link in my data pipelines. I would write <a href="https://docs.getdbt.com/reference/commands/test">dbt tests</a> which run in airflow DAGs; but ensuring the tests pass <em>prior</em> to merge was always done manually.</p>
+<p>Reliability is key in this space, after all. It can be difficult to ensure a data pipeline is well tested given the number of external services that need to be mocked, but I find that struggle pays off every time.</p>
+<p>For the longest time, dbt models had been the final untested link in my data pipelines. I would write <a href="https://docs.getdbt.com/reference/commands/test">dbt tests</a> which run in airflow DAGs; but ensuring the tests pass <em>prior</em> to merge was always done manually.</p>
 <p>I've even seen situations in which the convention was to <em>paste local terminal output in the PR description</em>. ☠</p>
 <p>There has to be a better way!</p>
 <iframe allowfullscreen="" class="giphy-embed" frameborder="0" height="360" src="https://giphy.com/embed/5yaCPstUOV9Kw" width="480"></iframe>
 <p>This post contains an overview of the solution I've been circling for a few years now.</p>
-<h2 id="why-running-dbt-in-ci-difficult">Why running dbt in CI difficult?</h2>
+<h2 id="why-is-running-dbt-in-ci-difficult">Why is running dbt in CI difficult?</h2>
 <h3 id="schema-management">Schema management</h3>
-<p>In local development dbt uses a host of schemas in a development database (<code>dbt_nolan</code>, <code>dbt_nolan_staging</code>, etc) which are automatically built to populate/test tables. The base prefix for all these tables is set via the <code>schema</code> in the <a href="https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#understanding-target-schemas"><code>profiles.yml</code></a>.</p>
-<p>Running in CI requires dynamically setting the schema prefix based on the PR number, git hash, branch name, etc. This can be done with <a href="https://docs.getdbt.com/reference/dbt-jinja-functions/env_var"><code>envvars</code></a>. The important thing is to pick something that won't collide with any other CI runs or user development.</p>
+<p>In local development dbt uses a host of schemas in a development database (<code>dbt_nolan</code>, <code>dbt_nolan_staging</code>, etc) which are automatically built to populate/test tables. The base prefix for all these tables is configured via the <code>schema</code> setting in <a href="https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#understanding-target-schemas"><code>profiles.yml</code></a>.</p>
+<p>Running dbt in CI requires <em>dynamically</em> setting the schema prefix; usually based on the PR number, git hash, branch name, etc. This can be done with <a href="https://docs.getdbt.com/reference/dbt-jinja-functions/env_var"><code>envvars</code></a>. The important thing is to pick something that won't collide with any other CI runs or user development.</p>
 <p>Not only does a CI solution need to generate the schema name on the fly, but it should have a system to drop the schemas after the fact so that the dev database doesn't store a bunch of old schemas from historical CI runs.</p>
 <h3 id="testing-changed-models">Testing changed models</h3>
-<p>In my experience its basically unthinkable (for database load, cost, time, etc, reasons) to run an entire dbt project when it reaches even medium sizes. So running only the affected models is important.</p>
+<p>In my experience its basically unthinkable (for database load, cost, time, etc, reasons) to <code>dbt build</code> an entire project of even medium size. So it becomes important to isolate the models affected by changes in a pull request.</p>
 <p>dbt is able to identify local files that have changed compared to a <a href="https://docs.getdbt.com/reference/artifacts/manifest-json">manifest/state file</a>. The state file is typically used to store the <em>main branch state</em> (or whatever the merge target), so that dbt can isolate the current changes.</p>
 <p><em>If such a file should be available</em>, the following dbt invocation can be run to test the changed files and first level dependents of them:</p>
-<div class="codehilitetable highlight"><pre><span></span><code>dbt build --select state:modified+1 --defer --favor-state --state<span class="o">=</span>path/to/state
+<div class="highlight codehilitetable"><pre><span></span><code>dbt build --select state:modified+1 --defer --favor-state --state<span class="o">=</span>path/to/state
 </code></pre></div>
 <blockquote class="blockquote">
 <p>Note: The <code>--defer --favor-state</code> arguments are used to ensure that the production versions of unchanged models are used instead of development versions.</p>
@@ -119,7 +119,7 @@
 <p>No matter what the solution, the CI runner will need to have access to the data warehouse. Which means passing around authentication secrets.</p>
 <p>In local development, database secrets are usually stored in plaintext in a file like <a href="https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml"><code>~/.dbt/profiles.yml</code></a>. GitHub will need a similar file to to connect to the data warehouse; but this one will need to be special to avoid saving secrets into the repository. The easiest way is to export <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions">GitHub actions secrets</a> to envvars, and pick those up in the yml file.</p>
 <p>Below is an example setup for a snowflake database:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">default</span><span class="p">:</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="nt">default</span><span class="p">:</span>
   <span class="nt">target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dev</span>
   <span class="nt">outputs</span><span class="p">:</span>
     <span class="nt">dev</span><span class="p">:</span>
@@ -137,7 +137,7 @@
 <p>This step is about saving the production manifest to some external storage so that it can be retrieved later to determine which models have changed.</p>
 <p>Compiling is usually pretty quick and the manifest is only a handful of megabytes, so this should be a quick and cheap workflow.</p>
 <p>An action like below can be used to save the manifest as an actions artifact, but one could imagine saving to cloud object storage, etc. The advantage of using an actions artifact is that, presumably, developers already have access to the GitHub repository and will not need additional authorization to download the files.</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Main Branch DBT State</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Main Branch DBT State</span>
 
 <span class="nt">on</span><span class="p">:</span>
   <span class="nt">push</span><span class="p">:</span>
@@ -182,7 +182,7 @@
 <p>By default, GitHub actions will save artifacts from workflow runs going back 90 days. The manifest from the <em>latest</em> run presumably contains the desired comparison state; so the CI pipeline needs to figure out which version of the <code>dbt_manifest_json</code> artifact is the latest one.</p>
 <p>I found is straightforward enough to do so via the <a href="https://cli.github.com/">GitHub cli</a>; which is easy to install locally and comes preinstalled in most GitHub actions runners. The below approach uses the cli to first list runs, and then grab the manifest from the latest one.</p>
 <p>The following invocation will list the last 500 runs of the "Main Branch DBT State" action:</p>
-<div class="codehilitetable highlight"><pre><span></span><code>gh run list <span class="se">\</span>
+<div class="highlight codehilitetable"><pre><span></span><code>gh run list <span class="se">\</span>
     --limit<span class="o">=</span><span class="m">500</span> <span class="se">\</span>
     --branch<span class="o">=</span>main <span class="se">\</span>
     --status<span class="o">=</span>completed <span class="se">\</span>
@@ -193,14 +193,14 @@
 <p>The <code>--json=databaseId,createdAt</code> flag tells the CLI to return JSON data, and to include the run ID as well as the timestamp of the run. Make sure the workflow and branch setting match the compile action's configuration.</p>
 </blockquote>
 <p>The resultant data look like this:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="p">[</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="p">[</span>
     <span class="p">{</span><span class="nt">"createdAt"</span><span class="p">:</span> <span class="s2">"2023-06-02T00:00:00Z"</span><span class="p">,</span> <span class="nt">"databaseId"</span><span class="p">:</span> <span class="mi">123</span><span class="p">}</span>
     <span class="p">{</span><span class="nt">"createdAt"</span><span class="p">:</span> <span class="s2">"2023-06-01T00:00:00Z"</span><span class="p">,</span> <span class="nt">"databaseId"</span><span class="p">:</span> <span class="mi">122</span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
 <p>In my experience, the records have been in reverse chronological order (latest first), but I was <a href="https://github.com/cli/cli/issues/6678#issuecomment-1334156674">unable to find a guarantee</a> about this. So instead I chose to pull a lot of runs (500) and hope that the latest one is in there.</p>
 <p>One can sort through the records in lots of ways. Here's how <a href="https://github.com/jqlang/jq"><code>jq</code></a> could be used:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="nv">runs</span><span class="o">=</span><span class="k">$(</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="nv">runs</span><span class="o">=</span><span class="k">$(</span>
     gh run list <span class="se">\</span>
     --limit<span class="o">=</span><span class="m">500</span> <span class="se">\</span>
     --branch<span class="o">=</span>main <span class="se">\</span>
@@ -216,7 +216,7 @@
 <span class="nb">echo</span> <span class="s2">"Latest run id: </span><span class="nv">$run_id</span><span class="s2"> (created at </span><span class="nv">$run_created_at</span><span class="s2">)"</span>
 </code></pre></div>
 <p>Given a <code>databaseId</code>, one can download the artifact like:</p>
-<div class="codehilitetable highlight"><pre><span></span><code>gh run download --name<span class="o">=</span>dbt_manifest_json --dir<span class="o">=</span>manifest/ <span class="nv">$run_id</span>
+<div class="highlight codehilitetable"><pre><span></span><code>gh run download --name<span class="o">=</span>dbt_manifest_json --dir<span class="o">=</span>manifest/ <span class="nv">$run_id</span>
 </code></pre></div>
 <blockquote class="blockquote">
 <p>The manifest.json will appear at <code>manifest/manifest.json</code> if successful.</p>
@@ -233,7 +233,7 @@
 <li>Wrap that <code>check_call</code> in a try/except statement, dropping the schemas in the <code>finally</code> clause.</li>
 </ol>
 <p>Here is one way to do it:</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
 <span class="sd">"""Run a DBT in an ephemeral schema.</span>
 
 <span class="sd">Call like:</span>
@@ -275,9 +275,15 @@
 
 
 <span class="k">def</span> <span class="nf">list_schemas_with_prefix</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-    <span class="sd">"""Check if a schema prefix collides with existing schemas.</span>
+    <span class="sd">"""List the schemas in the database which start with a prefix.</span>
 
-<span class="sd">    Returns True if there are any collisions, False otherwise.</span>
+<span class="sd">    Returns a list with one entry per schema. Each entry is a dicts with keys:</span>
+
+<span class="sd">      - created_on</span>
+<span class="sd">      - name</span>
+<span class="sd">      - kind (always null, see snowflake docs)</span>
+<span class="sd">      - database_name</span>
+<span class="sd">      - schema_name (always null, see snowflake docs)</span>
 <span class="sd">    """</span>
     <span class="n">db_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"DBT_DATABASE"</span><span class="p">]</span>
 
@@ -372,8 +378,8 @@
 <li>A bigger script to wrap dbt commands to use random, ephemeral schemas (<code>dbt-ci.py</code>).</li>
 </ol>
 <p>The final step is to write a workflow to put it all together.</p>
-<p>THe below workflow first sets up a dbt python environment, then downloads the state, then runs the dbt build wrapper (making sure to pass in the correct paths to the state and profiles.</p>
-<div class="codehilitetable highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CI</span>
+<p>The below workflow first sets up a dbt python environment, then downloads the state, then runs the dbt build wrapper (making sure to pass in the correct paths to the state and profiles).</p>
+<div class="highlight codehilitetable"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CI</span>
 
 <span class="nt">on</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">push</span>
