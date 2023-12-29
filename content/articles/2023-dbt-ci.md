@@ -7,9 +7,9 @@ keywords: dbt, database, ci
 
 I love what [dbt](https://www.getdbt.com/) has done for the host of data professions from which I earn a living. I don't know how people were managing databases before dbt, because in that era I was merely a _consumer_ of data. Learning dbt was key to my transition to a maintainer of tables; someone an organization could rely on to produce useful data.
 
-Reliability is key in this space, after all. Ensuring a data pipeline is well tested is difficult given the number of external services that need to be mocked, but I find that struggle pays off every time.
+Reliability is key in this space, after all. It can be difficult to ensure a data pipeline is well tested given the number of external services that need to be mocked, but I find that struggle pays off every time.
 
-For the longest time, dbt models had been a final untested link in my data pipelines. I would write [dbt tests](https://docs.getdbt.com/reference/commands/test) which run in airflow DAGs; but ensuring the tests pass _prior_ to merge was always done manually.
+For the longest time, dbt models had been the final untested link in my data pipelines. I would write [dbt tests](https://docs.getdbt.com/reference/commands/test) which run in airflow DAGs; but ensuring the tests pass _prior_ to merge was always done manually.
 
 I've even seen situations in which the convention was to _paste local terminal output in the PR description_. ::skull_and_cross_bones::
 
@@ -19,19 +19,19 @@ There has to be a better way!
 
 This post contains an overview of the solution I've been circling for a few years now.
 
-## Why running dbt in CI difficult?
+## Why is running dbt in CI difficult?
 
 ### Schema management
 
-In local development dbt uses a host of schemas in a development database (`dbt_nolan`, `dbt_nolan_staging`, etc) which are automatically built to populate/test tables. The base prefix for all these tables is set via the `schema` in the [`profiles.yml`](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#understanding-target-schemas).
+In local development dbt uses a host of schemas in a development database (`dbt_nolan`, `dbt_nolan_staging`, etc) which are automatically built to populate/test tables. The base prefix for all these tables is configured via the `schema` setting in [`profiles.yml`](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#understanding-target-schemas).
 
-Running in CI requires dynamically setting the schema prefix based on the PR number, git hash, branch name, etc. This can be done with [`envvars`](https://docs.getdbt.com/reference/dbt-jinja-functions/env_var). The important thing is to pick something that won't collide with any other CI runs or user development.
+Running dbt in CI requires *dynamically* setting the schema prefix; usually based on the PR number, git hash, branch name, etc. This can be done with [`envvars`](https://docs.getdbt.com/reference/dbt-jinja-functions/env_var). The important thing is to pick something that won't collide with any other CI runs or user development.
 
 Not only does a CI solution need to generate the schema name on the fly, but it should have a system to drop the schemas after the fact so that the dev database doesn't store a bunch of old schemas from historical CI runs.
 
 ### Testing changed models
 
-In my experience its basically unthinkable (for database load, cost, time, etc, reasons) to run an entire dbt project when it reaches even medium sizes. So running only the affected models is important.
+In my experience its basically unthinkable (for database load, cost, time, etc, reasons) to `dbt build` an entire project of even medium size. So it becomes important to isolate the models affected by changes in a pull request.
 
 dbt is able to identify local files that have changed compared to a [manifest/state file](https://docs.getdbt.com/reference/artifacts/manifest-json). The state file is typically used to store the _main branch state_ (or whatever the merge target), so that dbt can isolate the current changes.
 
@@ -259,9 +259,15 @@ def snowflake_query(sql: str, *args, **kwargs) -> list[dict]:
 
 
 def list_schemas_with_prefix(prefix: str) -> list[dict]:
-    """Check if a schema prefix collides with existing schemas.
+    """List the schemas in the database which start with a prefix.
+    
+    Returns a list with one entry per schema. Each entry is a dicts with keys:
 
-    Returns True if there are any collisions, False otherwise.
+      - created_on
+      - name
+      - kind (always null, see snowflake docs)
+      - database_name
+      - schema_name (always null, see snowflake docs)
     """
     db_name = os.environ["DBT_DATABASE"]
 
@@ -359,7 +365,7 @@ At this point, the following are available:
 
 The final step is to write a workflow to put it all together.
 
-THe below workflow first sets up a dbt python environment, then downloads the state, then runs the dbt build wrapper (making sure to pass in the correct paths to the state and profiles.
+The below workflow first sets up a dbt python environment, then downloads the state, then runs the dbt build wrapper (making sure to pass in the correct paths to the state and profiles).
 
 ```yaml
 name: CI
